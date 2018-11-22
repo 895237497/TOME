@@ -2,18 +2,16 @@
   <div id="Emitters">
       <CommonInput
          :showMenu="showMenu"
-		     :showName='showName'
-		     :info="info"
-         :del="del"
-         :SimJetSoft="SimJetSoft"
+		     :showService='showService'
+		     :educe="educe"
          />
-       		<ComTable :tableitems='tableitems'/>
+       		<ComTable :tableitems='tableitems' :showImg="showImg"/>
     </div>
 </template>
 
 <script>
-import CommonInput from "../CommonInput";
-import ComTable from "../ComTable";
+import CommonInput from "../../../../components/CommonInput";
+import ComTable from "../../../../components/ComTable";
 export default {
   components: {
     CommonInput,
@@ -22,18 +20,21 @@ export default {
   data() {
     return {
       showMenu: true,
-      showName: true,
-      info: true,
+      showImg:true,
+      showService:true,
+      showDate:true,
+      educe:true,
       del: true,
+      info: true,
      
       tableitems: [
         {
           hasSubs: false,
           subs: [
             {
-              label: "ID",
-              prop: "id",
-              width: "200",
+              label: "序号",
+              prop: "serialNum",
+              width: "100",
               type: "number",
               editable: true,
               searchable: true,
@@ -47,9 +48,9 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "角色名称",
-              prop: "role",
-              width: "606",
+              label: "景区服务商",
+              prop: "serviceproviders",
+              width: "360",
               type: "number",
               editable: true,
               searchable: true,
@@ -63,9 +64,9 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "添加时间",
-              prop: "addtime",
-              width: "620",
+              label: "版本",
+              prop: "Version",
+              width: "360",
               type: "number",
               editable: true,
               searchable: true,
@@ -74,7 +75,7 @@ export default {
               align: "center"
             }
           ]
-        },
+        }, 
       ]
     };
   }

@@ -11,51 +11,49 @@ import EmittersCount from '@/components/page/EmittersCount'
 import EmittersLog from '@/components/page/EmittersLog'
 import Place from '@/components/page/Place'
 import MachineCount from '@/components/page/MachineCount'
-import Promotion from '@/components/promotion/Promotion'
-import PromotionLog from '@/components/promotion/PromotionLog'
+import Promotion from '@/components/page/admin/promotion/Promotion'
+import PromotionLog from '@/components/page/admin/promotion/PromotionLog'
 import SpotService from '@/components/SpotService/SpotService'
-import Menu from '@/components/common/Menu'
 import Index from '@/components/Index'
+import Menu from '@/components/common/Menu'
+import RFID from "../components/page/admin/RFID"
 
 let routes = [
     {
         path: '/',
-        name: 'Login',
-        component: Login
+        component: Login,
+        // name: '订单管理',
+        iconCls: 'el-icon-document',
+        // children: [
+        //     {path: '/RFID', component: RFID, name: ''},
+        // ]
     },
 
     {
         path: '/index',
-        name: 'index',
-        component: Menu,
+        component: Index,
+        // name: '订单管理',
+        iconCls: 'el-icon-document',
+        children: [
+            {path: '/RFID', component: RFID, name: ''},
+            {path: '/SpotService', component: SpotService, name: '景区服务商'},
+            {path: '/PromotionLog', component: PromotionLog, name: '空页面'},
+            {path: '/Promotion', component: Promotion, name: '空页面'},
+            {path: '/MachineCount', component: MachineCount, name: '空页面'},
+            {path: '/Place', component: Place, name: '空页面'},
+            {path: '/EmittersCount', component: EmittersCount, name: '空页面'},
+            {path: '/Emitters', component: Emitters, name: '空页面'},
+            {path: '/Management', component: Management, name: '空页面'},
+            {path: '/Sos', component: Sos, name: '空页面'},
+            {path: '/PlantLeasing', component: PlantLeasing, name: '空页面'},
+            {path: '/Fence', component: Fence, name: '空页面'},
+            {path: '/Role', component: Role, name: '空页面'},
+            {path: '/AccountManage', component: AccountManage, name: '空页面'},
+            {path: '/EmittersLog', component: EmittersLog, name: '空页面'},
+        ]
     },
-    // {
-    //     path: '/index/Menu',
-    //     name:'menu',
-    //     components: Menu,
-    //     Children: [
-    //         {
-    //             path: 'Emitters',
-    //             component: Emitters
-    //         },
-    //         {
-    //             path: 'EmittersLog',
-    //             component: EmittersLog
-    //         },
-    //         {
-    //             path: 'EmittersCount',
-    //             component: EmittersCount
-    //         },
-    //         {
-    //             path: 'Place',
-    //             component: Place
-    //         },
-    //         {
-    //             path: 'MachineCount',
-    //             component: MachineCount
-    //         }
-    //     ]
-    // },
+   
+    
 ]
 
 export default routes

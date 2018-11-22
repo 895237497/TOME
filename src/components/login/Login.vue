@@ -107,7 +107,8 @@ export default {
                     message: "登陆成功",
                     type: "success"
                   });
-                  this.$router.push({ name: "index" });
+                
+                  this.$router.push({ path: "/index" });
                 }
                 else{
                   //  登录失败的错误提示
@@ -179,7 +180,7 @@ export default {
     background: #fff;
     border-radius: 8px;
     position: absolute;
-    top: 36%;
+    top: 28%;
     left: 60%;
     box-shadow: #fafafb 1px 1px 1px 1px;
     z-index: 9999;

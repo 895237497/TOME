@@ -1,45 +1,11 @@
 <template>
     <div id="Emitters">
         <!-- 上面部分 -->
-             <div class="top">
-                 <div>
-                   <span class="title">数据统计<span class="line">-</span>设备租赁次数统计</span>
-                 </div>
-                 <div class="input">
-                    <span>日期
-                        <el-date-picker
-                        v-model="value1"
-                        type="date"
-                        placeholder="选择日期">
-                        </el-date-picker>
-                        <el-date-picker
-                        v-model="value2"
-                        align="right"
-                        type="date"
-                        placeholder="选择日期"
-                        :picker-options="pickerOptions1">
-                        </el-date-picker>
-                    </span>
-                </div>
-                 <div class="input">
-                     <span>景区 <el-select v-model="value" placeholder="请选择">
-                                            <el-option
-                                            v-for="item in options"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
-                                            </el-option>
-                                        </el-select>
-                     </span>
-                 </div>
-                <div class="input">
-                   <el-button type="warning" plain>查询</el-button>
-                   <el-button  plain>重置</el-button>
-                </div>
-                <div class="input">
-                    <span>游客数统计：</span>
-                </div>
-             </div>
+             <CommonInput
+         :showMenu="showMenu"
+         :showService="showService"
+         :showDate="showDate"
+         />
         <!-- 下面部分 -->
        <div class="bottom" style="display: flex;">
         <!-- 环形图 -->
@@ -47,80 +13,25 @@
         <!-- 仪表图 -->
         <div id="main1" style="width:400px;height:600px;margin-top:15px"></div>
         <!-- 折线图 -->
-        <div id="main2" style="width:600px;height:600px;margin-top:15px flex:1"></div>
+        <div id="main2" style="width:1000px;height:600px;margin-top:15px flex:1"></div>
 
     </div> 
     </div>
 </template>
 <script>
+import CommonInput from "../CommonInput";
+
 var eCharts = require("echarts")
 export default {
+    components: {
+    CommonInput,
+  },
   data() {
     return {
-      
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
-      // select选择
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value: "",
-
-      // 日期
-      pickerOptions1: {
-        disabledDate(time) {
-          return time.getTime() > Date.now();
-        },
-        shortcuts: [
-          {
-            text: "今天",
-            onClick(picker) {
-              picker.$emit("pick", new Date());
-            }
-          },
-          {
-            text: "昨天",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit("pick", date);
-            }
-          },
-          {
-            text: "一周前",
-            onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit("pick", date);
-            }
-          }
-        ]
-      },
-      value1: "",
-      value2: ""
-      // 报表
-
+      showMenu: true,
+      showImg:true,
+      showService:true,
+      showDate:true,
     };
   },
   mounted() {
@@ -304,65 +215,6 @@ export default {
 </script>
 
 <style lang="less">
-#Emitters {
-  width: 88%;
-  height: 100%;
-  // margin-left: 13%;
-  // margin-top: -496px;
-
-  .top {
-    border-bottom: 1px solid #db6f27;
-  }
-  .title {
-    font-size: 16px;
-    color: #ccc;
-    border-left: 4px solid #ff6600;
-    margin-left: 10px;
-    padding-left: 5px;
-  }
-  .line {
-    color: #ff6600;
-  }
-  .input {
-    display: inline-block;
-    margin: 20px;
-    margin-left: 80px;
-    &:nth-of-type(4) {
-      margin-left: 25%;
-    }
-    span {
-      // width: 300px;
-      display: inline-block;
-      font-size: 16px;
-      color: #666;
-      text-align: right;
-      // margin-left: 15px;
-      input {
-        height: 30px;
-        outline: none;
-        border: none;
-        border-radius: 6px;
-        background: rgb(236, 233, 233);
-        text-align: center;
-        padding-left: 4px;
-      }
-      .el-input__inner {
-        width: 94%;
-        height: 30px;
-        line-height: 30px;
-        background: rgb(236, 233, 233);
-        text-align: center;
-      }
-      .el-input__icon {
-        text-align: right;
-        // margin-left: 10px;
-        line-height: 30px;
-        color: #ff6600;
-      }
-    }
-  }
-  //报表部分
- 
-}
+  
 </style>
 

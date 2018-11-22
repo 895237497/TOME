@@ -2,25 +2,20 @@
   <div id="Emitters">
       <CommonInput
          :showMenu="showMenu"
-		     :showAllot='showAllot'
-         :showState="showState"
-         :showPhone="showPhone"
-         :showService="showService"
-         :showDevice="showDevice"
+		     :showService='showService'
          :showRobotNum="showRobotNum"
-         :del="del"
-         :add="add"
-         :assign="assign"
-         :incDevice="incDevice"
-         :expDev="expDev"
+         :showDate="showDate"
+         :showVersion="showDeviceNum"
+         :showDeviceNum="showVersion"
+		     :educe="educe"
          />
-       		<ComTable :tableitems='tableitems'  :showImg="showImg" />
+       		<ComTable :tableitems='tableitems'/>
     </div>
 </template>
 
 <script>
-import CommonInput from "../CommonInput";
-import ComTable from "../ComTable";
+import CommonInput from "../../../../components/CommonInput";
+import ComTable from "../../../../components/ComTable";
 export default {
   components: {
     CommonInput,
@@ -28,27 +23,24 @@ export default {
   },
   data() {
     return {
-      showDate:true,
-      showMenu:true,
-      showAllot:true,
-      showState:true,
-      showPhone:true,
-      showService:true,
-      showDevice:true,
-      showRobotNum:true,
+      showMenu: true,
       showImg:true,
-      del:true,
-      add:true,
-      assign:true,
-      incDevice:true,
-      expDev:true,
+      showService:true,
+      showDate:true,
+      showRobotNum:true,
+      showVersion:true,
+      showDeviceNum:true,
+      educe:true,
+      del: true,
+      info: true,
+     
       tableitems: [
         {
           hasSubs: false,
           subs: [
             {
-              label: "设备IMEI",
-              prop: "device",
+              label: "序号",
+              prop: "serialNum",
               width: "100",
               type: "number",
               editable: true,
@@ -63,9 +55,9 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "机器码",
-              prop: "robotNum",
-              width: "120",
+              label: "景区服务商",
+              prop: "serviceproviders",
+              width: "190",
               type: "number",
               editable: true,
               searchable: true,
@@ -75,13 +67,13 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
               label: "旅游团",
               prop: "touristGroup",
-              width: "120",
+              width: "190",
               type: "number",
               editable: true,
               searchable: true,
@@ -90,15 +82,14 @@ export default {
               align: "center"
             }
           ]
-        },
-       
-         {
+        }, 
+        {
           hasSubs: false,
           subs: [
             {
-              label: "景区",
-              prop: "service",
-              width: "160",
+              label: "设备号",
+              prop: "deviceNum",
+              width: "190",
               type: "number",
               editable: true,
               searchable: true,
@@ -107,14 +98,14 @@ export default {
               align: "center"
             }
           ]
-        },
-         {
+        }, 
+        {
           hasSubs: false,
           subs: [
             {
-              label: "分配状态",
-              prop: "allot",
-              width: "120",
+              label: "机器码",
+              prop: "robotNum",
+              width: "190",
               type: "number",
               editable: true,
               searchable: true,
@@ -123,14 +114,14 @@ export default {
               align: "center"
             }
           ]
-        },
-         {
+        }, 
+        {
           hasSubs: false,
           subs: [
             {
-              label: "通讯号码",
-              prop: "postalNum",
-              width: "160",
+              label: "升级时间",
+              prop: "upgradeDate",
+              width: "190",
               type: "number",
               editable: true,
               searchable: true,
@@ -139,14 +130,14 @@ export default {
               align: "center"
             }
           ]
-        },
-         {
+        }, 
+        {
           hasSubs: false,
           subs: [
             {
-              label: "软件版本",
-              prop: "softwareVersion",
-              width: "120",
+              label: "升级版本",
+              prop: "upgradeVersion",
+              width: "190",
               type: "number",
               editable: true,
               searchable: true,
@@ -155,14 +146,14 @@ export default {
               align: "center"
             }
           ]
-        },
-         {
+        }, 
+        {
           hasSubs: false,
           subs: [
             {
-              label: "电量",
-              prop: "quantity",
-              width: "160",
+              label: "升级状态",
+              prop: "upgradeAllot",
+              width: "186",
               type: "number",
               editable: true,
               searchable: true,
@@ -171,23 +162,7 @@ export default {
               align: "center"
             }
           ]
-        },
-         {
-          hasSubs: false,
-          subs: [
-            {
-              label: "状态",
-              prop: "Condition",
-              width: "160",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
+        }, 
       ]
     };
   }

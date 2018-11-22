@@ -15,9 +15,9 @@ export default {
 
         }
     },
-    components: {
-        // "manage-header": Header
-    }
+    // components: {
+    //     "manage-header": Header
+    // }
 }
 
 </script>
@@ -26,11 +26,11 @@ export default {
     body,html{
         width: 100%;
         height: 100%;
-        /* overflow: hidden; */
+        overflow: hidden;
     }
     #app{
         height: 100%;
         box-sizing: border-box;
-        /* overflow: hidden; */
+        overflow: hidden;
     }
 </style>

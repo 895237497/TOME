@@ -6,7 +6,7 @@
                    <img src="../../../assets/images/logo.png" alt="" srcset=""> 
                    <span>智 慧 全 域</span> 
                    <div class="box">
-                       <span class="active">管理员</span>
+                       <span class="active">{{username}}</span>
                        <span>退出</span>
                    </div>
                 </div>
@@ -16,14 +16,32 @@
     </div>
 </template>
 <script>
-   export default {
-       name:'Header',
-       data(){
-           return{
-
-           }
-       }
-   }
+import axios from "axios";
+export default {
+  name: "Header",
+  data() {
+    return {
+      username: ""
+    };
+  },
+  mounted() {
+    var token = localStorage.getItem("token");
+    //alert(token)
+    var _this = this;
+    //var access_token=this.access_token
+    var access_token = _this.token;
+    axios
+      .get("http://192.168.0.128:8080/user/current", {
+        headers: {
+          Authorization: "Bearer" + token
+        }
+      })
+      .then(response => {
+        console.log(response);
+        return (_this.username = response.data.username);
+      });
+  }
+};
 </script>
 
 <style lang="less">
@@ -41,33 +59,38 @@
   border-bottom: 1px #ffe6c9 solid;
   box-shadow: #ffe6c9 5px 2px 6px;
   position: relative;
-  img{
+  img {
     //   margin-top: 8px;
-      margin-left: 20px;
+    margin-left: 20px;
   }
-  span{
+  span {
+    display: inline-block;
+    font-size: 26px;
+    color: #ff6600;
+    font-weight: 500;
+    margin-top: 12px;
+    margin-left: 20px;
+  }
+  .me {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 13px;
+  }
+  .box {
+    position: absolute;
+    top: 12px;
+    right: 60px;
+    span {
       display: inline-block;
-      font-size: 26px;
-      color: #ff6600;
-      font-weight: 500;
-      margin-top: 12px;
-      margin-left: 20px;
-  }
-  .box{
-      position: absolute;
-      top:12px;
-      right: 60px; 
-      span{
-          display: inline-block;
-          font-size: 12px;
-          color: #888;
-          &.active{
-              color: #ff6600;
-          }
-        
+      font-size: 12px;
+      color: #888;
+      &.active {
+        color: #ff6600;
       }
+    }
   }
- 
 }
 .bg-purple {
   background: #d3dce6;
@@ -83,6 +106,5 @@
   padding: 10px 0;
   background-color: #f9fafc;
 }
-
 </style>
 
