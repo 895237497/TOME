@@ -21,6 +21,7 @@
 <script>
 import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
+import axios from 'axios';
 export default {
   components: {
     CommonInput,
@@ -190,7 +191,21 @@ export default {
         },
       ]
     };
-  }
+  },
+  mounted() {
+    let param={
+      codeMachine:"51515651",
+      imei:"551161",
+      telephone:"13000000000"
+    }
+    axios.post("http://192.168.0.39:9091/terminal/addTerminal",{
+      param:param
+    })
+    .then(response=>{
+      console.log(response);
+      
+    })
+  },
 };
 </script>
 

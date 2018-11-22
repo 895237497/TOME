@@ -97,27 +97,28 @@ export default {
             .then(response => {
               console.log(response, "打印的数据是.....");
               if (response.status === 200) {
-                if (response.data.resultStatus.resultCode === '0000') {                  
+                if (response.data.resultStatus.resultCode === "0000") {
                   this.$store.commit("SET_TOKEN", response.data.token);
                   this.$store.commit("GET_USER", response.data.username);
-                  localStorage.setItem("token",response.data.value.access_token)
+                  localStorage.setItem(
+                    "token",
+                    response.data.value.access_token
+                  );
                   // var token = localStorage.getItem("token");
                   // alert(token)
                   this.$message({
                     message: "登陆成功",
                     type: "success"
                   });
-                
-                  this.$router.push({ path: "/index" });
-                }
-                else{
-                  //  登录失败的错误提示
-                      this.$message({
-                        message:"账号或者密码错误",
-                        type:"error"
-                      })
 
-                } 
+                  this.$router.push({ path: "/index" });
+                } else {
+                  //  登录失败的错误提示
+                  this.$message({
+                    message: "账号或者密码错误",
+                    type: "error"
+                  });
+                }
               }
             })
             .catch(function(error) {
@@ -169,8 +170,8 @@ export default {
   position: relative;
   .login_logo {
     margin-left: 80px;
-    img{
-      background-repeat:no-repeat;
+    img {
+      background-repeat: no-repeat;
       overflow-y: hidden;
     }
   }

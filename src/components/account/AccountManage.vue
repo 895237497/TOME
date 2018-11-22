@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
 export default {
@@ -115,7 +116,24 @@ export default {
         }, 
       ]
     };
-  }
+  },
+  // mounted() {
+  //   var token = localStorage.getItem("token");
+  //   console.log(token,"打印的token");
+    
+  //   var _this=this
+  //   var access_token = _this.token;
+  //   axios.post("http://192.168.0.128:8080/user/selectAllRole",{
+  //     paeSize:1,
+  //     pageNum:10,
+  //     token:_this.access_token
+  //   })
+  //   .then(response=>{
+  //     console.log(response,"打印的数据是------------");
+      
+      
+  //   })
+  // },
 };
 </script>
 

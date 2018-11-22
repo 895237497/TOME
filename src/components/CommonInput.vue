@@ -211,7 +211,7 @@
 										<span>用户名称</span>
 									</div>
 									<div v-for="o in 4" :key="o" class="text item">
-											<el-checkbox v-model="checked">备选项</el-checkbox>
+											<el-checkbox v-model="checked">青城山</el-checkbox>
 									</div>
 								</el-card>
 							 	
@@ -433,14 +433,13 @@ section {
         color: #fb8c32;
       }
     }
-    // .el-dialog__body {
-    //   .el-checkbox__inner {
-    //     display: inline-block;
-    //     position: relative;
-    //     left: -15px;
-    //   }
-    // }
+    
   }
+  .el-dialog__body {
+      .el-checkbox__label{
+        padding-left: 40px;
+      }
+    }
   .el-pagination {
     .el-input__inner {
       width: 100px;
