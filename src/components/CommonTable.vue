@@ -64,7 +64,7 @@
          </el-row >
 						
          <el-row style="margin-left: 89px;">
-         	 <el-table :data="tableData" border highlight-current-row style="width:100%;" :height="tableheight2"
+         	 <el-table :data="tableData" border highlight-current-row style="width:100%;" 
                   v-loading="loading" @sort-change="sortChange" id="tablearea">
 
  
@@ -147,52 +147,12 @@
 export default {
     data() {
       return {
-      	tableheight2:100,
-      	loading:false,
+      	/*loading:false,
       	hidePagination:false,
       	showRFID:false,
-      	showMenu:false,
+      	showMenu:false,*/
       	tilte:"RFID管理",
-      	 tableData:[
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	},
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	},
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	},
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	},
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	},
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	},
-      	 	{
-      	 		id:123,
-      	 		username:'张三',
-      	 		age:24
-      	 	}
-      	 ],
-      	 tableitems:[
-      	 	
-      	 ]
+      	 
       }
     },
     props:[

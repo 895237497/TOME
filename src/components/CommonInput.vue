@@ -232,7 +232,9 @@
 export default {
   data() {
     return {
-      showRFID: false,
+      checked:'',
+      value:'',
+      /*showRFID: false,
       showMenu: false,
       showRobotNum: false,
       showDevice: false,
@@ -255,15 +257,15 @@ export default {
       assign: false,
       incDevice: false,
       expDev: false,
-      SimJetSoft: false,
+      SimJetSoft: false,*/
       tilte: "景区服务商",
       //模态框
-      showform: false,
+  /*    showform: false,
       showInputName: false,
       showInputAddress: false,
       showInputPerson: false,
       showInputphone: false,
-      showInputjwd: false,
+      showInputjwd: false,*/
 
       // 模态框
       dialogFormVisible: false,

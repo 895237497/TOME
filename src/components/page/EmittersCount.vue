@@ -11,7 +11,7 @@
          :del="del"
          v-on:showSetting="showSetting"
          />
-       		<!--<ComTable :tableitems='tableitems' :showImg="showImg"/>-->
+       		<ComTable :tableitems='tableitems' :showImg="showImg"/>
     </div>
 </template>
 

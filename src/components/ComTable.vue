@@ -1,8 +1,8 @@
 <template>
    <section>		
          <el-row style="margin-left: 89px;">
-         	 <el-table :data="tableData" border highlight-current-row style="width:100%;" :height="tableheight2"
-                  v-loading="loading" @sort-change="sortChange" id="tablearea">
+         	 <el-table :data="tableData" border highlight-current-row style="width:100%;" 
+                  v-loading="loading"  id="tablearea">
  			<el-table-column
 		      type="selection"
 		      width="55"
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <el-table-column label="操作" :width="btswidth" v-if="showImg" align="center">
+            <el-table-column label="操作"  v-if="showImg" align="center">
                 	<template slot-scope="scope">
                     <el-button
                       size="mini"
@@ -83,7 +83,7 @@ export default {
       loading: false,
       hidePagination: false,
       showRFID: false,
-      showMenu: false, 
+
       tilte: "RFID管理",
       currentPage4: 8,
       tableData: [
@@ -140,7 +140,7 @@ export default {
         
         
       ],
-      tableitems: []
+
     };
   },
   props: ["showMenu","tableitems","showImg"],
