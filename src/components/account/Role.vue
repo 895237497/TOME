@@ -5,7 +5,9 @@
 		     :showName='showName'
 		     :info="info"
          :del="del"
-         :SimJetSoft="SimJetSoft"
+         :showform="showform"
+         :showInputrolename="showInputrolename"
+         :showInputIDcard="showInputIDcard"
          />
        		<ComTable :tableitems='tableitems'/>
     </div>
@@ -25,6 +27,10 @@ export default {
       showName: true,
       info: true,
       del: true,
+      showMenu: true,
+      showform:true,
+      showInputrolename:true,
+      showInputIDcard:true,
      
       tableitems: [
         {
@@ -49,7 +55,7 @@ export default {
             {
               label: "角色名称",
               prop: "role",
-              width: "606",
+              width: "635",
               type: "number",
               editable: true,
               searchable: true,
@@ -65,7 +71,7 @@ export default {
             {
               label: "添加时间",
               prop: "addtime",
-              width: "620",
+              width: "640",
               type: "number",
               editable: true,
               searchable: true,

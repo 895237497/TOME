@@ -10,14 +10,18 @@
           :SimJetSoft="SimJetSoft" 
           :showform="showform"
           :showInputName="showInputName"
+          :showInputAddress="showInputAddress"
+          :showInputPerson="showInputPerson"
+          :showInputPhone="showInputPhone"
+          :showInputjwd="showInputjwd"
          />
          
          <!-- 表格组件 -->
        		<ComTable :tableitems='tableitems' :showImg='showImg'/>
-          <!-- 弹出框 -->
+          <!-- 弹出框
            <modal-box :visible.sync="CreateVisible" :options="CreateOptions" @Confirm="ConfirmCreateHandler()">
     
-          </modal-box>
+          </modal-box> -->
                     
     </div>
 </template>
@@ -43,10 +47,10 @@ export default {
       //模态框
       showform: true,
       showInputName: true,
-      // showInputAddress:true,
-      // showInputPerson:false,
-      // showInputphone:true,
-      // showInputjwd:true,
+      showInputAddress:true,
+      showInputPerson:true,
+      showInputPhone:true,
+      showInputjwd:true,
       // 表格组件
       tableitems: [
         {

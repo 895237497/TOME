@@ -89,7 +89,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios
-            .post("http://192.168.0.128:8080/sys/login", {
+            .post("http://192.168.0.39:8080/sys/login", {
               username: _this.ruleForm.username,
               password: _this.ruleForm.password,
               imageCode: _this.ruleForm.code
@@ -136,7 +136,7 @@ export default {
         imageCode: ""
       };
       axios
-        .get("http://192.168.0.128:8080/sys/captcha", {
+        .get("http://192.168.0.39:8080/sys/captcha", {
           params: param,
           responseType: "arraybuffer"
         })
@@ -333,7 +333,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios
-            .post("http://192.168.0.128:8080/sys/login", {
+            .post("http://192.168.0.39:8080/sys/login", {
               username: _this.ruleForm.username,
               password: _this.ruleForm.password,
               imageCode: _this.ruleForm.code
@@ -381,7 +381,7 @@ export default {
         imageCode: ""
       };
       axios
-        .get("http://192.168.0.128:8080/sys/captcha", {
+        .get("http://192.168.0.39:8080/sys/captcha", {
           params: param,
           responseType: "arraybuffer"
         })

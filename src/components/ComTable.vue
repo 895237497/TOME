@@ -1,4 +1,5 @@
 <template>
+import Axios from 'axios';
    <section>		
          <el-row style="margin-left: 89px;">
          	 <el-table :data="tableData" border highlight-current-row style="width:100%;" 
@@ -97,7 +98,7 @@ export default {
           visitTimes:'', //访问次数
           devicesTotal:100, //设备总数
           offlineTotal:20, //离线总数
-          device:"", //设备IMEI
+          device:"device", //设备IMEI
           deviceNum:'',//设备号
           service:"", //景区
           postalNum:'110', //通讯号码
@@ -177,8 +178,8 @@ section{
 <template>
    <section>		
          <el-row style="margin-left: 89px;">
-         	 <el-table :data="tableData" border highlight-current-row style="width:100%;" :height="tableheight2"
-                  v-loading="loading" @sort-change="sortChange" id="tablearea">
+         	 <el-table :data="tableData" border highlight-current-row style="width:100%;" 
+                  v-loading="loading"  id="tablearea">
  			<el-table-column
 		      type="selection"
 		      width="55"
@@ -220,7 +221,7 @@ section{
                 </div>
             </div>
 
-            <el-table-column label="操作" :width="btswidth" v-if="showImg" align="center">
+            <el-table-column label="操作"  v-if="showImg" align="center">
                 	<template slot-scope="scope">
                     <el-button
                       size="mini"
@@ -253,13 +254,14 @@ section{
     </section>
 </template>
 <script>
+import { path } from '../api/api.js'
 export default {
   data() {
     return {
       loading: false,
       hidePagination: false,
       showRFID: false,
-      showMenu: false, 
+
       tilte: "RFID管理",
       currentPage4: 8,
       tableData: [
@@ -315,11 +317,10 @@ export default {
         },
         
         
-      ],
-      tableitems: []
+      ]
     };
   },
-  props: ["showMenu","tableitems","showImg"],
+  props: ["showMenu","tableitems","showImg","queryapi"],
     methods: {
       // 操作按钮
       handleEdit(index, row) {
@@ -334,6 +335,21 @@ export default {
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      getTableData(sform){
+            //this.$axios.post(path+api).then()
+            alert("组件table...")
+            alert(this.queryapi)
+            var api = this.queryapi;
+            this.$axios.post(path+api,{
+            codeMachine:'811500132',
+            imei:'9069',
+            telephone:'15203880307'
+          })
+          .then(response=>{
+            console.log(response);
+            
+          })
       }
     }
 };
