@@ -1,6 +1,6 @@
 <template>
   <div id="Emitters">
-      <CommonInput
+      <!-- <CommonInput
          :showMenu="showMenu"
 		     :showRFID='showRFID'
          :showService="showService"
@@ -10,17 +10,24 @@
          :inc="inc"
 		     :educe="educe"
 
-         />
-       		<ComTable :tableitems='tableitems' :showImg="showImg"/>
+         /> -->
+       		<ComTable :tableitems='tableitems' :showImg="showImg"  :showMenu="showMenu"
+		     :showRFID='showRFID'
+         :showService="showService"
+         :showDate="showDate"
+         :info="info"
+         :del="del"
+         :inc="inc"
+		     :educe="educe"/>
     </div>
 </template>
 
 <script>
-import CommonInput from "../CommonInput";
+// import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
 export default {
   components: {
-    CommonInput,
+    // CommonInput,
     ComTable
   },
   data() {

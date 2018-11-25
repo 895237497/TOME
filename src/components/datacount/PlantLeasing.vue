@@ -1,7 +1,7 @@
 <template>
     <div id="Emitters">
         <!-- 上面部分 -->
-             <CommonInput
+             <ComTable
          :showMenu="showMenu"
          :showService="showService"
          :showDate="showDate"
@@ -19,12 +19,12 @@
     </div>
 </template>
 <script>
-import CommonInput from "../CommonInput";
+import ComTable from "../ComTable";
 
 var eCharts = require("echarts")
 export default {
     components: {
-    CommonInput,
+    ComTable,
   },
   data() {
     return {

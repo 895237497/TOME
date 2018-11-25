@@ -1,6 +1,6 @@
 <template>
   <div id="Emitters">
-      <CommonInput
+      <!-- <CommonInput
          :showMenu="showMenu"
 		     :showAllot='showAllot'
          :showState="showState"
@@ -19,22 +19,40 @@
          :showInputphone="showInputphone"
          :showInputstateful="showInputstateful"
          :showInputservice="showInputservice"
-         />
+         /> -->
        		<ComTable
                       :tableitems='tableitems'
                       :showImg="showImg"
                       :queryapi="queryapi"
+                      :showMenu="showMenu"
+                      :showAllot='showAllot'
+                      :showState="showState"
+                      :showPhone="showPhone"
+                      :showService="showService"
+                      :showDevice="showDevice"
+                      :showRobotNum="showRobotNum"
+                      :del="del"
+                      :add="add"
+                      :assign="assign"
+                      :incDevice="incDevice"
+                      :expDev="expDev"
+                      :showform="showform"
+                      :showInputIMEI="showInputIMEI"
+                      :showInputcodeMachine="showInputcodeMachine"
+                      :showInputphone="showInputphone"
+                      :showInputstateful="showInputstateful"
+                      :showInputservice="showInputservice"
                       ref="tumitable" />
     </div>
 </template>
 
 <script>
-import CommonInput from "../CommonInput";
+// import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
 import axios from 'axios';
 export default {
   components: {
-    CommonInput,
+    // CommonInput,
     ComTable
   },
   data() {

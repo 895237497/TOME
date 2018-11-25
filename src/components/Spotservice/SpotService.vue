@@ -1,6 +1,6 @@
 <template>
     <div id="Emitters">
-      <CommonInput
+      <!-- <CommonInput
           :showMenu="showMenu"
           :showService='showService'
           :info="info" 
@@ -14,10 +14,22 @@
           :showInputPerson="showInputPerson"
           :showInputPhone="showInputPhone"
           :showInputjwd="showInputjwd"
-         />
+         /> -->
          
          <!-- 表格组件 -->
-       		<ComTable :tableitems='tableitems' :showImg='showImg'/>
+       		<ComTable :tableitems='tableitems' :showImg='showImg' :showMenu="showMenu"
+          :showService='showService'
+          :info="info" 
+          :del="del"
+          :inc="inc"
+          :educe="educe"
+          :SimJetSoft="SimJetSoft" 
+          :showform="showform"
+          :showInputName="showInputName"
+          :showInputAddress="showInputAddress"
+          :showInputPerson="showInputPerson"
+          :showInputPhone="showInputPhone"
+          :showInputjwd="showInputjwd"/>
           <!-- 弹出框
            <modal-box :visible.sync="CreateVisible" :options="CreateOptions" @Confirm="ConfirmCreateHandler()">
     
@@ -26,12 +38,12 @@
     </div>
 </template>
 <script>
-import CommonInput from "../CommonInput";
+// import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
 
 export default {
   components: {
-    CommonInput,
+    // CommonInput,
     ComTable
   },
   data() {

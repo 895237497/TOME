@@ -1,6 +1,6 @@
 <template>
   <div id="Emitters">
-      <CommonInput
+      <!-- <CommonInput
          :showMenu="showMenu"
 		     :showName='showName'
 		     :info="info"
@@ -8,17 +8,23 @@
          :showform="showform"
          :showInputrolename="showInputrolename"
          :showInputIDcard="showInputIDcard"
-         />
-       		<ComTable :tableitems='tableitems'/>
+         /> -->
+       		<ComTable :tableitems='tableitems' :showMenu="showMenu"
+		     :showName='showName'
+		     :info="info"
+         :del="del"
+         :showform="showform"
+         :showInputrolename="showInputrolename"
+         :showInputIDcard="showInputIDcard"/>
     </div>
 </template>
 
 <script>
-import CommonInput from "../CommonInput";
+// import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
 export default {
   components: {
-    CommonInput,
+    // CommonInput,
     ComTable
   },
   data() {
