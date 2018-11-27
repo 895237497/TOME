@@ -1,7 +1,6 @@
 <template>
-   <section>		
-
-         <el-row>
+   <section>
+     <el-row>
 			<div style="margin: 24px 0 0 13px;font:14px;color: #919191;border-left: 4px solid #F98319;padding-left:8px ;">
 				{{tilte}}<strong style="color: #F98319;padding: 0 5px;font: 14px;">-</strong>
 			</div>
@@ -133,10 +132,7 @@
 													<div class="con">
 														<input type="text">
 													</div>
-								  	    </div>
-									  
-								
-								
+								  	    </div>	
         </el-row>
         <el-row>
         	<el-col :span="24" align="rignth" >
@@ -159,7 +155,7 @@
         		<el-button round size="small" v-if="inc">导入</el-button>
         		<el-button round size="small" v-if="educe">导出</el-button>
         		<el-button round @click="dialogFormVisible = true" size="small" v-if="add">添加设备</el-button>
-        		<el-button round size="small" v-if="assign">分配设备</el-button>
+        		<el-button round @click="dialogFormVisible = true" size="small" v-if="assign">分配设备</el-button>
         		<el-button round size="small" v-if="incDevice">导入设备</el-button>
         		<el-button round size="small" v-if="expDev">导出设备</el-button>
 						<el-button round size="small" v-if="SimJetSoft">一键关机</el-button>
@@ -372,19 +368,20 @@
     </section>
 </template>
 <script>
-import axios from 'axios';
+import axios from "axios";
+import { path } from "../api/api.js";
+
 export default {
   data() {
     return {
-        checked:'',
-        value:'',
-
+      checked: "",
+      value: "",
 
       loading: false,
       hidePagination: false,
       // showRFID: false,
 
-       // 模态框
+      // 模态框
       dialogFormVisible: false,
       form: {
         name: "",
@@ -392,15 +389,15 @@ export default {
         person: "",
         phone: "",
         jwd: "",
-        username:"",
-        loginname:"",
-        loginpwd:"",
-        role:"",
-        rolename:"",
-        IMEI:"",
-        codeMachine:"",
-        phone:"",
-        stateful:"",
+        username: "",
+        loginname: "",
+        loginpwd: "",
+        role: "",
+        rolename: "",
+        IMEI: "",
+        codeMachine: "",
+        phone: "",
+        stateful: ""
       },
       formLabelWidth: "100px",
 
@@ -459,68 +456,66 @@ export default {
       value1: "",
       value2: "",
 
-
-
-      // tilte: "RFID管理",
+      tilte: "RFID管理",
       currentPage4: 8,
       tableData: [
         {
           id: 123, //
           username: "张三", //用户名
-          RFIDNum:110, //发射源编号
-          ReportCount:15, //播报次数
-          tourist:"", //旅游景点
-          coodrinte:'', //坐标
-          visitTimes:'', //访问次数
-          devicesTotal:100, //设备总数
-          offlineTotal:20, //离线总数
-          device:"device", //设备IMEI
-          deviceNum:'',//设备号
-          service:"", //景区
-          postalNum:'110', //通讯号码
-          quantity:"57%", //电量
-          serialNum:1, //序号
-          Verifychar:'',//是否确认
-          upgradeVersion:"", //升级版本
-          Version:'',//版本
-          place:"", //位置
-          via:'', //头像
-          scenicspot:"", //所属景区
-          verifychar:true, //是否确认
-          address:"青城山", //地址
-          serviceproviders:"", //景区服务商
-          addtime:'', //添加时间
-          date:'',//时间
-          robotNum:"2165415", //机器码
-          broradius:'', //播报半径
-          onlineTotal:62, //在线总数
-          princiPalName:'刘星', //负责人姓名
-          principalphone:"13333333333", //负责人电话
-          postalAddress:'', //通讯地址
-          touristGroup:'', //旅游团
-          allot:"", //分配状态
-          softwareVersion:"", //软件版本
-          Condition:'', //状态
-          upgradeDate:'', //升级时间
-          upgradeAllot:'', //升级状态
-          upgradeVersion:'',//升级版本
-          phone:"13500000000", //手机号
-          trapeze:'', //经纬度
-          theirdroup:'', //所属团
-          rescue:'', //救援
-          loginName:'', //登录名
-          scenicNum:50, //景区数
-          role:'', //角色
-          remark:'',//备注
-          accessdate:'',//访问时间
-        },
-        
-        
-      ],
-
+          RFIDNum: 110, //发射源编号
+          ReportCount: 15, //播报次数
+          tourist: "", //旅游景点
+          coodrinte: "", //坐标
+          visitTimes: "", //访问次数
+          devicesTotal: 100, //设备总数
+          offlineTotal: 20, //离线总数
+          device: "", //设备IMEI
+          deviceNum: "", //设备号
+          service: "", //景区
+          postalNum: "110", //通讯号码
+          quantity: "57%", //电量
+          serialNum: 1, //序号
+          Verifychar: "", //是否确认
+          upgradeVersion: "", //升级版本
+          Version: "", //版本
+          place: "", //位置
+          via: "", //头像
+          scenicspot: "", //所属景区
+          verifychar: true, //是否确认
+          address: "青城山", //地址
+          serviceproviders: "", //景区服务商
+          addtime: "", //添加时间
+          date: "", //时间
+          robotNum: "2165415", //机器码
+          broradius: "", //播报半径
+          onlineTotal: 62, //在线总数
+          princiPalName: "刘星", //负责人姓名
+          principalphone: "13333333333", //负责人电话
+          postalAddress: "", //通讯地址
+          touristGroup: "", //旅游团
+          allot: "", //分配状态
+          softwareVersion: "", //软件版本
+          Condition: "", //状态
+          upgradeDate: "", //升级时间
+          upgradeAllot: "", //升级状态
+          upgradeVersion: "", //升级版本
+          phone: "13500000000", //手机号
+          trapeze: "", //经纬度
+          theirdroup: "", //所属团
+          rescue: "", //救援
+          loginName: "", //登录名
+          scenicNum: 50, //景区数
+          role: "", //角色
+          remark: "", //备注
+          accessdate: "" //访问时间
+        }
+      ]
     };
   },
-  props: ["showMenu","tableitems","showImg",
+  props: [
+    "showMenu",
+    "tableitems",
+    "showImg",
     "showRFID",
     "showRobotNum",
     "showDevice",
@@ -562,41 +557,73 @@ export default {
     "showInputIMEI",
     "showInputcodeMachine",
     "showInputphone",
-    "showInputstateful",],
-    methods: {
-      // 操作按钮
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
-      // 分页
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      },
-      alertMessege:function(){
-  		alert('111');
-  		this.$emit('showSetting', 'ljb')
-  	}
+    "showInputstateful"
+  ],
+  methods: {
+    // 操作按钮
+    handleEdit(index, row) {
+      console.log(index, row);
+    },
+    handleDelete(index, row) {
+      console.log(index, row);
+    },
+    // 分页
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    alertMessege: function() {
+      alert("111");
+      this.$emit("showSetting", "ljb");
+    },
+
+    getTableData(sform) {
+      var vm = this;
+      // this.loading = true;
+      var api = this.queryapi;
+      /*setTimeout(() => {
+           vm.alertInfo('登录过期,请重新登录!')
+       }, 100)
+*/
+      this.$axios
+        .post(path + api, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+          }
+        })
+        .then(function(response) {
+          let ret = response;
+          if (ret.status == "200") {
+            vm.tableData = ret.data.value.list;
+            console.log(ret.data.value);
+            vm.total = ret.data.value.total;
+            vm.loading = false;
+          }
+        })
+        .catch(function(error) {
+          setTimeout(() => {
+            alert("请求失败");
+          }, 150);
+        });
     }
+  }
 };
 </script>
 
 <style lang="less">
-section{
+section {
   position: relative;
-  .block{
-    background: #fff;
-    position: absolute;
-    right: 50px;
+  .input {
+    display: inline-block;
+    margin-right: 50px;
+    margin-top: 20px;
   }
-  
+  .label {
+    display: inline;
     font-size: 16px;
-    // text-align: right;
+    text-align: right;
   }
   .con {
     display: inline;
@@ -616,6 +643,10 @@ section{
     }
     .el-input__icon {
       color: #ff6600;
+    }
+    .el-select__caret {
+      margin-top: 5px;
+      // margin-right: 10px;
     }
   }
   // 模态框
@@ -652,19 +683,20 @@ section{
         color: #fb8c32;
       }
     }
-    
   }
   .el-dialog__body {
-      .el-checkbox__label{
-        padding-left: 40px;
-      }
+    .el-checkbox__label {
+      padding-left: 40px;
     }
+  }
   .el-pagination {
+    position: absolute;
+    right: 80px;
     .el-input__inner {
       width: 100px;
     }
   }
-
+}
 </style>
 
 

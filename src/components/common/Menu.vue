@@ -60,7 +60,7 @@
                     <el-menu-item-group>
                       <el-menu-item index="/PlantLeasing">设备租赁次数统计表</el-menu-item>
                     <el-menu-item index="/Sos">SOS统计</el-menu-item>
-                    <el-menu-item index="/Sos">人流统计</el-menu-item>
+                    <el-menu-item index="">人流统计</el-menu-item>
                     <el-menu-item index="/Fence">电子围栏统计</el-menu-item>
                     </el-menu-item-group>
               </el-submenu>

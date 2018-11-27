@@ -42,6 +42,7 @@
                       :showInputphone="showInputphone"
                       :showInputstateful="showInputstateful"
                       :showInputservice="showInputservice"
+                      v-on:getTableData="getTableData"
                       ref="tumitable" />
     </div>
 </template>
@@ -49,7 +50,7 @@
 <script>
 // import CommonInput from "../CommonInput";
 import ComTable from "../ComTable";
-import axios from 'axios';
+import { path } from "../../api/api.js";
 export default {
   components: {
     // CommonInput,
@@ -57,27 +58,27 @@ export default {
   },
   data() {
     return {
-      queryapi:"/device/terminal/addTerminal",
-      showDate:true,
-      showMenu:true,
-      showAllot:true,
-      showState:true,
-      showPhone:true,
-      showService:true,
-      showDevice:true,
-      showRobotNum:true,
-      showImg:true,
-      del:true,
-      add:true,
-      assign:true,
-      incDevice:true,
-      expDev:true,
-      showform:true,
-      showInputIMEI:true,
-      showInputcodeMachine:true,
-      showInputphone:true,
-      showInputstateful:true,
-      showInputservice:true,
+      queryapi: "/device/terminal/addTerminal",
+      showDate: true,
+      showMenu: true,
+      showAllot: true,
+      showState: true,
+      showPhone: true,
+      showService: true,
+      showDevice: true,
+      showRobotNum: true,
+      showImg: true,
+      del: true,
+      add: true,
+      assign: true,
+      incDevice: true,
+      expDev: true,
+      showform: true,
+      showInputIMEI: true,
+      showInputcodeMachine: true,
+      showInputphone: true,
+      showInputstateful: true,
+      showInputservice: true,
       tableitems: [
         {
           hasSubs: false,
@@ -95,7 +96,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -111,7 +112,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -127,8 +128,8 @@ export default {
             }
           ]
         },
-       
-         {
+
+        {
           hasSubs: false,
           subs: [
             {
@@ -144,7 +145,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -160,7 +161,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -176,7 +177,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -192,7 +193,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -208,7 +209,7 @@ export default {
             }
           ]
         },
-         {
+        {
           hasSubs: false,
           subs: [
             {
@@ -223,19 +224,35 @@ export default {
               align: "center"
             }
           ]
-        },
+        }
       ]
     };
   },
+  methods: {
+    getTableData() {
+      let sfrom = {};
+      let _this = this;
+      let api = this.queryapi;
+      this.$axios
+        .post(path + api, {
+          codeMachine: _this.codeMachine,
+          imei: _this.imei,
+          telephone: _this.telephone
+          // codeMachine: "codeMachine",
+          // imei: "imei",
+          // telephone: "telephone"
+        })
+        .then(response => {
+          console.log(response);
+          if(response.data.resultStatus.resultCode == "0000"){
+            return getTableData.value
+          }
+        });
+    }
+  },
   mounted() {
-     alert("actived")
-    let sfrom={}
-    this.$refs['tumitable'].getTableData({});
-    
-  },
-  activated() {
-   
-  },
+    this.$refs["tumitable"].getTableData({});
+  }
 };
 </script>
 

@@ -19,18 +19,18 @@ import Menu from '@/components/common/Menu'
 import RFID from "../components/page/admin/RFID"
 
 let routes = [
-    // {
-    //     path: '/',
-    //     component: Login,
-    //     // name: '订单管理',
-    //     iconCls: 'el-icon-document',
-    //     // children: [
-    //     //     {path: '/RFID', component: RFID, name: ''},
-    //     // ]
-    // },
-
     {
         path: '/',
+        component: Login,
+        // name: '订单管理',
+        iconCls: 'el-icon-document',
+        // children: [
+        //     {path: '/RFID', component: RFID, name: ''},
+        // ]
+    },
+
+    {
+        path: '/index',
         component: Index,
         // name: '订单管理',
         iconCls: 'el-icon-document',
