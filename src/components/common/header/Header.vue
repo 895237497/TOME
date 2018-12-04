@@ -31,7 +31,7 @@ export default {
     //var access_token=this.access_token
     var access_token = _this.token;
     axios
-      .get("http://192.168.0.39:8080/user/current", {
+      .get("http://192.168.0.196:8080/user/current", {
         headers: {
           Authorization: "Bearer" + token
         }

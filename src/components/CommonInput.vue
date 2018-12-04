@@ -153,11 +153,11 @@
         </el-row>
         
          <el-row style="margin-left: 89px;">
-        		<el-button round @click="dialogFormVisible = true" size="small" v-if="Info">新增</el-button>
+        		<el-button round  @click="dialogFormVisible = true" size="small" v-if="Info">新增</el-button>
         		<el-button round size="small" v-if="del">删除</el-button>
         		<el-button round size="small" v-if="inc">导入</el-button>
         		<el-button round size="small" v-if="educe">导出</el-button>
-        		<el-button round @click="dialogFormVisible = true" size="small" v-if="add">添加设备</el-button>
+        		<el-button round size="small" v-if="add">添加设备</el-button>
         		<el-button round size="small" v-if="assign">分配设备</el-button>
         		<el-button round size="small" v-if="incDevice">导入设备</el-button>
         		<el-button round size="small" v-if="expDev">导出设备</el-button>
@@ -166,90 +166,37 @@
       
 			     <!-- 模态框 -->
         <el-dialog title="新增" :visible.sync="dialogFormVisible">
-						<el-form :model="form" v-if="showform">
-               <div v-if="showInputIMEI">
-									<el-form-item label="设备IMEI*" :label-width="formLabelWidth" >
-										<el-input v-model="form.IMEI" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-               <div v-if="showInputcodeMachine">
-									<el-form-item label="机器码*" :label-width="formLabelWidth" >
-										<el-input v-model="form.codeMachine" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-               <div v-if="showInputphone">
-									<el-form-item label="手机号码*" :label-width="formLabelWidth" >
-										<el-input v-model="form.phone" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-               <div v-if="showInputstateful">
-									<el-form-item label="状态*" :label-width="formLabelWidth" >
-										<el-input v-model="form.stateful" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
+						<el-form :model="form" >
 
-               <div v-if="showInputName">
+               
 									<el-form-item label="景区服务商*" :label-width="formLabelWidth" >
 										<el-input v-model="form.name" autocomplete="off"></el-input>
 									</el-form-item>
-               </div>
-               <div v-if="showInputAddress">
+               
 									<el-form-item label="通讯地址*" :label-width="formLabelWidth" >
 										<el-input v-model="form.address" autocomplete="off"></el-input>
 									</el-form-item>
-               </div>
-               <div v-if="showInputPerson">
+               
 									<el-form-item label="负责人*" :label-width="formLabelWidth" >
 										<el-input v-model="form.person" autocomplete="off"></el-input>
 									</el-form-item>
-               </div>
-
-
-                <div v-if="showInputusername">
-									<el-form-item label="用户名*" :label-width="formLabelWidth" >
-										<el-input v-model="form.username" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-               <div v-if="showInputloginname">
-									<el-form-item label="登录名*" :label-width="formLabelWidth" >
-										<el-input v-model="form.loginname" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-               <div v-if="showInputloginpwd">
-									<el-form-item label="登录密码*" :label-width="formLabelWidth" >
-										<el-input v-model="form.loginpwd" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-               <div v-if="showInputrole">
-									<el-form-item label="角色*" :label-width="formLabelWidth" >
-										<el-input v-model="form.role" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-
-               <div v-if="showInputPhone">
+							 
 									<el-form-item label="负责人电话*" :label-width="formLabelWidth" >
 										<el-input v-model="form.phone" autocomplete="off"></el-input>
 									</el-form-item>
-               </div>
-               <div v-if="showInputrolename">
-									<el-form-item label="角色名*" :label-width="formLabelWidth" >
-										<el-input v-model="form.rolename" autocomplete="off"></el-input>
-									</el-form-item>
-               </div>
-							 <div v-if="showInputjwd">
+							 	
+							 
 								<el-form-item label="经纬度*" :label-width="formLabelWidth" >
 									<el-input v-model="form.jwd" autocomplete="off"></el-input>
 								</el-form-item>
-							 </div> 
-               <div v-if="showInputSpot"> 
+
 								<el-form-item label="景区*" :label-width="formLabelWidth" >
 									<div><span>青城山</span>&nbsp;	&nbsp; <span>青城山</span>	&nbsp;	&nbsp;<span>青城山</span></div>
 									<el-input v-model="form.jwd" autocomplete="off" placeholder="请选择景区...."></el-input>
 								</el-form-item>
-               </div>
-               <div v-if="showInputservice"> 
+
 								<el-form-item label="景区*" :label-width="formLabelWidth" >
-									<el-select v-model="value" placeholder="太行山">
+									<el-select v-model="value" placeholder="请选择">
 												<el-option
 													v-for="item in options"
 													:key="item.value"
@@ -258,20 +205,7 @@
 												</el-option>
 											</el-select>
 								</el-form-item>
-               </div>
-               <div v-if="showInputIDcard"> 
-								<el-form-item label="身份*" :label-width="formLabelWidth" >
-									<el-select v-model="value" placeholder="请选择.....">
-												<el-option
-													v-for="item in options"
-													:key="item.value"
-													:label="item.label"
-													:value="item.value">
-												</el-option>
-											</el-select>
-								</el-form-item>
-               </div>
-               <div v-if="showInputCard">
+
 								<el-card class="box-card">
 									<div slot="header" class="clearfix">
 										<span>用户名称</span>
@@ -280,7 +214,7 @@
 											<el-checkbox v-model="checked">备选项</el-checkbox>
 									</div>
 								</el-card>
-               </div>	
+							 	
 						</el-form>
 							<div slot="footer" class="dialog-footer">
 								<!-- <el-button @click="dialogFormVisible = false">取 消</el-button> -->
@@ -340,16 +274,7 @@ export default {
         address: "",
         person: "",
         phone: "",
-        jwd: "",
-        username:"",
-        loginname:"",
-        loginpwd:"",
-        role:"",
-        rolename:"",
-        IMEI:"",
-        codeMachine:"",
-        phone:"",
-        stateful:"",
+        jwd: ""
       },
       formLabelWidth: "100px",
 
@@ -434,25 +359,12 @@ export default {
     "incDevice",
     "expDev",
     "SimJetSoft",
-    "showform",
+    "showForm",
     "showInputName",
     "showInputAddress",
     "showInputPerson",
     "showInputPhone",
-    "showInputjwd",
-    "showInputSpot",
-    "showInputservice",
-    "showInputCard",
-    "showInputusername",
-    "showInputIDcard",
-    "showInputloginname",
-    "showInputloginpwd",
-    "showInputrole",
-    "showInputrolename",
-    "showInputIMEI",
-    "showInputcodeMachine",
-    "showInputphone",
-    "showInputstateful",
+    "showInputjwd"
   ],
   methods:{
   	alertMessege:function(){
@@ -529,13 +441,14 @@ section {
         color: #fb8c32;
       }
     }
-    
+    // .el-dialog__body {
+    //   .el-checkbox__inner {
+    //     display: inline-block;
+    //     position: relative;
+    //     left: -15px;
+    //   }
+    // }
   }
-  .el-dialog__body {
-      .el-checkbox__label{
-        padding-left: 40px;
-      }
-    }
   .el-pagination {
     .el-input__inner {
       width: 100px;

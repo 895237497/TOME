@@ -7,6 +7,7 @@ import Sos from '@/components/datacount/Sos'
 import Management from '@/components/Management/Management'
 import TestMap from '@/components/page/TestMap'
 import Emitters from '@/components/page/Emitters'
+import PeopleCounting from '@/components/page/PeopleCounting'
 import EmittersCount from '@/components/page/EmittersCount'
 import EmittersLog from '@/components/page/EmittersLog'
 import Place from '@/components/page/Place'
@@ -22,34 +23,31 @@ let routes = [
     {
         path: '/',
         component: Login,
-        // name: '订单管理',
+        // name: '登录',
         iconCls: 'el-icon-document',
-        // children: [
-        //     {path: '/RFID', component: RFID, name: ''},
-        // ]
     },
-
     {
         path: '/index',
         component: Index,
-        // name: '订单管理',
+        // name: '首页',
         iconCls: 'el-icon-document',
         children: [
-            {path: '/RFID', component: RFID, name: ''},
+            {path: '/TestMap', component: TestMap, name: '地图'},
             {path: '/SpotService', component: SpotService, name: '景区服务商'},
-            {path: '/PromotionLog', component: PromotionLog, name: '空页面'},
-            {path: '/Promotion', component: Promotion, name: '空页面'},
-            {path: '/MachineCount', component: MachineCount, name: '空页面'},
-            {path: '/Place', component: Place, name: '空页面'},
-            {path: '/EmittersCount', component: EmittersCount, name: '空页面'},
-            {path: '/Emitters', component: Emitters, name: '空页面'},
-            {path: '/Management', component: Management, name: '空页面'},
-            {path: '/Sos', component: Sos, name: '空页面'},
-            {path: '/PlantLeasing', component: PlantLeasing, name: '空页面'},
-            {path: '/Fence', component: Fence, name: '空页面'},
-            {path: '/Role', component: Role, name: '空页面'},
-            {path: '/AccountManage', component: AccountManage, name: '空页面'},
-            {path: '/EmittersLog', component: EmittersLog, name: '空页面'},
+            {path: '/PeopleCounting', component: PeopleCounting, name: '人流统计'},
+            {path: '/PromotionLog', component: PromotionLog, name: '升级日志'},
+            {path: '/Promotion', component: Promotion, name: '升级情况'},
+            {path: '/MachineCount', component: MachineCount, name: '机器码统计'},
+            {path: '/Place', component: Place, name: '位置版'},
+            {path: '/EmittersCount', component: EmittersCount, name: '发射源'},
+            {path: '/Emitters', component: Emitters, name: '发射源统计'},
+            {path: '/Management', component: Management, name: '设备信息'},
+            {path: '/Sos', component: Sos, name: 'SOS统计'},
+            {path: '/PlantLeasing', component: PlantLeasing, name: '设备租赁次数'},
+            {path: '/Fence', component: Fence, name: '电子围栏统计'},
+            {path: '/Role', component: Role, name: '角色管理'},
+            {path: '/AccountManage', component: AccountManage, name: '账号管理'},
+            {path: '/EmittersLog', component: EmittersLog, name: '发射源访问日志'},
         ]
     },
    

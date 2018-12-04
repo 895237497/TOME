@@ -43,6 +43,7 @@
 
 <script>
 import axios from "axios";
+import { path } from "../../api/api.js"
 export default {
   name: "Login",
   data() {
@@ -86,10 +87,11 @@ export default {
     // 登录函数
     submitForm(formName) {
       var _this = this;
+      var api="/sys/login"
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios
-            .post("http://192.168.0.39:8080/sys/login", {
+            .post(path+api, {
               username: _this.ruleForm.username,
               password: _this.ruleForm.password,
               imageCode: _this.ruleForm.code
@@ -101,6 +103,8 @@ export default {
                   this.$store.commit("SET_TOKEN", response.data.token);
                   this.$store.commit("GET_USER", response.data.username);
                   localStorage.setItem("token",response.data.value.access_token)
+                  alert(response.data.value.access_token)
+                  alert(localStorage.getItem(token))
                   // var token = localStorage.getItem("token");
                   // alert(token)
                   this.$message({
@@ -135,8 +139,9 @@ export default {
       let param = {
         imageCode: ""
       };
+      var api="/sys/captcha"
       axios
-        .get("http://192.168.0.39:8080/sys/captcha", {
+        .get(path+api, {
           params: param,
           responseType: "arraybuffer"
         })
@@ -333,7 +338,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios
-            .post("http://192.168.0.39:8080/sys/login", {
+            .post("http://192.168.0.196:8080/sys/login", {
               username: _this.ruleForm.username,
               password: _this.ruleForm.password,
               imageCode: _this.ruleForm.code
@@ -381,7 +386,7 @@ export default {
         imageCode: ""
       };
       axios
-        .get("http://192.168.0.39:8080/sys/captcha", {
+        .get("http://192.168.0.196:8080/sys/captcha", {
           params: param,
           responseType: "arraybuffer"
         })
