@@ -10,11 +10,7 @@
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-		       			:showImport='showImport'
 		       			:showExport='showExport'
-		       			:showDel="showDel"
-		       			:showAdd2="showAdd2"
-		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
@@ -191,15 +187,12 @@ export default {
 	    },
     	addVisible:false,
     	showQueryDate:true,
-    	showImport:true,
     	showExport:true,
-    	showDel:true,
-    	showAdd2:true,
     	fridtype:1,
       showTools: {
       	tools:true,
       	codeMachine:true,
-        device:true,
+        imei:true,
         version:true,
         scenery:true,
         date:true,
@@ -215,152 +208,16 @@ export default {
 			],
 			sceneryspoteditlist:[],
       tableitems: [
-      {
-          hasSubs: false,
-          subs: [
-            {
-              label: "发射源id",
-              prop: "id",
-              width: "100",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              hidden:true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-       },
         {
           hasSubs: false,
           subs: [
             {
               label: "序号",
-              prop: "no",
-              width: "96",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: false,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
-         {
-          hasSubs: false,
-          subs: [
-            {
-              label: "时间",
-              prop: "address",
-              width: "160",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-				},
-				{
-          hasSubs: false,
-          subs: [
-            {
-              label: "位置",
-              prop: "machine",
-              width: "200",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
-         {
-          hasSubs: false,
-          subs: [
-            {
-              label: "手机号",
-              prop: "sceneryName",
-              width: "200",
-              type: "selection",
-              selectlist: [{},{}],
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
-        
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "头像",
-              prop: "scenerySpotName",
+              prop: "serialNum",
               width: "100",
-               type: "selection",
-              selectlist: [{},{}],
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "经纬度",
-              prop: "coodrinte",
-              width: "200",
               type: "number",
               editable: true,
               searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center",
-              format: function (row) {
-                  return row.lon +","+row.lat;
-         		  }
-            }
-          ]
-        },
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "景区id",
-              prop: "sceneryId",
-              width: "200",
-              type: "number",
-              editable: true,
-              hidden:true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },{
-          hasSubs: false,
-          subs: [
-            {
-              label: "景点id",
-              prop: "scenerySpotId",
-              width: "200",
-              type: "number",
-              editable: true,
-              searchable: true,
-              hidden:true,
               addable: true,
               unsortable: true,
               align: "center"
@@ -371,30 +228,10 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "所属景区",
-              prop: "createTime",
+              label: "景区服务商",
+              prop: "serviceproviders",
               width: "200",
-              type: "date",
-              editable: false,
-              searchable: true,
-              addable: false,
-              unsortable: true,
-              align: "center",
-              format:function(row){
-              	return common.dateformat(row.createTime);
-              }
-            }
-          ]
-				},
-				 {
-          hasSubs: false,
-          subs: [
-            {
-              label: "所属团",
-              prop: "scenerySpotName",
-              width: "200",
-               type: "selection",
-              selectlist: [{},{}],
+              type: "number",
               editable: true,
               searchable: true,
               addable: true,
@@ -402,16 +239,15 @@ export default {
               align: "center"
             }
           ]
-				},
-				 {
+        },
+        {
           hasSubs: false,
           subs: [
             {
-              label: "是否确认",
-              prop: "scenerySpotName",
-              width: "120",
-               type: "selection",
-              selectlist: [{},{}],
+              label: "旅游团",
+              prop: "touristGroup",
+              width: "200",
+              type: "number",
               editable: true,
               searchable: true,
               addable: true,
@@ -419,8 +255,87 @@ export default {
               align: "center"
             }
           ]
-				},
-				 
+        }, 
+        {
+          hasSubs: false,
+          subs: [
+            {
+              label: "设备号",
+              prop: "deviceNum",
+              width: "200",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        }, 
+        {
+          hasSubs: false,
+          subs: [
+            {
+              label: "机器码",
+              prop: "robotNum",
+              width: "200",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        }, 
+        {
+          hasSubs: false,
+          subs: [
+            {
+              label: "升级时间",
+              prop: "upgradeDate",
+              width: "198",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        }, 
+        {
+          hasSubs: false,
+          subs: [
+            {
+              label: "升级版本",
+              prop: "upgradeVersion",
+              width: "188",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        }, 
+        {
+          hasSubs: false,
+          subs: [
+            {
+              label: "升级状态",
+              prop: "upgradeAllot",
+              width: "190",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        }, 
       ],
       	addFormRules:{
     		 no: [

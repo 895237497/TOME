@@ -32,7 +32,7 @@
       <el-button round @click="exportData" size="small" v-if="showExport">导出</el-button>
       <el-button round size="small" v-if="showDel" @click="showDelVisible">删除</el-button>
 
-      <el-button round size="small" v-if="showAddDevice">添加设备</el-button>
+      <el-button round  @click="addData2" size="small" v-if="showAddDevice">添加设备</el-button>
       <el-button round size="small" v-if="showAllDevice">分配设备</el-button>
       <el-button round size="small" v-if="showImpDevice">导入设备</el-button>
       <el-button round size="small" v-if="showExpDevice">导出设备</el-button>
@@ -255,11 +255,11 @@ export default {
             // if (ret > 0) {
             //删除成功
             vm.$refs["menutool"].query();
-            /*vm.$message({
+            vm.$message({
                         message: '删除成功!',
                         type: 'success',
                         duration: 600
-                    });*/
+                    });
           } else {
             //更新失败
             vm.$message({
@@ -308,8 +308,8 @@ export default {
 
       var api = this.queryapi;
 
-      sform.rows = this.pageSize;
-      sform.page = this.currentPage;
+      sform.pageSize = this.pageSize;
+      sform.pageNum = this.currentPage;
 
       let token = localStorage.getItem("token");
       console.log("query.................");

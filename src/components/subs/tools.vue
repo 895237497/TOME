@@ -2,7 +2,7 @@
  		<el-row  style="margin: 34px 0 47px 89px;font:'microsoft yahei' 18px/32px ;" v-if="showTools.tools">
  			
  			
- 			<div style="display: inline;margin-right: 48px;" v-if="showTools.no" >
+ 			<div style="display: inline;margin-right: 84px;" v-if="showTools.no" >
  				<span style="margin-right: 18px;">发射源编号</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入发射源编号"
@@ -11,7 +11,7 @@
 				</el-input>
  			</div>
 
- 			<div style="display: inline;margin-right: 48px;" v-if="showTools.codeMachine" >
+ 			<div style="display: inline;margin-right: 84px;" v-if="showTools.codeMachine" >
  				<span style="margin-right: 18px;">机器码</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入机器码"
@@ -20,90 +20,90 @@
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.username" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.username" >
  				<span style="margin-right: 18px;">用户名</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入用户名"
-				  v-model="sform.codeMachine"
+				  v-model="sform.username"
 				  clearable>
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.allot" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.isAllot" >
  				<span style="margin-right: 18px;">分配状态</span>
  				<el-input style="display: inline-block;" size="small"
-				  placeholder="请输入用户名"
-				  v-model="sform.codeMachine"
+				  placeholder="查询分配状态"
+				  v-model="sform.isAllot"
 				  clearable>
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.imei" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.imei" >
  				<span style="margin-right: 18px;">设备IMEI</span>
  				<el-input style="display: inline-block;" size="small"
-				  placeholder="请输入用户名"
-				  v-model="sform.codeMachine"
+				  placeholder="请输入设备IMEI号"
+				  v-model="sform.imei"
 				  clearable>
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.phone" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.telephone" >
  				<span style="margin-right: 18px;">手机号</span>
  				<el-input style="display: inline-block;" size="small"
-				  placeholder="请输入用户名"
-				  v-model="sform.codeMachine"
+				  placeholder="请输入手机号"
+				  v-model="sform.telephone"
 				  clearable>
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.device" >
+			 <!-- <div style="display: inline;margin-right: 84px;" v-if="showTools.device" >
  				<span style="margin-right: 18px;">设备号</span>
  				<el-input style="display: inline-block;" size="small"
-				  placeholder="请输入用户名"
-				  v-model="sform.codeMachine"
+				  placeholder="请输入设备号"
+				  v-model="sform.device"
 				  clearable>
 				</el-input>
- 			</div>
+ 			</div> -->
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.version" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.version" >
  				<span style="margin-right: 18px;">版本号</span>
  				<el-input style="display: inline-block;" size="small"
-				  placeholder="请输入用户名"
-				  v-model="sform.codeMachine"
+				  placeholder="请输入版本"
+				  v-model="sform.version"
 				  clearable>
 				</el-input>
  			</div>
 
-			  <div style="display: inline;margin-right: 48px;" v-if="showTools.name" >
+			  <div style="display: inline;margin-right: 84px;" v-if="showTools.name" >
  				<span style="margin-right: 18px;">名称</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入名称"
-				  v-model="sform.codeMachine"
+				  v-model="sform.name"
 				  clearable>
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.loginname" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.loginname" >
  				<span style="margin-right: 18px;">登录名</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入登录名"
-				  v-model="sform.codeMachine"
+				  v-model="sform.loginname"
 				  clearable>
 				</el-input>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.role" >
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.role" >
  				<span style="margin-right: 18px;">角色</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入角色"
-				  v-model="sform.codeMachine"
+				  v-model="sform.role"
 				  clearable>
 				</el-input>
  			</div>
  			
- 			<div style="display: inline;margin-right: 48px;" v-if="showTools.scenery">
+ 			<div style="display: inline;margin-right: 84px;" v-if="showTools.scenery">
  				<span style="margin-right: 18px;">景区</span>
- 				<el-select  size="small" v-model="sform.sceneryIdId" placeholder="请选择">
+ 				<el-select  size="small" v-model="sform.scenery" placeholder="请选择景区·····">
 				    <el-option st
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
@@ -113,9 +113,9 @@
 			    </el-select>
  			</div>
 
-			 <div style="display: inline;margin-right: 48px;" v-if="showTools.state">
+			 <!-- <div style="display: inline;margin-right: 84px;" v-if="showTools.state">
  				<span style="margin-right: 18px;">状态</span>
- 				<el-select  size="small" v-model="sform.sceneryIdId" placeholder="请选择">
+ 				<el-select  size="small" v-model="sform.state" placeholder="请选择状态···">
 				    <el-option st
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
@@ -123,9 +123,9 @@
 				      :value="item.id">
 				    </el-option>
 			    </el-select>
- 			</div>
+ 			</div> -->
 
- 			<div style="display: inline;margin-right: 48px;" v-if="showTools.date">
+ 			<div style="display: inline;margin-right: 84px;" v-if="showTools.date">
  				<span style="margin-right: 18px;">日期</span>
  				<el-date-picker size="small"
 			      v-model="sform.startTime"
@@ -162,10 +162,21 @@ export default {
 		showRFID:true,
 		sform:{
 			no:'',
+			codeMachine:'',
+			username:'',
+			isAllot:'',
+			imei:'',
+			telephone:'',
+			// device:'',
+			version:'',
+			name:'',
+			loginname:'',
+			role:'',
+			scenery:'',
+			// state:'',
+			date:'',
 			startTime:'',
 			endTime:'',
-			sceneryIdId:'',
-			codeMachine:''
 		},
 
 
