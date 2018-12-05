@@ -8,10 +8,8 @@
 		       			:tableitems='tableitems' 
 		       			:queryapi="queryapi"
 		       			:showScenery='showScenery'
-								:showImg="showImg" 
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-								:showShutDown="showShutDown"
 		       			:showImport='showImport'
 		       			:showExport='showExport'
 		       			:showDel="showDel"
@@ -160,9 +158,9 @@ export default {
       };
     return {
     	contenttitl:{
-    		name:'景区服务商',
-    		// description:'升级日志',
-    		tabledesctiption:'共有景区',
+    		name:'数据统计',
+    		description:'电子围栏统计',
+    		tabledesctiption:'电子围栏报警',
     		unit:'个'
     	},
     	queryapi:'/device/rfid/query',
@@ -192,21 +190,19 @@ export default {
 		     age: ''
 	    },
     	addVisible:false,
-			showQueryDate:true,
-			showImg:true,
+    	showQueryDate:true,
     	showImport:true,
     	showExport:true,
     	showDel:true,
-			showAdd2:true,
-			showShutDown:true,
+    	showAdd2:true,
     	fridtype:1,
       showTools: {
       	tools:true,
-      	// codeMachine:true,
-        // device:true,
-        // version:true,
+      	codeMachine:true,
+        device:true,
+        version:true,
         scenery:true,
-        // date:true,
+        date:true,
       },
       showRFID:true,
 			showScenery:true,
@@ -218,7 +214,7 @@ export default {
 				
 			],
 			sceneryspoteditlist:[],
-      tableitems:[
+      tableitems: [
       {
           hasSubs: false,
           subs: [
@@ -240,13 +236,29 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "发射源编号",
+              label: "序号",
               prop: "no",
-              width: "100",
+              width: "96",
               type: "number",
               editable: true,
               searchable: true,
               addable: false,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        },
+         {
+          hasSubs: false,
+          subs: [
+            {
+              label: "时间",
+              prop: "address",
+              width: "160",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
               unsortable: true,
               align: "center"
             }
@@ -256,11 +268,10 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "景区服务商",
-              prop: "sceneryName",
-              width: "168",
-              type: "selection",
-              selectlist: [{},{}],
+              label: "位置",
+              prop: "machine",
+              width: "200",
+              type: "number",
               editable: true,
               searchable: true,
               addable: true,
@@ -273,10 +284,11 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "设备总数",
-              prop: "address",
-              width: "168",
-              type: "number",
+              label: "手机号",
+              prop: "sceneryName",
+              width: "200",
+              type: "selection",
+              selectlist: [{},{}],
               editable: true,
               searchable: true,
               addable: true,
@@ -285,30 +297,14 @@ export default {
             }
           ]
         },
-         
+        
         {
           hasSubs: false,
           subs: [
             {
-              label: "在线总数",
-              prop: "radius",
-              width: "168",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "离线总数",
+              label: "头像",
               prop: "scenerySpotName",
-              width: "168",
+              width: "100",
                type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -323,18 +319,18 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "负责人姓名",
+              label: "经纬度",
               prop: "coodrinte",
-              width: "168",
+              width: "200",
               type: "number",
               editable: true,
               searchable: true,
               addable: true,
               unsortable: true,
               align: "center",
-              // format: function (row) {
-              //     return row.lon +","+row.lat;
-         		  // }
+              format: function (row) {
+                  return row.lon +","+row.lat;
+         		  }
             }
           ]
         },
@@ -375,40 +371,56 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "负责人电话",
+              label: "所属景区",
               prop: "createTime",
-              width: "168",
+              width: "200",
               type: "date",
               editable: false,
               searchable: true,
               addable: false,
               unsortable: true,
               align: "center",
-              // format:function(row){
-              // 	return common.dateformat(row.createTime);
-              // }
+              format:function(row){
+              	return common.dateformat(row.createTime);
+              }
             }
           ]
 				},
-				{
+				 {
           hasSubs: false,
           subs: [
             {
-              label: "通讯地址",
-              prop: "createTime",
-              width: "168",
-              type: "date",
-              editable: false,
+              label: "所属团",
+              prop: "scenerySpotName",
+              width: "200",
+               type: "selection",
+              selectlist: [{},{}],
+              editable: true,
               searchable: true,
-              addable: false,
+              addable: true,
               unsortable: true,
-              align: "center",
-              // format:function(row){
-              // 	return common.dateformat(row.createTime);
-              // }
+              align: "center"
             }
           ]
-        },
+				},
+				 {
+          hasSubs: false,
+          subs: [
+            {
+              label: "是否确认",
+              prop: "scenerySpotName",
+              width: "120",
+               type: "selection",
+              selectlist: [{},{}],
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+				},
+				 
       ],
       	addFormRules:{
     		 no: [

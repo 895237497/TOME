@@ -29,6 +29,33 @@
 				</el-input>
  			</div>
 
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.allot" >
+ 				<span style="margin-right: 18px;">分配状态</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入用户名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.imei" >
+ 				<span style="margin-right: 18px;">设备IMEI</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入用户名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.phone" >
+ 				<span style="margin-right: 18px;">手机号</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入用户名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
 			 <div style="display: inline;margin-right: 48px;" v-if="showTools.device" >
  				<span style="margin-right: 18px;">设备号</span>
  				<el-input style="display: inline-block;" size="small"
@@ -85,6 +112,19 @@
 				    </el-option>
 			    </el-select>
  			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.state">
+ 				<span style="margin-right: 18px;">状态</span>
+ 				<el-select  size="small" v-model="sform.sceneryIdId" placeholder="请选择">
+				    <el-option st
+				      v-for="item in scenerylistquery"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.id">
+				    </el-option>
+			    </el-select>
+ 			</div>
+
  			<div style="display: inline;margin-right: 48px;" v-if="showTools.date">
  				<span style="margin-right: 18px;">日期</span>
  				<el-date-picker size="small"

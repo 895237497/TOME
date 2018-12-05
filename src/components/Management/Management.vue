@@ -6,16 +6,17 @@
 		       			:showTools="showTools"
 		       			:showRFID="showRFID"
 		       			:tableitems='tableitems' 
-		       			:showImg="showImg" 
 		       			:queryapi="queryapi"
 		       			:showScenery='showScenery'
+								:showImg="showImg" 
 		       			:showQueryDate='showQueryDate'
-		       			:scenerylist='scenerylist'
+		       			:scenerylistquery='scenerylistquery'
+								:showShutDown="showShutDown"
+		       			:showImport='showImport'
+		       			:showExport='showExport'
 		       			:showDel="showDel"
-								:showAddDevice="showAddDevice"
-								:showAllDevice="showAllDevice"
-								:showImpDevice="showImpDevice"
-								:showExpDevice="showExpDevice"
+		       			:showAdd2="showAdd2"
+		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
@@ -159,9 +160,9 @@ export default {
       };
     return {
     	contenttitl:{
-    		name:'设备管理',
-    		description:'设备信息',
-    		tabledesctiption:'共有设备',
+    		name:'景区服务商',
+    		// description:'升级日志',
+    		tabledesctiption:'共有景区',
     		unit:'个'
     	},
     	queryapi:'/device/rfid/query',
@@ -187,20 +188,27 @@ export default {
     		lat:''
     	},
     	showAdd:false,
-    	 numberValidateForm: {
-          age: ''
-        },
+			numberValidateForm: {
+		     age: ''
+	    },
     	addVisible:false,
-    	showQueryDate:true,
-    	showDel:true,
-			showAddDevice:true,
-			showAllDevice:true,
-			showImpDevice:true,
-			showExpDevice:true,
-    	fridtype:1,
-
-      showTools: true,
+			showQueryDate:true,
 			showImg:true,
+    	showImport:true,
+    	showExport:true,
+    	showDel:true,
+			showAdd2:true,
+			showShutDown:true,
+    	fridtype:1,
+      showTools: {
+      	tools:true,
+      	codeMachine:true,
+        allot:true,
+        imei:true,
+        phone:true,
+        scenery:true,
+        state:true
+      },
       showRFID:true,
 			showScenery:true,
 			scenerylist:[
@@ -211,7 +219,7 @@ export default {
 				
 			],
 			sceneryspoteditlist:[],
-      tableitems: [
+      tableitems:[
       {
           hasSubs: false,
           subs: [
@@ -233,7 +241,7 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "设备IMEI",
+              label: "发射源编号",
               prop: "no",
               width: "100",
               type: "number",
@@ -244,30 +252,14 @@ export default {
               align: "center"
             }
           ]
-        },
-         {
+				},
+				{
           hasSubs: false,
           subs: [
             {
-              label: "机器码",
-              prop: "address",
-              width: "200",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },
-         {
-          hasSubs: false,
-          subs: [
-            {
-              label: "旅游团",
+              label: "景区服务商",
               prop: "sceneryName",
-              width: "200",
+              width: "168",
               type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -278,13 +270,30 @@ export default {
             }
           ]
         },
+         {
+          hasSubs: false,
+          subs: [
+            {
+              label: "设备总数",
+              prop: "address",
+              width: "168",
+              type: "number",
+              editable: true,
+              searchable: true,
+              addable: true,
+              unsortable: true,
+              align: "center"
+            }
+          ]
+        },
+         
         {
           hasSubs: false,
           subs: [
             {
-              label: "景区",
+              label: "在线总数",
               prop: "radius",
-              width: "200",
+              width: "168",
               type: "number",
               editable: true,
               searchable: true,
@@ -298,9 +307,9 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "分配状态",
+              label: "离线总数",
               prop: "scenerySpotName",
-              width: "160",
+              width: "168",
                type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -315,18 +324,18 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "通讯号码",
+              label: "负责人姓名",
               prop: "coodrinte",
-              width: "160",
+              width: "168",
               type: "number",
               editable: true,
               searchable: true,
               addable: true,
               unsortable: true,
               align: "center",
-              format: function (row) {
-                  return row.lon +","+row.lat;
-         		  }
+              // format: function (row) {
+              //     return row.lon +","+row.lat;
+         		  // }
             }
           ]
         },
@@ -367,9 +376,9 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "软件版本",
+              label: "负责人电话",
               prop: "createTime",
-              width: "120",
+              width: "168",
               type: "date",
               editable: false,
               searchable: true,
@@ -386,28 +395,9 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "电量",
+              label: "通讯地址",
               prop: "createTime",
-              width: "80",
-              type: "date",
-              editable: false,
-              searchable: true,
-              addable: false,
-              unsortable: true,
-              align: "center",
-              // format:function(row){
-              // 	return common.dateformat(row.createTime);
-              // }
-            }
-          ]
-				},
-				{
-          hasSubs: false,
-          subs: [
-            {
-              label: "状态",
-              prop: "createTime",
-              width: "80",
+              width: "168",
               type: "date",
               editable: false,
               searchable: true,
@@ -444,7 +434,7 @@ export default {
             {type:'number', required: true, message: '请输入合法纬度，例如39.123456', trigger: 'blur' }
           ]
     	},
-      
+      row:''
     };
   },
   methods:{
@@ -467,6 +457,7 @@ export default {
   	},
   	//编辑
   	editData(row){
+  		this.row = row;
   		var _this = this;
   		
   		//根据当前景区id获取景点信息
@@ -476,6 +467,7 @@ export default {
   		
   		//复制row到editForm
   		common.copyattribute(_this.editForm,row);
+  		
   		//显示编辑页面
   		this.editVisible=true;
 
@@ -543,9 +535,7 @@ export default {
 		    	//data.push({id: 0, name: "查询全部"})
 		    	data.splice(0, 0, {id: 0, name: "查询全部"});
 		    	_this.scenerylistquery = data;
-		    	console.log('==============================')
-		    	console.log(_this.scenerylistquery)
-		    	console.log('==============================')
+
 		    	//获取表格数据
 		    	_this.getTableData({});
 		    })
@@ -605,7 +595,14 @@ export default {
 			    	 	vm.sceneryspotlist=data.value
 			    	 });
 			 },
-			 "editForm.sceneryId": function sceneryId(){
+			 "editForm.sceneryId": function sceneryId(value){
+			 	//alert(value != )
+			 	
+			 	if(this.row.sceneryId == value){
+			 		this.editForm.scenerySpotId = this.row.scenerySpotId;
+			 	}else{
+			 		this.editForm.scenerySpotId=''
+			 	}
 				//通过检测景区id的修改查询景点id
 				var api = "/scenery/webdata/getsceneryspotbysceneryid";
 				let token = localStorage.getItem("token");
@@ -614,8 +611,7 @@ export default {
 				}
 				var vm = this;
 				this.addForm.scenerySpotId='';
-			
-			    	
+
 	    	 common.commonPost(path+api,sform,token,function(data){
 	    	 		vm.sceneryspoteditlist=data.value
 	    	 });
