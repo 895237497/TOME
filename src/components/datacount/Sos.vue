@@ -9,7 +9,7 @@
 		       			:queryapi="queryapi"
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
-		       			:scenerylist='scenerylist'
+		       			:scenerylistquery='scenerylistquery'
 		       			:delapi="delapi"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
@@ -154,7 +154,7 @@ export default {
     return {
     	contenttitl:{
     		name:'数据统计',
-    		description:'SOS统计',
+    		description:'SOS报警',
     		tabledesctiption:'SOS累积报警次数',
     		unit:'个'
     	},
@@ -181,14 +181,17 @@ export default {
     		lat:''
     	},
     	showAdd:false,
-    	 numberValidateForm: {
-          age: ''
-        },
+			numberValidateForm: {
+		     age: ''
+	    },
     	addVisible:false,
     	showQueryDate:true,
     	fridtype:1,
-
-      showTools: true,
+      showTools: {
+      	tools:true,
+      	scenery:true,
+      	date:true
+      },
       showRFID:true,
 			showScenery:true,
 			scenerylist:[
@@ -199,7 +202,7 @@ export default {
 				
 			],
 			sceneryspoteditlist:[],
-      tableitems: [
+      tableitems:[
       {
           hasSubs: false,
           subs: [
@@ -463,7 +466,7 @@ export default {
             {type:'number', required: true, message: '请输入合法纬度，例如39.123456', trigger: 'blur' }
           ]
     	},
-      
+      row:''
     };
   },
   methods:{
@@ -486,6 +489,7 @@ export default {
   	},
   	//编辑
   	editData(row){
+  		this.row = row;
   		var _this = this;
   		
   		//根据当前景区id获取景点信息
@@ -495,6 +499,7 @@ export default {
   		
   		//复制row到editForm
   		common.copyattribute(_this.editForm,row);
+  		
   		//显示编辑页面
   		this.editVisible=true;
 
@@ -562,9 +567,7 @@ export default {
 		    	//data.push({id: 0, name: "查询全部"})
 		    	data.splice(0, 0, {id: 0, name: "查询全部"});
 		    	_this.scenerylistquery = data;
-		    	console.log('==============================')
-		    	console.log(_this.scenerylistquery)
-		    	console.log('==============================')
+
 		    	//获取表格数据
 		    	_this.getTableData({});
 		    })
@@ -624,7 +627,14 @@ export default {
 			    	 	vm.sceneryspotlist=data.value
 			    	 });
 			 },
-			 "editForm.sceneryId": function sceneryId(){
+			 "editForm.sceneryId": function sceneryId(value){
+			 	//alert(value != )
+			 	
+			 	if(this.row.sceneryId == value){
+			 		this.editForm.scenerySpotId = this.row.scenerySpotId;
+			 	}else{
+			 		this.editForm.scenerySpotId=''
+			 	}
 				//通过检测景区id的修改查询景点id
 				var api = "/scenery/webdata/getsceneryspotbysceneryid";
 				let token = localStorage.getItem("token");
@@ -633,8 +643,7 @@ export default {
 				}
 				var vm = this;
 				this.addForm.scenerySpotId='';
-			
-			    	
+
 	    	 common.commonPost(path+api,sform,token,function(data){
 	    	 		vm.sceneryspoteditlist=data.value
 	    	 });

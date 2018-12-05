@@ -5,14 +5,16 @@
        					:contenttitl="contenttitl"
 		       			:showTools="showTools"
 		       			:showRFID="showRFID"
-								:showdevice="showdevice" 
 		       			:tableitems='tableitems' 
 		       			:queryapi="queryapi"
-                :showAdd2="showAdd2" 
-                :showDel="showDel"
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
-		       			:scenerylist='scenerylist'
+		       			:scenerylistquery='scenerylistquery'
+		       			:showImport='showImport'
+		       			:showExport='showExport'
+		       			:showDel="showDel"
+		       			:showAdd2="showAdd2"
+		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
@@ -156,9 +158,9 @@ export default {
       };
     return {
     	contenttitl:{
-    		name:'账号分配',
-    		description:'角色分配',
-    		tabledesctiption:'共有角色',
+    		name:'RFID管理',
+    		description:'位置版',
+    		tabledesctiption:'共有位置版发射源',
     		unit:'个'
     	},
     	queryapi:'/device/rfid/query',
@@ -184,20 +186,21 @@ export default {
     		lat:''
     	},
     	showAdd:false,
-    	 numberValidateForm: {
-          age: ''
-        },
+			numberValidateForm: {
+		     age: ''
+	    },
     	addVisible:false,
     	showQueryDate:true,
+    	showImport:true,
+    	showExport:true,
     	showDel:true,
     	showAdd2:true,
     	fridtype:1,
-
-      showTools: true,
-			// showImg:true,
-			showRFID:true,
-			showdevice:true,
-
+      showTools: {
+				tools:true,
+      	name:true
+      },
+      showRFID:true,
 			showScenery:true,
 			scenerylist:[
 				

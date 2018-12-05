@@ -5,15 +5,17 @@
        					:contenttitl="contenttitl"
 		       			:showTools="showTools"
 		       			:showRFID="showRFID"
-								:showdevice="showdevice" 
 		       			:tableitems='tableitems' 
+		       			:showImg="showImg" 
 		       			:queryapi="queryapi"
-                :showImg="showImg" 
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
-		       			:scenerylist='scenerylist'
-                :showAdd2="showAdd2" 
-                :showDel="showDel"
+		       			:scenerylistquery='scenerylistquery'
+		       			:showImport='showImport'
+		       			:showExport='showExport'
+		       			:showDel="showDel"
+		       			:showAdd2="showAdd2"
+		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
@@ -157,8 +159,8 @@ export default {
       };
     return {
     	contenttitl:{
-    		name:'发射源管理',
-    		description:'发射源访问日志',
+    		name:'RFID管理',
+    		description:'位置版',
     		tabledesctiption:'共有位置版发射源',
     		unit:'个'
     	},
@@ -185,21 +187,25 @@ export default {
     		lat:''
     	},
     	showAdd:false,
-    	 numberValidateForm: {
-          age: ''
-        },
+			numberValidateForm: {
+		     age: ''
+	    },
     	addVisible:false,
-      showQueryDate:true,
-      showImg:true,
+    	showQueryDate:true,
+    	showImport:true,
+    	showExport:true,
     	showDel:true,
     	showAdd2:true,
     	fridtype:1,
-
-      showTools: true,
-			// showImg:true,
-			showRFID:true,
-			showdevice:true,
-
+      showTools: {
+				tools:true,
+      	username:true,
+      	loginname:true,
+      	scenery:true,
+      	role:true
+      },
+			showImg:true,
+      showRFID:true,
 			showScenery:true,
 			scenerylist:[
 				

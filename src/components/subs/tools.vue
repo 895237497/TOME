@@ -9,12 +9,66 @@
 				  v-model="sform.no"
 				  clearable>
 				</el-input>
-
  			</div>
+
  			<div style="display: inline;margin-right: 48px;" v-if="showTools.codeMachine" >
  				<span style="margin-right: 18px;">机器码</span>
  				<el-input style="display: inline-block;" size="small"
 				  placeholder="请输入机器码"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.username" >
+ 				<span style="margin-right: 18px;">用户名</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入用户名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.device" >
+ 				<span style="margin-right: 18px;">设备号</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入用户名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.version" >
+ 				<span style="margin-right: 18px;">版本号</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入用户名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			  <div style="display: inline;margin-right: 48px;" v-if="showTools.name" >
+ 				<span style="margin-right: 18px;">名称</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入名称"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.loginname" >
+ 				<span style="margin-right: 18px;">登录名</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入登录名"
+				  v-model="sform.codeMachine"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 48px;" v-if="showTools.role" >
+ 				<span style="margin-right: 18px;">角色</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入角色"
 				  v-model="sform.codeMachine"
 				  clearable>
 				</el-input>
@@ -48,7 +102,7 @@
 
  			
  			<div style="display: inline;margin-left: 70px;">
- 				 <el-button size="small" style="background: #FA841A;color: white;" @click="query">查询</el-button>
+ 				 <el-button size="small" style="background: #FA841A;color: white; " @click="query">查询</el-button>
  				  <el-button size="small" @click="resetForm">重置</el-button>
  				  <el-button size="small" @click="query">刷新</el-button>
  			</div>
@@ -70,7 +124,8 @@ export default {
 			no:'',
 			startTime:'',
 			endTime:'',
-			sceneryIdId:''
+			sceneryIdId:'',
+			codeMachine:''
 		},
 
 
@@ -151,6 +206,9 @@ export default {
     }*/
 	.el-row .el-input{
 		width: 150px;
+	}
+	.el-button--small, .el-button--small.is-round{
+		margin-top: 15px;
 	}
 	/*.el-input__inner{
 		width: 150px;
