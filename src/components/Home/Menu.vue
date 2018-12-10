@@ -26,10 +26,10 @@
             <span>首页</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/TestMap">首页</el-menu-item>
+            <el-menu-item index="/BMapcomponents">首页</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="2">
+        <!-- <el-submenu index="2">
           <template slot="title">
             <i class="icon iconfont icon-jingqu"></i>
             <span>景区服务商</span>
@@ -37,52 +37,63 @@
           <el-menu-item-group>
             <el-menu-item index="/SpotService">景区服务商</el-menu-item>
           </el-menu-item-group>
-        </el-submenu>
+        </el-submenu> -->
         <el-submenu index="3">
           <template slot="title">
-            <i class="icon iconfont icon-shouji"></i>
-            <span>设备管理</span>
+            <i class="icon iconfont icon-shezhi1"></i>
+            <span>景区维护</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/Management">设备信息</el-menu-item>
+            <el-menu-item index="/Trace">线路信息</el-menu-item>
+            <el-menu-item index="/Tours">旅游团管理</el-menu-item>
+            <el-menu-item index="/SpotsMessages">景点信息</el-menu-item>
+            <el-menu-item index="/Energizer">电子围栏</el-menu-item>
+            <el-menu-item index="/Scenic">景区服务</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="4">
           <template slot="title">
-            <i class="icon iconfont icon-wifi"></i>
-            <span>发射源管理</span>
+            <i class="icon iconfont icon-shouji"></i>
+            <span>设备/成员</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/Emitters">发射源统计</el-menu-item>
-            <el-menu-item index="/MachineCount">机器码统计</el-menu-item>
-            <el-menu-item index="/EmittersLog">发射源访问日志</el-menu-item>
-            <el-menu-item index="/EmittersCount">发射源</el-menu-item>
-            <el-menu-item index="/Place">位置版</el-menu-item>
+            <el-menu-item index="/Equipment">设备信息</el-menu-item>
+            <el-menu-item index="/Firms">成员信息</el-menu-item>
+            <el-menu-item index="/Guidemessage">导游信息</el-menu-item>
+            <!-- <el-menu-item index="/EmittersCount">发射源</el-menu-item>
+            <el-menu-item index="/Place">位置版</el-menu-item> -->
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="5">
+          <template slot="title">
+            <i class="icon iconfont icon-guanli"></i>
+            <span>运营管理</span>
+          </template>
+          <el-menu-item-group>
+            <!-- <el-menu-item index="/PlantLeasing">行程信息</el-menu-item>
+            <el-menu-item index="/PeopleCounting">RFID发射源统计</el-menu-item>
+            <el-menu-item index="/PeopleCounting">位置版发射源统计</el-menu-item>
+            <el-menu-item index="/Fence">电子围栏统计</el-menu-item>
+            <el-menu-item index="/Sos">SOS统计</el-menu-item> -->
+            <el-menu-item index="/Travel">行程信息</el-menu-item>
+            <el-menu-item index="/RFID">RFID发射源统计</el-menu-item>
+            <el-menu-item index="/Seat">位置版发射源统计</el-menu-item>
+            <el-menu-item index="/Fences">电子围栏统计</el-menu-item>
+            <el-menu-item index="/Help">SOS统计</el-menu-item>
+
+          </el-menu-item-group>
+        </el-submenu>
+        <el-submenu index="6">
           <template slot="title">
             <i class="icon iconfont icon-shujutongjiweixuanzhong"></i>
             <span>数据统计</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item index="/PlantLeasing">设备租赁次数统计表</el-menu-item>
-            <el-menu-item index="/Sos">SOS统计</el-menu-item>
-            <el-menu-item index="/PeopleCounting">客流统计</el-menu-item>
-            <el-menu-item index="/Fence">电子围栏统计</el-menu-item>
+            <el-menu-item index="/Promotions">客流量统计</el-menu-item>
+            <el-menu-item index="/PromotionLogs">设备租赁次数统计</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
-        <el-submenu index="6">
-          <template slot="title">
-            <i class="icon iconfont icon-update"></i>
-            <span>设备升级</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="/Promotion">升级情况</el-menu-item>
-            <el-menu-item index="/PromotionLog">升级日志</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="7">
+        <!-- <el-submenu index="7">
           <template slot="title">
             <i class="icon iconfont icon-zhanghao00"></i>
             <span>账号分配</span>
@@ -91,7 +102,7 @@
             <el-menu-item index="/AccountManage">账号管理</el-menu-item>
             <el-menu-item index="/Role">角色分配</el-menu-item>
           </el-menu-item-group>
-        </el-submenu>
+        </el-submenu> -->
       </el-menu>
     </div>
     <!-- 右边内容 -->

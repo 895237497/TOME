@@ -17,6 +17,7 @@
 </template>
 <script>
 import axios from "axios";
+import { path } from '../../../api/api.js'
 export default {
   name: "Header",
   data() {
@@ -28,10 +29,11 @@ export default {
     var token = localStorage.getItem("token");
     //alert(token)
     var _this = this;
+    var api="/user/current"
     //var access_token=this.access_token
     var access_token = _this.token;
     axios
-      .get("http://192.168.0.196:8080/user/current", {
+      .get(path + api, {
         headers: {
           Authorization: "Bearer" + token
         }

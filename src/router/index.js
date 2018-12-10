@@ -14,6 +14,10 @@ export default [{
       component: r => require.ensure([], () => r(require('../components/Index')), 'index')
     },
     {
+      path: 'spotindex',
+      component: r => require.ensure([], () => r(require('../components/Home/Index')), 'spotindex')
+    },
+    {
       path: 'menu',
       component: r => require.ensure([], () => r(require('../components/common/Menu')), 'Menu')
     },

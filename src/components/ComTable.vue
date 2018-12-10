@@ -33,9 +33,13 @@
       <el-button round size="small" v-if="showDel" @click="showDelVisible">删除</el-button>
 
       <el-button round  @click="addData2" size="small" v-if="showAddDevice">添加设备</el-button>
-      <el-button round size="small" v-if="showAllDevice">分配设备</el-button>
+      <el-button round @click="taskData" size="small" v-if="showAllDevice">分配设备</el-button>
+      <el-button round @click="addData2" size="small" v-if="showAddtravel">添加行程</el-button>
+      <el-button round @click="showDelVisible"  size="small" v-if="showcleartravel">清空行程</el-button>
+
+      <el-button round  size="small" v-if="showEnergizer">添加围栏</el-button>
       <el-button round size="small" v-if="showImpDevice">导入设备</el-button>
-      <el-button round size="small" v-if="showExpDevice">导出设备</el-button>
+      <el-button round @click="exportReceipt" size="small" v-if="showExpDevice">导出设备</el-button>
       <el-button round size="small" v-if="showShutDown">一键关机</el-button>
     </el-row>
 
@@ -50,7 +54,7 @@
         v-loading="loading"
         id="tablearea"
         @selection-change="handleSelectionChange"
-      >>
+      >
         <el-table-column type="selection" width="55" fixed="left"></el-table-column>
         <div v-for="items in tableitems">
           <div v-if="items.hasSubs">
@@ -190,7 +194,10 @@ export default {
     "showAllDevice",
     "showImpDevice",
     "showExpDevice",
-    "showShutDown"
+    "showShutDown",
+    "showEnergizer",
+    "showAddtravel",
+     "showcleartravel"
   ],
   methods: {
     //添加数据
@@ -209,6 +216,20 @@ export default {
     exportData() {
       alert("导出");
     },
+    // 分配设备
+    taskData(){
+      // alert("这是分配设备事件");
+      var multipleSelection = this.multipleSelection;
+      console.log('-------------------------')
+      console.log(multipleSelection);
+      this.$emit("taskData",multipleSelection)
+    },
+    // 导出设备
+    exportReceipt(){
+      
+      
+    },
+    
     // 操作按钮
     handleEdit(index, row) {
       console.log(index, row);
@@ -281,6 +302,8 @@ export default {
     },
     handleSelectionChange(val) {
       this.multipleSelection = val;
+    // console.log("只是点击获取值的时间-------");
+    
     },
     openDelete(index, row) {
       var arr = new Array();
@@ -327,7 +350,7 @@ export default {
 
           if (ret.status == "200") {
             vm.tableData = ret.data.value.list;
-            console.log(ret.data.value);
+            console.log(vm.tableData);
             vm.total = ret.data.value.total;
             vm.loading = false;
             vm.$message({

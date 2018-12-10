@@ -20,6 +20,15 @@
 				</el-input>
  			</div>
 
+		  <div style="display: inline;margin-right: 84px;" v-if="showTools.line" >
+						<span style="margin-right: 18px;">线路名称</span>
+						<el-input style="display: inline-block;" size="small"
+							placeholder="请输入线路名称"
+							v-model="sform.line"
+							clearable>
+						</el-input>
+					</div>
+
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.username" >
  				<span style="margin-right: 18px;">用户名</span>
  				<el-input style="display: inline-block;" size="small"
@@ -29,13 +38,33 @@
 				</el-input>
  			</div>
 
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.mold" >
+ 				<span style="margin-right: 18px;">线路类型</span>
+ 				<el-select  size="small" v-model="sform.type" placeholder="请输入线路类型">
+				    <el-option st
+				      v-for="item in scenerylistquery"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.sceneryId">
+				    </el-option>
+			    </el-select>
+					
+ 			</div>
+
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.isAllot" >
  				<span style="margin-right: 18px;">分配状态</span>
- 				<el-input style="display: inline-block;" size="small"
-				  placeholder="查询分配状态"
-				  v-model="sform.isAllot"
-				  clearable>
-				</el-input>
+ 				<!-- <el-select  size="small" v-model="sform.isAllot" placeholder="请选择景区·····">
+				    <el-option st
+				      v-for="item in isAllot"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.sceneryId">
+				    </el-option>
+			    </el-select> -->
+					<select v-model="sform.isAllot" style="width:140px;height:30px;border:1px solid rgb(182, 178, 178);border-radius:6px;outline:none">
+						<option value="0">0</option>
+						<option value="1">1</option>
+					</select>
  			</div>
 
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.imei" >
@@ -73,6 +102,24 @@
 				  clearable>
 				</el-input>
  			</div>
+       
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.mobile" >
+ 				<span style="margin-right: 18px;">电话</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入电话"
+				  v-model="sform.mobile"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.terminal" >
+ 				<span style="margin-right: 18px;">终端</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入终端imei号"
+				  v-model="sform.terminal"
+				  clearable>
+				</el-input>
+ 			</div>
 
 			  <div style="display: inline;margin-right: 84px;" v-if="showTools.name" >
  				<span style="margin-right: 18px;">名称</span>
@@ -100,10 +147,39 @@
 				  clearable>
 				</el-input>
  			</div>
+
+			  <div style="display: inline;margin-right: 84px;" v-if="showTools.travel" >
+ 				<span style="margin-right: 18px;">行程名称</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入行程名称"
+				  v-model="sform.travel"
+				  clearable>
+				</el-input>
+ 			</div>
  			
  			<div style="display: inline;margin-right: 84px;" v-if="showTools.scenery">
  				<span style="margin-right: 18px;">景区</span>
- 				<el-select  size="small" v-model="sform.scenery" placeholder="请选择景区·····">
+ 				<!-- <el-select  size="small" v-model="sform.scenery" placeholder="请选择景区·····">
+				    <el-option st
+				      v-for="item in scenerylistquery"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.id">
+				    </el-option>
+			    </el-select> -->
+					<el-select  v-model="sform.scenery" size="small" filterable placeholder="请选择景区·····">
+									<el-option
+										v-for="item in scenerylistquery"
+										:key="item.id"
+										:label="item.name"
+										:value="item.id">
+									</el-option>
+								</el-select>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.genre">
+ 				<span style="margin-right: 18px;">类型</span>
+ 				<el-select  size="small" v-model="sform.genre" placeholder="请选择类型···">
 				    <el-option st
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
@@ -113,9 +189,9 @@
 			    </el-select>
  			</div>
 
-			 <!-- <div style="display: inline;margin-right: 84px;" v-if="showTools.state">
- 				<span style="margin-right: 18px;">状态</span>
- 				<el-select  size="small" v-model="sform.state" placeholder="请选择状态···">
+			  <div style="display: inline;margin-right: 84px;" v-if="showTools.service">
+ 				<span style="margin-right: 18px;">服务类型</span>
+ 				<el-select  size="small" v-model="sform.service" placeholder="请选择类型···">
 				    <el-option st
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
@@ -123,7 +199,28 @@
 				      :value="item.id">
 				    </el-option>
 			    </el-select>
- 			</div> -->
+ 			</div>
+
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.group">
+ 				<span style="margin-right: 18px;">旅游团</span>
+ 				<el-select  size="small" v-model="sform.group" placeholder="请选择类型···">
+				    <el-option st
+				      v-for="item in scenerylistquery"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.id">
+				    </el-option>
+			    </el-select>
+ 			</div>
+
+			  <div style="display: inline;margin-right: 84px;" v-if="showTools.group" >
+ 				<span style="margin-right: 18px;">旅游团</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入角色"
+				  v-model="sform.group"
+				  clearable>
+				</el-input>
+ 			</div>
 
  			<div style="display: inline;margin-right: 84px;" v-if="showTools.date">
  				<span style="margin-right: 18px;">日期</span>
@@ -167,16 +264,16 @@ export default {
 			isAllot:'',
 			imei:'',
 			telephone:'',
-			// device:'',
 			version:'',
 			name:'',
 			loginname:'',
 			role:'',
 			scenery:'',
-			// state:'',
 			date:'',
 			startTime:'',
 			endTime:'',
+			line:'',
+			mold:''
 		},
 
 
@@ -189,6 +286,7 @@ export default {
 		var ssform = this.sform;
 		var formdata ={};
 		var scenerylist= this.scenerylistquery;
+		var isAllot=this.isAllot
 		
 
 		//封装表单数据

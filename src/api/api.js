@@ -1,1 +1,1 @@
-export const path ="http://192.168.0.196:8080";
+export const path ="http://192.168.0.102:8080";
