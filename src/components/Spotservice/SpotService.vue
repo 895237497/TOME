@@ -28,41 +28,45 @@
    			 <el-dialog  title="" :visible.sync="addVisible" style="" width="520px" :close-on-click-modal="false">
             
             				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">新增</div>
-							<el-form :model="addForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
+							       <el-form :model="addForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
 								
-							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="发射源编号" prop="no" >
-							    <el-input  v-model="addForm.no" autocomplete="off"></el-input>
+							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="景区服务商" prop="name" >
+							    <el-input  v-model="addForm.name" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="地址" prop="address" >
+							  <el-form-item style="margin: 30px auto;width: 330px;" label="通讯地址" prop="address" >
 							    <el-input  v-model="addForm.address" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="播报半径" prop="radius" >
-							    <el-input  v-model="addForm.radius" autocomplete="off"></el-input>
+							  <el-form-item style="margin: 30px auto;width: 330px;" label="负责人姓名" prop="chargeName" >
+							    <el-input  v-model="addForm.chargeName" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item label="景区服务商"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
+								<el-form-item style="margin: 30px auto;width: 330px;" label="负责人电话" prop="chargeTelephone" >
+							    <el-input  v-model="addForm.chargeTelephone" autocomplete="off"></el-input>
+							  </el-form-item>
+
+							  <!-- <el-form-item label="负责人电话"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
 							    <el-select v-model="addForm.sceneryId" placeholder="请选择景区">
 							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
 							    </el-select>
-							  </el-form-item>
+							  </el-form-item> -->
 
-							  <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
+							  <!-- <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
 							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
 							    	
 							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
 							    </el-select>
+							  </el-form-item> -->
+							  
+							  
+							  <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat" >
+							    <el-input  v-model="addForm.lonLat" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="经度" prop="lon" >
-							    <el-input  v-model.number="addForm.lon" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
+							  <!-- <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
 							    <el-input  v-model.number="addForm.lat" autocomplete="off"></el-input>
-							  </el-form-item>
+							  </el-form-item> -->
 							  
 														  
 							</el-form>
@@ -77,44 +81,45 @@
    			 <el-dialog  title="" :visible.sync="editVisible" style="" width="520px" :close-on-click-modal="false">
             
             				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">编辑</div>
-							<el-form :model="editForm" ref="editForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
+							       <el-form :model="editForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
 								
-								
-								
-							
-							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="发射源编号" prop="no" >
-							    <el-input  v-model="editForm.no" autocomplete="off"></el-input>
+							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="景区服务商" prop="name" >
+							    <el-input  v-model="editForm.name" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="地址" prop="address" >
+							  <el-form-item style="margin: 30px auto;width: 330px;" label="通讯地址" prop="address" >
 							    <el-input  v-model="editForm.address" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="播报半径" prop="radius" >
-							    <el-input  v-model="editForm.radius" autocomplete="off"></el-input>
+							  <el-form-item style="margin: 30px auto;width: 330px;" label="负责人姓名" prop="chargeName" >
+							    <el-input  v-model="editForm.chargeName" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item label="景区服务商"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="editForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
+								<el-form-item style="margin: 30px auto;width: 330px;" label="负责人电话" prop="chargeTelephone" >
+							    <el-input  v-model="editForm.chargeTelephone" autocomplete="off"></el-input>
 							  </el-form-item>
 
-							  <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="editForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspoteditlist" :label="item.name" :value="item.id"></el-option>
+							  <!-- <el-form-item label="负责人电话"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
+							    <el-select v-model="addForm.sceneryId" placeholder="请选择景区">
+							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
 							    </el-select>
-							  </el-form-item>
+							  </el-form-item> -->
+
+							  <!-- <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
+							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
+							    	
+							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
+							    </el-select>
+							  </el-form-item> -->
 							  
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="经度" prop="lon" >
-							    <el-input  v-model.number="editForm.lon" autocomplete="off"></el-input>
+							  <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat" >
+							    <el-input  v-model="editForm.lonLat" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="editForm.lat" autocomplete="off"></el-input>
-							  </el-form-item>
+							  <!-- <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
+							    <el-input  v-model.number="editForm.lonLat" autocomplete="off"></el-input>
+							  </el-form-item> -->
 							  
 														  
 							</el-form>
@@ -165,27 +170,28 @@ export default {
     		tabledesctiption:'共有景区',
     		unit:'个'
     	},
-    	queryapi:'/device/rfid/query',
-    	delapi:'/device/rfid/del',
-    	saveapi:'/device/rfid/save',
-    	updateapi:'/device/rfid/update',
+    	queryapi:'/scenery/scenery/selectScenery',
+    	delapi:'/scenery/scenery/deleteSceneryBath',
+    	saveapi:'/scenery/scenery/addScenery',
+    	updateapi:'/scenery/scenery/updateScenery',
     	scenerySpotId:'',
     	editVisible:false,
     	addForm:{
-    		sceneryId:'',
-    		scenerySpotId:'',
+    		name:'',
+				address:'',
+				chargeName:'',
+				chargeTelephone:'',
+				lonLat:'',
     		type:1
     	},
     	editForm:{
-    		id:'',
-    		no:'',
-    		address:'',
-    		radius:'',
-    		sceneryId:'',
-    		scenerySpotId:'',
-    		type:1,
-    		lon:'',
-    		lat:''
+    		name:'',
+				address:'',
+				chargeName:'',
+				chargeTelephone:'',
+				type:1,
+				id:'',
+    		lonLat:''
     	},
     	showAdd:false,
 			numberValidateForm: {
@@ -219,45 +225,45 @@ export default {
 			],
 			sceneryspoteditlist:[],
       tableitems:[
-      {
-          hasSubs: false,
-          subs: [
-            {
-              label: "发射源id",
-              prop: "id",
-              width: "100",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              hidden:true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-       },
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "发射源编号",
-              prop: "no",
-              width: "100",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: false,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-				},
+      // {
+      //     hasSubs: false,
+      //     subs: [
+      //       {
+      //         label: "发射源id",
+      //         prop: "id",
+      //         width: "100",
+      //         type: "number",
+      //         editable: true,
+      //         searchable: true,
+      //         addable: true,
+      //         hidden:true,
+      //         unsortable: true,
+      //         align: "center"
+      //       }
+      //     ]
+      //  },
+        // {
+        //   hasSubs: false,
+        //   subs: [
+        //     {
+        //       label: "发射源编号",
+        //       prop: "no",
+        //       width: "100",
+        //       type: "number",
+        //       editable: true,
+        //       searchable: true,
+        //       addable: false,
+        //       unsortable: true,
+        //       align: "center"
+        //     }
+        //   ]
+				// },
 				{
           hasSubs: false,
           subs: [
             {
               label: "景区服务商",
-              prop: "sceneryName",
+              prop: "name",
               width: "168",
               type: "selection",
               selectlist: [{},{}],
@@ -274,7 +280,7 @@ export default {
           subs: [
             {
               label: "设备总数",
-              prop: "address",
+              prop: "terminalTotalNum",
               width: "168",
               type: "number",
               editable: true,
@@ -291,7 +297,7 @@ export default {
           subs: [
             {
               label: "在线总数",
-              prop: "radius",
+              prop: "onLineTerminalTotalNum",
               width: "168",
               type: "number",
               editable: true,
@@ -307,7 +313,7 @@ export default {
           subs: [
             {
               label: "离线总数",
-              prop: "scenerySpotName",
+              prop: "offLineTerminalTotalNum",
               width: "168",
                type: "selection",
               selectlist: [{},{}],
@@ -324,7 +330,7 @@ export default {
           subs: [
             {
               label: "负责人姓名",
-              prop: "coodrinte",
+              prop: "chargeName",
               width: "168",
               type: "number",
               editable: true,
@@ -376,7 +382,7 @@ export default {
           subs: [
             {
               label: "负责人电话",
-              prop: "createTime",
+              prop: "chargeTelephone",
               width: "168",
               type: "date",
               editable: false,
@@ -395,7 +401,7 @@ export default {
           subs: [
             {
               label: "通讯地址",
-              prop: "createTime",
+              prop: "address",
               width: "168",
               type: "date",
               editable: false,
@@ -411,27 +417,27 @@ export default {
         },
       ],
       	addFormRules:{
-    		 no: [
-            { required: true, message: '请输入发射源编号', trigger: 'blur' }
+    		 name: [
+            { required: true, message: '请输入景区名称', trigger: 'blur' }
           ],
           address: [
             { required: true, message: '请输入地址', trigger: 'blur' }
           ],
-          radius: [
-            { validator: validatePass,required: true, trigger: 'blur' }
+          // radius: [
+          //   { validator: validatePass,required: true, trigger: 'blur' }
+          // ],
+          chargeName: [
+            { required: true, message: '请输入负责人姓名', trigger: 'blur' }
           ],
-          sceneryId: [
-            { required: true, message: '请选择景区', trigger: 'change' }
+          chargeTelephone: [
+            {  required: true, message: '请输入负责人电话', trigger: 'blur' }
           ],
-          scenerySpotId: [
-            {  required: true, message: '请选择景点', trigger: 'change' }
-          ],
-          lon: [
+          lonLat: [
             {type:'number', required: true, message: '请输入合法经度，例如111.123456', trigger: 'blur' }
           ],
-          lat: [
-            {type:'number', required: true, message: '请输入合法纬度，例如39.123456', trigger: 'blur' }
-          ]
+          // lat: [
+          //   {type:'number', required: true, message: '请输入合法纬度，例如39.123456', trigger: 'blur' }
+          // ]
     	},
       row:''
     };
@@ -465,7 +471,10 @@ export default {
   		common.clearattribute(_this.editForm);
   		
   		//复制row到editForm
-  		common.copyattribute(_this.editForm,row);
+			common.copyattribute(_this.editForm,row);
+			
+			this.editForm.lonLat = row.lon+','+row.lat;
+
   		
   		//显示编辑页面
   		this.editVisible=true;
