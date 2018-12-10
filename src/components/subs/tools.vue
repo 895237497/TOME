@@ -10,7 +10,19 @@
 				  clearable>
 				</el-input>
  			</div>
-
+				
+			<div style="display: inline;margin-right: 48px;" v-if="showTools.RFIDType">
+ 				<span style="margin-right: 18px;">发射源类型</span>
+ 				<el-select  size="small" v-model="sform.RFIDType" placeholder="请选择">
+				    <el-option st
+				      v-for="item in RFIDTypes"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.id">
+				    </el-option>
+			    </el-select>
+ 			</div>
+			
  			<div style="display: inline;margin-right: 48px;" v-if="showTools.codeMachine" >
  				<span style="margin-right: 18px;">机器码</span>
  				<el-input style="display: inline-block;" size="small"
@@ -165,9 +177,22 @@ export default {
 			startTime:'',
 			endTime:'',
 			sceneryIdId:'',
-			codeMachine:''
+			codeMachine:'',
+			RFIDType:''
 		},
-
+		RFIDTypes:[
+			{
+				id:-1,
+				name:'查询全部'
+			},
+			{
+				id:0,
+				name:'RFID'
+			},{
+				id:1,
+				name:"位置版"
+			}
+		]
 
     }
   },

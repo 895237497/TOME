@@ -6,21 +6,14 @@
 		       			:showTools="showTools"
 		       			:showRFID="showRFID"
 		       			:tableitems='tableitems' 
-		       			:showImg="showImg" 
 		       			:queryapi="queryapi"
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-		       			:showImport='showImport'
-		       			:showExport='showExport'
-		       			:showDel="showDel"
-		       			:showAdd2="showAdd2"
-		       			:showAdd="showAdd"
-		       			:delapi="delapi"
+		       			:showSelectionColumn="showSelectionColumn"
 		       			:showButtonEdit="showButtonEdit"
 		       			v-on:search="onSearch"
-		       			v-on:addData2="addData2"
-		       			v-on:editData="editData"
+
 	       							ref="tumitable"/>
 	       	
     </div>
@@ -39,6 +32,7 @@ export default {
   data() {
   	
     return {
+    	showSelectionColumn:true,
     	showButtonEdit:true,
     	showTools: {
     		tools:true,
@@ -49,12 +43,11 @@ export default {
       },
     	contenttitl:{
     		name:'RFID管理',
-    		description:'RFID',
+    		description:'发射源访问统计',
     		tabledesctiption:'发射源访问记录',
     		unit:'条'
     	},
-    	queryapi:'/device/fridlog/log/query',
-    	delapi:'/device/fridlog/log/del',
+    	queryapi:'/device/fridlog/log/countbyterminal',
     	scenerySpotId:'',
     	editVisible:false,
     	addForm:{
@@ -79,12 +72,7 @@ export default {
         },
     	addVisible:false,
     	showQueryDate:true,
-    	showImport:true,
-    	showExport:true,
-    	showDel:true,
-    	showAdd2:true,
-    	fridtype:0,
-			showImg:true,
+
       showRFID:true,
 			showScenery:true,
 			scenerylist:[
@@ -96,24 +84,7 @@ export default {
 			],
 			sceneryspoteditlist:[],
       tableitems: [
-      {
-          hasSubs: false,
-          subs: [
-            {
-              label: "发射源id",
-              prop: "id",
-              width: "100",
-              type: "number",
-              editable: true,
-              searchable: true,
-              addable: true,
-              hidden:true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-       },
-        {
+ {
           hasSubs: false,
           subs: [
             {
@@ -194,37 +165,26 @@ export default {
               align: "center"
             }
           ]
-        },
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "景区id",
-              prop: "sceneryId",
-              width: "200",
-              type: "number",
-              editable: true,
-              hidden:true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
         },{
           hasSubs: false,
           subs: [
             {
-              label: "景点id",
-              prop: "scenerySpotId",
+              label: "发射源类型",
+              prop: "type",
               width: "200",
               type: "number",
               editable: true,
               searchable: true,
-              hidden:true,
               addable: true,
               unsortable: true,
-              align: "center"
+              align: "center",
+              format:function(row){
+              	if(row.type==0){
+              		return "RFID";
+              	}else{
+              		return "位置版";
+              	}
+              }
             }
           ]
         },
@@ -232,18 +192,15 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "访问时间",
-              prop: "accessTime",
+              label: "访问次数",
+              prop: "total",
               width: "200",
               type: "date",
               editable: false,
               searchable: true,
               addable: false,
               unsortable: true,
-              align: "center",
-              format:function(row){
-              	return common.dateformat(row.accessTime);
-              }
+              align: "center"
             }
           ]
         },
@@ -331,16 +288,12 @@ export default {
 		    	//data.push({id: 0, name: "查询全部"})
 		    	data.splice(0, 0, {id: 0, name: "查询全部"});
 		    	_this.scenerylistquery = data;
-		    	console.log('==============================')
-		    	console.log(_this.scenerylistquery)
-		    	console.log('==============================')
+
 		    	//获取表格数据
 		    	_this.getTableData({});
 		    })
   	},
   	onSearch(sform){
-
-			sform.type=this.fridtype;
 			
 			this.getTableData(sform);
     },
@@ -360,9 +313,14 @@ export default {
 	  	}else{
 	  		sceneryIds.push(sform.sceneryIdId)
 	  	}
+	  	//判断查询的RFID类型
+	  	
+			if(sform.RFIDType !=undefined && sform.RFIDType!=-1){
+				sform.type = sform.RFIDType;
+			}
 			
 	  	//获取表格数据
-	  	sform.type = this.fridtype;
+	  	
 	  	sform.sceneryIds=sceneryIds
 	  	
 	  	this.$refs['tumitable'].getTableData(sform);

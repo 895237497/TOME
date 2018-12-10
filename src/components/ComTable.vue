@@ -50,7 +50,7 @@
         v-loading="loading"
         id="tablearea"
         @selection-change="handleSelectionChange"
-      >>
+      >
         <el-table-column type="selection" width="55" fixed="left"></el-table-column>
         <div v-for="items in tableitems">
           <div v-if="items.hasSubs">
@@ -308,8 +308,8 @@ export default {
 
       var api = this.queryapi;
 
-      sform.rows = this.pageSize;
-      sform.page = this.currentPage;
+      sform.pageSize = this.pageSize;
+      sform.pageNum = this.currentPage;
 
       let token = localStorage.getItem("token");
       console.log("query.................");
@@ -367,5 +367,8 @@ export default {
 </script>
 
 <style lang="less">
+	.el-table th{
+		background: #FAFAFA;
+	}
 </style>
 

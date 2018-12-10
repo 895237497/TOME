@@ -49,7 +49,7 @@ export default {
       },
     	contenttitl:{
     		name:'RFID管理',
-    		description:'RFID',
+    		description:'发射源访问日志',
     		tabledesctiption:'发射源访问记录',
     		unit:'条'
     	},
