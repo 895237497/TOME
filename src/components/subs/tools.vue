@@ -24,7 +24,6 @@
 			    </el-select>
  			</div>
 			
- 			<div style="display: inline;margin-right: 84px;" v-if="showTools.codeMachine" >
 
 
  			<div style="display: inline;margin-right: 84px;" v-if="showTools.codeMachine" >

@@ -27,7 +27,7 @@
             <el-input class="input" type="code" v-model="ruleForm.code" placeholder="请输入验证码"></el-input>
           </el-form-item>
           <span class="picture">
-            <!--<img @click="getVcode" :src="vcode">-->
+            <!--<img @click="getVcode" :src="vcode">-->           
             	<img :src="codeUrl" @click="refreshCode" alt="" />
           </span>
            <!-- <el-form-item>
@@ -39,17 +39,17 @@
         </div>
 
        
-
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import { path } from "../../api/api"
 export default {
   name: "Login",
   data() {
     return {
-      codeUrl: "http://192.168.0.196:8080/sys/captcha",
+      codeUrl: path+"/sys/captcha",
       labelPosition: "top",
       ruleForm: {
         username: "",
@@ -83,18 +83,19 @@ export default {
 
   methods: {
   	refreshCode(){
-  		this.codeUrl="http://192.168.0.196:8080/sys/captcha?time="+new Date().getTime();
+  		this.codeUrl=path+"/sys/captcha?time="+new Date().getTime();
   	},
     getVcode() {
       this.getCheckCode();
     },
     // 登录函数
     submitForm(formName) {
+    	alert(path)
       var _this = this;
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios
-            .post("http://192.168.0.147:8080/sys/login", {
+            .post("http://192.168.0.150:8080"+"/sys/login", {
               username: _this.ruleForm.username,
               password: _this.ruleForm.password,
               imageCode: _this.ruleForm.code
@@ -138,11 +139,12 @@ export default {
 
     //验证码函数
     getCheckCode() {
+    	var _this = this;
       let param = {
         imageCode: ""
       };
       axios
-        .get("http://192.168.0.147:8080/sys/captcha", {
+        .get(path+"/sys/captcha", {
           params: param,
           responseType: "arraybuffer"
         })
