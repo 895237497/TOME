@@ -347,7 +347,7 @@ export default {
         })
         .then(function(response) {
           let ret = response;
-
+          
           if (ret.status == "200") {
             vm.tableData = ret.data.value.list;
             console.log(vm.tableData);

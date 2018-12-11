@@ -201,9 +201,11 @@
 			    </el-select>
  			</div>
 
+			 
+
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.group">
  				<span style="margin-right: 18px;">旅游团</span>
- 				<el-select  size="small" v-model="sform.group" placeholder="请选择类型···">
+ 				<el-select  size="small" v-model="sform.group" placeholder="请选择旅游团···">
 				    <el-option st
 				      v-for="item in scenerylistquery"
 				      :key="item.id"

@@ -176,6 +176,7 @@ export default {
       color: #7e7876;
     }
     .icon {
+      
       color: #ff6600;
     }
     .el-radio-button__inner {
