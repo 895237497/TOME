@@ -260,7 +260,7 @@ export default {
           subs: [
             {
               label: "播报次数",
-              prop: "machine",
+              prop: "total",
               width: "360",
               type: "number",
               editable: true,

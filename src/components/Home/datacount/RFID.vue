@@ -8,118 +8,15 @@
 		       			:tableitems='tableitems' 
 		       			:queryapi="queryapi"
 		       			:showScenery='showScenery'
-                :showExport="showExport" 
+								:showExport="showExport" 
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-		       			:delapi="delapi"
+		       			:showSelectionColumn="showSelectionColumn"
+		       			:showButtonEdit="showButtonEdit"
 		       			v-on:search="onSearch"
-		       			v-on:addData2="addData2"
-		       			v-on:editData="editData"
+
 	       							ref="tumitable"/>
 	       	
-	   
-	       	<!--发射源添加-->
-   			 <el-dialog  title="" :visible.sync="addVisible" style="" width="520px" :close-on-click-modal="false">
-            
-            				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">新增</div>
-							<el-form :model="addForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
-								
-							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="发射源编号" prop="no" >
-							    <el-input  v-model="addForm.no" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="地址" prop="address" >
-							    <el-input  v-model="addForm.address" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="播报半径" prop="radius" >
-							    <el-input  v-model="addForm.radius" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item label="景区服务商"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="addForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item>
-
-							  <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item>
-							  
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="经度" prop="lon" >
-							    <el-input  v-model.number="addForm.lon" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="addForm.lat" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-														  
-							</el-form>
-				        
-				       <span slot="footer" class="dialog-footer">
-							<el-button @click="clearData" size="small">清空</el-button>
-							<el-button type="primary" style="background: #FA841A;"  size="small" @click="save">保存</el-button>
-            </span>
-        </el-dialog>	
-        
-        	<!--发射源修改-->
-   			 <el-dialog  title="" :visible.sync="editVisible" style="" width="520px" :close-on-click-modal="false">
-            
-            				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">编辑</div>
-							<el-form :model="editForm" ref="editForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
-								
-								
-								
-							
-							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="发射源编号" prop="no" >
-							    <el-input  v-model="editForm.no" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="地址" prop="address" >
-							    <el-input  v-model="editForm.address" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="播报半径" prop="radius" >
-							    <el-input  v-model="editForm.radius" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item label="景区服务商"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="editForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item>
-
-							  <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="editForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspoteditlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item>
-							  
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="经度" prop="lon" >
-							    <el-input  v-model.number="editForm.lon" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="editForm.lat" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-														  
-							</el-form>
-				        
-				       <span slot="footer" class="dialog-footer">
-							<!--<el-button @click="clearData" size="small">清空</el-button>-->
-							<el-button type="primary" style="background: #FA841A;"  size="small" @click="update">保存</el-button>
-            </span>
-        </el-dialog>		
-	       							
-				
     </div>
     
     
@@ -135,40 +32,30 @@ export default {
   },
   data() {
   	
-  	//自定义校验，播报半径校验，正整数
-  	var validatePass = (rule, value, callback) => {
-        if (value==undefined || value === '') {
-          callback(new Error('播报半径不能为空'));
-        } else {
-          if (this.addForm.radius !== '') {
-          	var num = Number(value);
-          	if(typeof num === 'number' && num%1 === 0 && num>0){
-          		 callback();
-          	}else{
-          		callback(new Error('播报半径必须为正整数'));
-          	}
-            
-          }
-         
-        }
-      };
     return {
+    	showSelectionColumn:true,
+    	showButtonEdit:true,
+    	showTools: {
+    		tools:true,
+      	no:true,
+      	scenery:true,
+      	date:true,
+      	RFIDType:true
+      },
     	contenttitl:{
     		name:'RFID管理',
     		description:'RFID发射源统计',
     		tabledesctiption:'共有RFID',
     		unit:'个'
     	},
-    	queryapi:'/device/rfid/query',
-    	delapi:'/device/rfid/del',
-    	saveapi:'/device/rfid/save',
-    	updateapi:'/device/rfid/update',
+    	queryapi:'/device/fridlog/log/countbyfrid',
+    	delapi:'/device/fridlog/log/del',
     	scenerySpotId:'',
     	editVisible:false,
     	addForm:{
     		sceneryId:'',
     		scenerySpotId:'',
-    		type:1
+    		type:0
     	},
     	editForm:{
     		id:'',
@@ -177,25 +64,18 @@ export default {
     		radius:'',
     		sceneryId:'',
     		scenerySpotId:'',
-    		type:1,
+    		type:0,
     		lon:'',
     		lat:''
     	},
     	showAdd:false,
-			numberValidateForm: {
-		     age: ''
-	    },
+    	 numberValidateForm: {
+          age: ''
+        },
     	addVisible:false,
     	showQueryDate:true,
-    	fridtype:1,
-      showTools: {
-      	tools:true,
-      	no:true,
-        scenery:true,
-        date:true,
-      },
+      showExport:true, 
       showRFID:true,
-      showExport:true,
 			showScenery:true,
 			scenerylist:[
 				
@@ -205,7 +85,7 @@ export default {
 				
 			],
 			sceneryspoteditlist:[],
-      tableitems:[
+      tableitems: [
       {
           hasSubs: false,
           subs: [
@@ -260,7 +140,7 @@ export default {
           subs: [
             {
               label: "播报次数",
-              prop: "machine",
+              prop: "total",
               width: "400",
               type: "number",
               editable: true,
@@ -327,30 +207,6 @@ export default {
          
 				 
       ],
-      	addFormRules:{
-    		 no: [
-            { required: true, message: '请输入发射源编号', trigger: 'blur' }
-          ],
-          address: [
-            { required: true, message: '请输入地址', trigger: 'blur' }
-          ],
-          radius: [
-            { validator: validatePass,required: true, trigger: 'blur' }
-          ],
-          sceneryId: [
-            { required: true, message: '请选择景区', trigger: 'change' }
-          ],
-          scenerySpotId: [
-            {  required: true, message: '请选择景点', trigger: 'change' }
-          ],
-          lon: [
-            {type:'number', required: true, message: '请输入合法经度，例如111.123456', trigger: 'blur' }
-          ],
-          lat: [
-            {type:'number', required: true, message: '请输入合法纬度，例如39.123456', trigger: 'blur' }
-          ]
-    	},
-      row:''
     };
   },
   methods:{
@@ -370,23 +226,6 @@ export default {
   				_this.editVisible=false;
   		});
   		
-  	},
-  	//编辑
-  	editData(row){
-  		this.row = row;
-  		var _this = this;
-  		
-  		//根据当前景区id获取景点信息
-  		
-  		//清空editForm
-  		common.clearattribute(_this.editForm);
-  		
-  		//复制row到editForm
-  		common.copyattribute(_this.editForm,row);
-  		
-  		//显示编辑页面
-  		this.editVisible=true;
-
   	},
   	//刷新表格
   	refreshTable(){
@@ -457,8 +296,6 @@ export default {
 		    })
   	},
   	onSearch(sform){
-
-			sform.type=this.fridtype;
 			
 			this.getTableData(sform);
     },
@@ -478,9 +315,14 @@ export default {
 	  	}else{
 	  		sceneryIds.push(sform.sceneryIdId)
 	  	}
+	  	//判断查询的RFID类型
+	  	
+			if(sform.RFIDType !=undefined && sform.RFIDType!=-1){
+				sform.type = sform.RFIDType;
+			}
 			
 	  	//获取表格数据
-	  	sform.type = this.fridtype;
+	  	
 	  	sform.sceneryIds=sceneryIds
 	  	
 	  	this.$refs['tumitable'].getTableData(sform);
@@ -496,42 +338,7 @@ export default {
 
   },
   watch:{
-  	"addForm.sceneryId": function sceneryId(){
-				//通过检测景区id的修改查询景点id
-				var api = "/scenery/webdata/getsceneryspotbysceneryid";
-				let token = localStorage.getItem("token");
-				let sform = {
-					sceneryId:this.addForm.sceneryId
-				}
-				var vm = this;
-				this.addForm.scenerySpotId='';
-			
-			    	
-			    	 common.commonPost(path+api,sform,token,function(data){
-			    	 	vm.sceneryspotlist=data.value
-			    	 });
-			 },
-			 "editForm.sceneryId": function sceneryId(value){
-			 	//alert(value != )
-			 	
-			 	if(this.row.sceneryId == value){
-			 		this.editForm.scenerySpotId = this.row.scenerySpotId;
-			 	}else{
-			 		this.editForm.scenerySpotId=''
-			 	}
-				//通过检测景区id的修改查询景点id
-				var api = "/scenery/webdata/getsceneryspotbysceneryid";
-				let token = localStorage.getItem("token");
-				let sform = {
-					sceneryId:this.editForm.sceneryId
-				}
-				var vm = this;
-				this.addForm.scenerySpotId='';
-
-	    	 common.commonPost(path+api,sform,token,function(data){
-	    	 		vm.sceneryspoteditlist=data.value
-	    	 });
-			 }
+  	
   }
 };
 </script>

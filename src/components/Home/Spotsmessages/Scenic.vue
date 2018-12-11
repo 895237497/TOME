@@ -131,11 +131,13 @@ export default {
         name:'',
         address:'',
         lonLat:'',
+        type:1
       },
       editForm: {
          name:'',
-        address:'',
-        lonLat:'',
+         address:'',
+         lonLat:'',
+         id:''
       },
      
       showAdd: false,

@@ -45,7 +45,7 @@ export default {
     		tabledesctiption:'共有设备',
     		unit:'条'
     	},
-    	queryapi:'/device/fridlog/log/query',
+    	queryapi:'/device/terminal/selectTerminal',
     	delapi:'/device/fridlog/log/del',
     	scenerySpotId:'',
     	editVisible:false,
@@ -122,7 +122,7 @@ export default {
           subs: [
             {
               label: "旅游团",
-              prop: "address",
+              prop: "touristTeamName",
               width: "420",
               type: "number",
               editable: true,
@@ -138,7 +138,7 @@ export default {
           subs: [
             {
               label: "在线状态",
-              prop: "codeMachine",
+              prop: "isOnline",
               width: "420",
               type: "number",
               editable: true,
@@ -154,7 +154,7 @@ export default {
           subs: [
             {
               label: "手机号码",
-              prop: "sceneryName",
+              prop: "telephone",
               width: "434",
               type: "selection",
               selectlist: [{},{}],

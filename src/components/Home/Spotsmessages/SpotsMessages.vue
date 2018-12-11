@@ -39,7 +39,7 @@
 
         <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
           <el-select v-model="addForm.touristRouteIds" placeholder="请选择线路">
-            <el-option v-for="item in touristRouteIds" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
 
@@ -369,9 +369,8 @@ export default {
           Authorization:"Bearer" + token
         }
       }).then(response=>{
-        console.log('chaxun....')
-        console.log(response)
-        return this.touristRouteIds = response.data.value
+        console.log(response,'这是我要的东西吗？....')
+        // return _this.touristRouteIds = response.data.value
         
       })
     },
