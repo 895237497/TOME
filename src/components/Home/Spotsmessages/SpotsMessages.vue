@@ -37,16 +37,29 @@
           <el-input v-model="addForm.name" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
+        <!-- <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
           <el-select v-model="addForm.touristRouteIds" placeholder="请选择线路">
-            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
+            <el-option v-for="item in touristRouteIdslist" :label="item.name" :value="item.id"></el-option>
           </el-select>
+        </el-form-item> -->
+
+          <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
+          <!-- <el-select v-model="editForm.touristRouteIds" placeholder="请选择线路">
+            <el-option v-for="item in touristRouteIdslist" :label="item.name" :value="item.id"></el-option>
+          </el-select> -->
+          <el-checkbox-group v-model="addForm.touristRouteIds" size="small">
+           <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.id" :key="item.id"></el-checkbox-button>
+          </el-checkbox-group>
         </el-form-item>
 
         <el-form-item label="状态" style="margin: 30px auto;width: 330px;" prop="status">
-          <el-select v-model="addForm.status" placeholder="请选择状态">
+          <!-- <el-select v-model="addForm.status" placeholder="请选择状态">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+          </el-select> -->
+          <select v-model="addForm.status" aria-placeholder="请选择状态···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+            <option value="0">无效</option>
+            <option value="1">有效</option>
+          </select>
         </el-form-item>
 
         <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat">
@@ -85,16 +98,22 @@
           <el-input v-model="editForm.name" autocomplete="off"></el-input>
         </el-form-item>
 
+       
+
         <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
-          <el-select v-model="editForm.touristRouteIds" placeholder="请选择线路">
-            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+          <!-- <el-select v-model="editForm.touristRouteIds" placeholder="请选择线路">
+            <el-option v-for="item in touristRouteIdslist" :label="item.name" :value="item.id"></el-option>
+          </el-select> -->
+          <el-checkbox-group v-model="editForm.touristRouteIds" size="small">
+           <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.name" ></el-checkbox-button>
+          </el-checkbox-group>
         </el-form-item>
 
         <el-form-item label="状态" style="margin: 30px auto;width: 330px;" prop="status">
-          <el-select v-model="editForm.status" placeholder="请选择状态">
-            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+           <select v-model="addForm.status" aria-placeholder="请选择状态···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+            <option value="0">无效</option>
+            <option value="1">有效</option>
+          </select>
         </el-form-item>
 
         <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat">
@@ -124,6 +143,7 @@
 import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
+const touristRouteIds=[this.touristRouteIds]
 export default {
   components: {
     ComTable
@@ -145,6 +165,7 @@ export default {
       }
     };
     return {
+      touristRouteIdslist:[],
       contenttitl: {
         name: "首页",
         description: "景点信息",
@@ -159,7 +180,7 @@ export default {
       editVisible: false,
       addForm: {
         name:'',
-        touristRouteIds:'',
+        touristRouteIds:[],
         status:'',
         lonLat:'',
         address:'',
@@ -167,11 +188,12 @@ export default {
       },
       editForm: {
         name:'',
-        touristRouteIds:'',
+        touristRouteIds:[],
         status:'',
         lonLat:'',
         address:'',
         introduction:'',
+        id:''
       },
      
       showAdd: false,
@@ -303,7 +325,6 @@ export default {
         ],
         lonLat: [
           {
-            type: "number",
             required: true,
             message: "请输入合法经纬度，例如111.12,30.22",
             trigger: "blur"
@@ -335,6 +356,7 @@ export default {
       var _this = this;
 
       //根据当前景区id获取景点信息
+      
 
       //清空editForm
       common.clearattribute(_this.editForm);
@@ -364,13 +386,16 @@ export default {
       var api="/route/touristRoute/selectTouristRouteIdAndName";
       var token=localStorage.getItem("token");
       var _this=this;
-      this.$axios.get(path + api,{},{
-        headers:{
-          Authorization:"Bearer" + token
+      this.$axios.get(path + api, {
+        headers: {
+          Authorization: "Bearer" + token
         }
       }).then(response=>{
         console.log(response,'这是我要的东西吗？....')
-        // return _this.touristRouteIds = response.data.value
+        return this.touristRouteIdslist = response.data.value
+       console.log(this.touristRouteIdslist,"这是我想要的东西····");
+         
+
         
       })
     },
@@ -453,19 +478,19 @@ export default {
     },
     getTableData(sform) {
       var _scenerylist = this.scenerylist;
-      var touristRouteIds = [];
+      var sceneryIds = [];
       //查询全部
       if (sform.sceneryIdId === undefined || sform.sceneryIdId == 0) {
         for (var i = 0; i < _scenerylist.length; i++) {
-          touristRouteIds.push(_scenerylist[i].id);
+          sceneryIds.push(_scenerylist[i].id);
         }
       } else {
-        touristRouteIds.push(sform.sceneryIdId);
+        sceneryIds.push(sform.sceneryIdId);
       }
 
       //获取表格数据
       sform.type = this.fridtype;
-      sform.touristRouteIds = touristRouteIds;
+      sform.sceneryIds = sceneryIds;
 
       this.$refs["tumitable"].getTableData(sform);
     }

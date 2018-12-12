@@ -39,12 +39,38 @@
         
         <div style="margin-left:74px">
           <el-form-item label="目的地" style="margin: 30px auto;width: 330px;display:inline;" prop="sceneryId">
-            <el-select v-model="addForm.province" style="width:116px;" placeholder="请选择省">
+            <!-- <el-select v-model="addForm.province" style="width:116px;" placeholder="请选择省">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
+          </el-select> -->
+
+          <el-select
+            v-model="addForm.province"
+             @change="choseProvince"
+            style="width:116px;"
+            placeholder="请选择省">
+            <el-option
+              v-for="item in province"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
-           <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
+
+          <el-select
+            v-model="addForm.city"
+            @change="choseCity"
+            style="width:116px;"
+            placeholder="请选择市">
+            <el-option
+              v-for="item in shi1"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
+          </el-select>
+           <!-- <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+          </el-select> -->
         </el-form-item>
         </div>
 
@@ -53,20 +79,12 @@
         </el-form-item>
 
          <el-form-item label="线路类型" style="margin: 30px auto;width: 330px;" prop="type">
-            <el-select v-model="addForm.type"  placeholder="请选择景区">
-            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
-           
+           <select v-model="addForm.type" aria-placeholder="请选择线路类型···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+            <option value="1">出境游</option>
+            <option value="2">短途游</option>
+            <option value="3">长途游</option>
+          </select>
         </el-form-item>
-
-         
-
-        <!-- <el-form-item ref="select1" label="状态" style="margin: 30px auto;width: 330px;" prop="isAllot">
-							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-        </el-form-item>-->
       </el-form>
 
       <span slot="footer" class="dialog-footer">
@@ -88,18 +106,44 @@
         style="width:100%;border-top: 2px solid #FCD4B0;"
       >
         <el-form-item style="margin: 47px auto 30px;width: 330px;" label="线路名称" prop="name">
-          <el-input v-model="addForm.name" autocomplete="off"></el-input>
+          <el-input v-model="editForm.name" autocomplete="off"></el-input>
         </el-form-item>
 
         
         <div style="margin-left:74px">
           <el-form-item label="目的地" style="margin: 30px auto;width: 330px;display:inline;" prop="sceneryId">
-            <el-select v-model="editForm.province" style="width:116px;" placeholder="请选择省">
+            <!-- <el-select v-model="addForm.province" style="width:116px;" placeholder="请选择省">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
+          </el-select> -->
+
+          <el-select
+            v-model="editForm.province"
+             @change="choseProvince"
+            style="width:116px;"
+            placeholder="请选择省">
+            <el-option
+              v-for="item in province"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
           </el-select>
-           <el-select v-model="editForm.city" style="width:116px;" placeholder="请选择市">
+
+          <el-select
+            v-model="editForm.city"
+            @change="choseCity"
+            style="width:116px;"
+            placeholder="请选择市">
+            <el-option
+              v-for="item in shi1"
+              :key="item.id"
+              :label="item.value"
+              :value="item.id">
+            </el-option>
+          </el-select>
+           <!-- <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+          </el-select> -->
         </el-form-item>
         </div>
 
@@ -108,10 +152,11 @@
         </el-form-item>
 
          <el-form-item label="线路类型" style="margin: 30px auto;width: 330px;" prop="type">
-            <el-select v-model="editForm.type"  placeholder="请选择景区">
-            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
-           
+           <select v-model="editForm.type" aria-placeholder="请选择线路类型···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+            <option value="1">出境游</option>
+            <option value="2">短途游</option>
+            <option value="3">长途游</option>
+          </select>
         </el-form-item>
       </el-form>
 
@@ -129,6 +174,7 @@
 import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
+import axios from 'axios'
 export default {
   components: {
     ComTable
@@ -150,6 +196,14 @@ export default {
       }
     };
     return {
+
+      mapJson:'../../../../static/map.json',
+      province:[],
+      sheng: '',
+      shi: '',
+      shi1: [],
+      city:'',
+
       contenttitl: {
         name: "景区服务商",
         description: "线路信息",
@@ -159,11 +213,10 @@ export default {
       queryapi: "/route/touristRoute/selectTouristRoute",
       delapi: "/route/touristRoute/deleteTouristRouteBath",
       saveapi: "/route/touristRoute/addTouristRoute",
-      updateapi: "/route/touristRoute/addTouristRoute",
+      updateapi: "/route/touristRoute/updateTouristRoute",
       scenerySpotId: "",
       editVisible: false,
       addForm: {
-        sceneryId: "",
         name:'',
         province:'',
         city:'',
@@ -171,12 +224,12 @@ export default {
         type:'',
       },
       editForm: {
-        sceneryId: "",
         name:'',
         province:'',
         city:'',
         detail:'',
         type:'',
+        id:''
       },
      
       showAdd: false,
@@ -255,40 +308,92 @@ export default {
        
       ],
       addFormRules: {
-        imei: [{ required: true, message: "请输入IMEI号", trigger: "blur" }],
-        codeMachine: [
-          { required: true, message: "请输入机器码", trigger: "blur" }
+        name: [{ required: true, message: "请输入线路名称", trigger: "blur" }],
+        province: [
+          { required: true, message: "请选择省份", trigger: "blur" }
         ],
         // radius: [
         //   { validator: validatePass,required: true, trigger: 'blur' }
         // ],
-        telephone: [
-          { required: true, message: "请输入电话号码", trigger: "blur" }
+        city: [
+          { required: true, message: "请选择市区", trigger: "blur" }
         ],
-        sceneryId: [
-          { required: false, message: "请选择景点", trigger: "change" }
+        detail: [
+          { required: true, message: "请填写详情", trigger: "change" }
         ],
-        lon: [
+        type: [
           {
-            type: "number",
             required: true,
-            message: "请输入合法经度，例如111.123456",
+            message: "请选择类型",
             trigger: "blur"
           }
         ],
-        lat: [
-          {
-            type: "number",
-            required: true,
-            message: "请输入合法纬度，例如39.123456",
-            trigger: "blur"
-          }
-        ]
+        
       },
       row: ""
     };
   },
   methods: {
+
+    
+    // 加载china地点数据，三级
+      getCityData(){
+        var that = this
+        
+        axios.get(that.mapJson).then(function(response){
+          if (response.status==200) {
+            var data = response.data
+            console.log(data,"这是打印的数据--------");
+            
+            that.province = []
+            that.city = []
+            //that.block = []
+            // 省市区数据分类
+            for (var item in data) {
+              if (item.match(/0000$/)) {//省
+                that.province.push({id: item, value: data[item], children: []})
+              } else if (item.match(/00$/)) {//市
+                that.city.push({id: item, value: data[item], children: []})
+              } 
+            }
+            // 分类市级
+            for (var index in that.province) {
+              for (var index1 in that.city) {
+                if (that.province[index].id.slice(0, 2) === that.city[index1].id.slice(0, 2)) {
+                  that.province[index].children.push(that.city[index1])
+                }
+              }
+            }
+            // 分类区级
+           
+          }
+          else{
+            console.log(response.status)
+          }
+        }).catch(function(error){console.log(typeof+ error)})
+      },
+      // 选省
+      choseProvince:function(e) {
+        for (var index2 in this.province) {
+          if (e === this.province[index2].id) {
+            this.shi1 = this.province[index2].children
+            this.shi = this.province[index2].children[0].value
+          }
+        }
+      },
+      // 选市
+      choseCity:function(e) {
+        for (var index3 in this.city) {
+          if (e === this.city[index3].id) {
+            this.qu1 = this.city[index3].children
+            // console.log(this.E)
+          }
+        }
+      },
+     
+
+       
+    
     //修改
     update() {
       var _this = this;
@@ -436,12 +541,15 @@ export default {
       sform.sceneryIds = sceneryIds;
 
       this.$refs["tumitable"].getTableData(sform);
-    }
+    },
   },
-  activated() {},
+  activated() {
+    
+  },
   mounted() {
     //查询景区服务商并并获取表格数据
     this.getSceneryList();
+    this.getCityData();
   },
   watch: {
     "addForm.sceneryId": function sceneryId() {
