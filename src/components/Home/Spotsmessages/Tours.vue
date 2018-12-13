@@ -116,55 +116,7 @@
       </span>
     </el-dialog>
 
-    <!--分配设备-->
-    <el-dialog title :visible.sync="taskVisible" style width="520px" :close-on-click-modal="false">
-      <div
-        style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;"
-      >分配设备</div>
-      <el-form
-        :model="taskForm"
-        ref="taskForm"
-        label-width="100px"
-        :rules="addFormRules"
-        style="width:100%;border-top: 2px solid #FCD4B0;"
-      >
-        <!-- <el-form-item style="margin: 47px auto 30px;width: 330px;" label="设备IMEI" prop="imei" >
-							    <el-input  v-model="editForm.imei" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="机器码" prop="codeMachine" >
-							    <el-input  v-model="editForm.codeMachine" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="手机号码" prop="telephone" >
-							    <el-input  v-model="editForm.telephone" autocomplete="off"></el-input>
-        </el-form-item>-->
-        <!-- <el-form-item style="margin: 30px auto;width: 330px;" label="状态" prop="isAllot" >
-							    <el-input  v-model="addForm.isAllot" autocomplete="off"></el-input>
-        </el-form-item>-->
-        <el-form-item
-          label="景区"
-          style="margin: 30px auto;width: 330px;margin-top:30px"
-          prop="sceneryId"
-        >
-          <el-select v-model="taskForm.sceneryId" placeholder="太行山">
-            <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select>
-        </el-form-item>
-
-        <!-- <el-form-item ref="select1" label="状态" style="margin: 30px auto;width: 330px;" prop="isAllot">
-							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-        </el-form-item>-->
-      </el-form>
-
-      <span slot="footer" class="dialog-footer">
-        <!--<el-button @click="clearData" size="small">清空</el-button>-->
-        <el-button type="primary" style="background: #FA841A;" size="small" @click="saveData">保存</el-button>
-      </span>
-    </el-dialog>
+    
   </div>
 </template>
 

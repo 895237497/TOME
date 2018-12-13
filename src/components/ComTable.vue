@@ -347,6 +347,7 @@ export default {
         })
         .then(function(response) {
           let ret = response;
+          console.log(ret,"这是我要的数据----");
           
           if (ret.status == "200") {
             vm.tableData = ret.data.value.list;

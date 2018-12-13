@@ -85,6 +85,26 @@
 				</el-input>
  			</div>
 
+			  <div style="display: inline;margin-right: 84px;" v-if="showTools.usename" >
+ 				<span style="margin-right: 18px;">姓名</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入姓名"
+				  v-model="sform.name"
+				  clearable>
+				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.cardnum" >
+ 				<span style="margin-right: 18px;">证件号码</span>
+ 				<el-input style="display: inline-block;" size="small"
+				  placeholder="请输入证件号码"
+				  v-model="sform.credentialsNumber"
+				  clearable>
+				</el-input>
+ 			</div>
+     
+
+
 			 <!-- <div style="display: inline;margin-right: 84px;" v-if="showTools.device" >
  				<span style="margin-right: 18px;">设备号</span>
  				<el-input style="display: inline-block;" size="small"
@@ -110,6 +130,22 @@
 				  v-model="sform.mobile"
 				  clearable>
 				</el-input>
+ 			</div>
+
+			 <div style="display: inline;margin-right: 84px;" v-if="showTools.sex" >
+ 				<span style="margin-right: 18px;">性别</span>
+ 				<!-- <el-select  size="small" v-model="sform.isAllot" placeholder="请选择景区·····">
+				    <el-option st
+				      v-for="item in isAllot"
+				      :key="item.id"
+				      :label="item.name"
+				      :value="item.sceneryId">
+				    </el-option>
+			    </el-select> -->
+					<select v-model="sform.sex" style="width:140px;height:30px;border:1px solid #e5e5e5;border-radius:6px;outline:none">
+						<option value="1">男</option>
+						<option value="2">女</option>
+					</select>
  			</div>
 
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.terminal" >
@@ -262,20 +298,28 @@ export default {
 		sform:{
 			no:'',
 			codeMachine:'',
+			line:'',
 			username:'',
+			type:'',
 			isAllot:'',
 			imei:'',
 			telephone:'',
+			name:'',
+			credentialsNumber:'',
 			version:'',
+			mobile:'',
+			sex:'',
+			terminal:'',
 			name:'',
 			loginname:'',
 			role:'',
+			travel:'',
 			scenery:'',
-			date:'',
+			genre:'',
+			service:'',
+			group:'',
 			startTime:'',
 			endTime:'',
-			line:'',
-			mold:''
 		},
 
 

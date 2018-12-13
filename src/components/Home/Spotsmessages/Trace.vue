@@ -16,7 +16,6 @@
       v-on:search="onSearch"
       v-on:addData2="addData2"
       v-on:editData="editData"
-      v-on:taskData="taskData"
       ref="tumitable"
     />
 
@@ -293,7 +292,7 @@ export default {
           subs: [
             {
               label: "目的地",
-              prop: "city",
+              prop: "destination",
               width: "420",
               type: "selection",
               selectlist: [{}, {}],
@@ -439,15 +438,7 @@ export default {
         _this.refreshTable();
       });
     },
-    saveData(){
-      var sform = this.taskForm;
-      var token= localStorage.getItem("token");
-      var _this=this;
-      var api="/device/terminal/allotTerminal";
-      common.commonUploadByPost(path + api,sform, token, function() {
-        _this.refreshTable();
-      });
-    },
+   
     clearData() {
       var _this = this;
       //清空editForm
@@ -469,18 +460,7 @@ export default {
     addData2() {
       this.addVisible = true;
     },
-    // 分配设备
-    taskData(multipleSelection) {
-      
-      console.log('设备绑定=================')
-      console.log(multipleSelection)
-      var ids =[]
-      for(var i = 0; i< multipleSelection.length;i++){
-        ids.push(multipleSelection[i].id)
-      }
-      this.taskForm.ids=ids
-      this.taskVisible = true;
-    },
+    
     //  导出设备
     exportReceipt(){
     

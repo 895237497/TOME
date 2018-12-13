@@ -101,16 +101,13 @@
        
 
         <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
-          <!-- <el-select v-model="editForm.touristRouteIds" placeholder="请选择线路">
-            <el-option v-for="item in touristRouteIdslist" :label="item.name" :value="item.id"></el-option>
-          </el-select> -->
           <el-checkbox-group v-model="editForm.touristRouteIds" size="small">
            <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.name" ></el-checkbox-button>
           </el-checkbox-group>
         </el-form-item>
 
         <el-form-item label="状态" style="margin: 30px auto;width: 330px;" prop="status">
-           <select v-model="addForm.status" aria-placeholder="请选择状态···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+           <select v-model="editForm.status" aria-placeholder="请选择状态···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
             <option value="0">无效</option>
             <option value="1">有效</option>
           </select>
@@ -187,13 +184,14 @@ export default {
         introduction:'',
       },
       editForm: {
+        id:'',
         name:'',
         touristRouteIds:[],
         status:'',
         lonLat:'',
         address:'',
         introduction:'',
-        id:''
+        
       },
      
       showAdd: false,
@@ -391,12 +389,7 @@ export default {
           Authorization: "Bearer" + token
         }
       }).then(response=>{
-        console.log(response,'这是我要的东西吗？....')
         return this.touristRouteIdslist = response.data.value
-       console.log(this.touristRouteIdslist,"这是我想要的东西····");
-         
-
-        
       })
     },
     
@@ -495,6 +488,7 @@ export default {
       this.$refs["tumitable"].getTableData(sform);
     }
   },
+  
   activated() {},
   mounted() {
     //查询景区服务商并并获取表格数据
