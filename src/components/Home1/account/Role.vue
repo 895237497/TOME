@@ -10,59 +10,61 @@
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-		       			:showImport='showImport'
-		       			:showExport='showExport'
+		       			:showImg="showImg"
 		       			:showDel="showDel"
 		       			:showAdd2="showAdd2"
 		       			:showAdd="showAdd"
 		       			:delapi="delapi"
+								 :showresetButton="showresetButton" 
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
 		       			v-on:editData="editData"
 	       							ref="tumitable"/>
 	       	
 	   
-	       	<!--发射源添加-->
+	       	<!--添加-->
    			 <el-dialog  title="" :visible.sync="addVisible" style="" width="520px" :close-on-click-modal="false">
             
-            				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">新增</div>
+            				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">创建角色</div>
 							<el-form :model="addForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
 								
-							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="发射源编号" prop="no" >
-							    <el-input  v-model="addForm.no" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="地址" prop="address" >
-							    <el-input  v-model="addForm.address" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="播报半径" prop="radius" >
-							    <el-input  v-model="addForm.radius" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item label="景区服务商"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="addForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
+							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="角色名" prop="name" >
+							    <el-input  v-model="addForm.name" autocomplete="off"></el-input>
 							  </el-form-item>
 
-							  <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
+								<el-form-item style="margin: 47px auto 30px;width: 330px;" label="角色标识" prop="code" >
+							    <el-input  v-model="addForm.code" autocomplete="off"></el-input>
 							  </el-form-item>
 							  
+							 
 							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="经度" prop="lon" >
-							    <el-input  v-model.number="addForm.lon" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="addForm.lat" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-														  
+							  <el-form-item label="身份"  style="margin: 30px auto;width: 330px;" prop="type">
+									<select v-model="addForm.type" style="width:230px;height:40px; dispaly:inline;border:1px solid #e5e5e5;border-radius:6px;outline:none">
+										<option value="0">超级管理员</option>
+										<option value="1">景区管理员</option>
+									</select>
+							  </el-form-item>		
+                  
+							<el-form-item v-model="addForm.permissionIds" style="margin: 47px auto;width: 330px;" label="选择权限"	prop="permissionIds">
+
+								 <el-checkbox-group   v-for="item in menuList">
+									 <!-- 一级菜单 -->
+									 <p>
+									   <el-checkbox  :label="item.id"  :key="item.id">{{item.name}}</el-checkbox>
+									</p>
+                    <!-- 二级菜单 -->
+									<span style="margin-left:5px;text-align:left">
+										<el-checkbox v-for="(item1,index) in item.child" :label="item1.id">{{item1.name}}</el-checkbox>
+									</span>
+									<!-- 循环子类 -->
+									<span style="margin-left:16px">
+									 <el-checkbox  v-for="(subItem,index) in item.permissionList" :label="subItem.id">{{subItem.name}}</el-checkbox>
+								 </span>
+								
+								</el-checkbox-group>
+								 
+							</el-form-item>	
+								
 							</el-form>
 				        
 				       <span slot="footer" class="dialog-footer">
@@ -71,50 +73,47 @@
             </span>
         </el-dialog>	
         
-        	<!--发射源修改-->
+        	<!--修改-->
    			 <el-dialog  title="" :visible.sync="editVisible" style="" width="520px" :close-on-click-modal="false">
             
             				<div style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;">编辑</div>
 							<el-form :model="editForm" ref="editForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
 								
-								
-								
-							
-							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="发射源编号" prop="no" >
-							    <el-input  v-model="editForm.no" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="地址" prop="address" >
-							    <el-input  v-model="editForm.address" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="播报半径" prop="radius" >
-							    <el-input  v-model="editForm.radius" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item label="景区服务商"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="editForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item>
+							  <!-- <el-form-item style="margin: 47px auto 30px;width: 330px;" label="角色名" prop="name" >
+							    <el-input  v-model="editForm.name" autocomplete="off"></el-input>
+							  </el-form-item> -->
 
-							  <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="editForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspoteditlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
+								<!-- <el-form-item style="margin: 47px auto 30px;width: 330px;" label="角色标识" prop="code" >
+							    <el-input  v-model="editForm.code" autocomplete="off"></el-input>
 							  </el-form-item>
-							  
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="经度" prop="lon" >
-							    <el-input  v-model.number="editForm.lon" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-							  <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="editForm.lat" autocomplete="off"></el-input>
-							  </el-form-item>
-							  
-														  
+							   -->
+							  <!-- <el-form-item label="身份"  style="margin: 30px auto;width: 330px;" prop="type">
+									<select v-model="editForm.type" style="width:230px;height:40px; dispaly:inline;border:1px solid #e5e5e5;border-radius:6px;outline:none">
+										<option value="0">超级管理员</option>
+										<option value="1">景区管理员</option>
+									</select>
+							  </el-form-item>		 -->
+                  
+							<!-- <el-form-item style="margin: 47px auto;width: 330px;" label="选择权限"	prop="menuIds"> -->
+
+								 <!-- <el-checkbox-group v-model="editForm.menuIds"  v-for="item in menuList"> -->
+									 <!-- 一级菜单 -->
+									 <!-- <p>
+									   <el-checkbox  :label="item.id"  :key="item.id">{{item.name}}</el-checkbox>
+									</p> -->
+                    <!-- 二级菜单 -->
+									<!-- <span style="margin-left:5px;text-align:left">
+										<el-checkbox v-for="(item1,index) in item.child" :label="item1.id">{{item1.name}}</el-checkbox>
+									</span> -->
+									<!-- 循环子类 -->
+									<!-- <span style="margin-left:16px">
+									 <el-checkbox v-for="(subItem,index) in item.permissionList" :label="subItem.id">{{subItem.name}}</el-checkbox>
+								 </span> -->
+								
+								<!-- </el-checkbox-group> -->
+								 
+							<!-- </el-form-item>	 -->
+								
 							</el-form>
 				        
 				       <span slot="footer" class="dialog-footer">
@@ -157,33 +156,31 @@ export default {
         }
       };
     return {
+			showresetButton:true,
     	contenttitl:{
-    		name:'RFID管理',
-    		description:'位置版',
-    		tabledesctiption:'共有位置版发射源',
+    		name:'账号管理',
+    		description:'角色分配',
+    		tabledesctiption:'共有角色',
     		unit:'个'
     	},
-    	queryapi:'/device/rfid/query',
-    	delapi:'/device/rfid/del',
-    	saveapi:'/device/rfid/save',
-    	updateapi:'/device/rfid/update',
+    	queryapi:'/user/selectAllRole',
+    	delapi:'/user/deleteRoleByRoleIds',
+    	saveapi:'/user/addRole',
+    	updateapi:'/user/updatePermissionByRoleId',
     	scenerySpotId:'',
     	editVisible:false,
     	addForm:{
-    		sceneryId:'',
-    		scenerySpotId:'',
-    		type:1
+				type:'',
+				menuIds:[],
+				name:'',
+				permissionIds:[]
     	},
     	editForm:{
-    		id:'',
-    		no:'',
-    		address:'',
-    		radius:'',
-    		sceneryId:'',
-    		scenerySpotId:'',
-    		type:1,
-    		lon:'',
-    		lat:''
+				id:'',
+				name:'',
+				code:'',
+				permissionIds:[],
+				menuIds:[],
     	},
     	showAdd:false,
 			numberValidateForm: {
@@ -191,8 +188,7 @@ export default {
 	    },
     	addVisible:false,
     	showQueryDate:true,
-    	showImport:true,
-    	showExport:true,
+    	showImg:true,
     	showDel:true,
     	showAdd2:true,
     	fridtype:1,
@@ -206,6 +202,7 @@ export default {
 				
 			],
 			sceneryspotlist:[],
+			menuList:{},
 			scenerylistquery:[
 				
 			],
@@ -233,7 +230,7 @@ export default {
           subs: [
             {
               label: "ID",
-              prop: "no",
+              prop: "id",
               width: "276",
               type: "number",
               editable: true,
@@ -249,8 +246,8 @@ export default {
           subs: [
             {
               label: "角色名称",
-              prop: "address",
-              width: "600",
+              prop: "name",
+              width: "300",
               type: "number",
               editable: true,
               searchable: true,
@@ -260,93 +257,25 @@ export default {
             }
           ]
 				},
-				// {
-        //   hasSubs: false,
-        //   subs: [
-        //     {
-        //       label: "机器码",
-        //       prop: "machine",
-        //       width: "250",
-        //       type: "number",
-        //       editable: true,
-        //       searchable: true,
-        //       addable: true,
-        //       unsortable: true,
-        //       align: "center"
-        //     }
-        //   ]
-        // },
-        //  {
-        //   hasSubs: false,
-        //   subs: [
-        //     {
-        //       label: "景区服务商",
-        //       prop: "sceneryName",
-        //       width: "250",
-        //       type: "selection",
-        //       selectlist: [{},{}],
-        //       editable: true,
-        //       searchable: true,
-        //       addable: true,
-        //       unsortable: true,
-        //       align: "center"
-        //     }
-        //   ]
-        // },
-        
+				
         // {
         //   hasSubs: false,
         //   subs: [
         //     {
-        //       label: "旅游景点",
-        //       prop: "scenerySpotName",
-        //       width: "258",
-        //        type: "selection",
-        //       selectlist: [{},{}],
-        //       editable: true,
-        //       searchable: true,
-        //       addable: true,
-        //       unsortable: true,
-        //       align: "center"
-        //     }
-        //   ]
-        // },
-        // {
-        //   hasSubs: false,
-        //   subs: [
-        //     {
-        //       label: "坐标",
-        //       prop: "coodrinte",
+        //       label: "景区id",
+        //       prop: "sceneryId",
         //       width: "200",
         //       type: "number",
         //       editable: true,
+        //       hidden:true,
         //       searchable: true,
         //       addable: true,
         //       unsortable: true,
-        //       align: "center",
-        //       format: function (row) {
-        //           return row.lon +","+row.lat;
-        //  		  }
+        //       align: "center"
         //     }
         //   ]
-        // },
-        {
-          hasSubs: false,
-          subs: [
-            {
-              label: "景区id",
-              prop: "sceneryId",
-              width: "200",
-              type: "number",
-              editable: true,
-              hidden:true,
-              searchable: true,
-              addable: true,
-              unsortable: true,
-              align: "center"
-            }
-          ]
-        },{
+				// },
+				{
           hasSubs: false,
           subs: [
             {
@@ -369,7 +298,7 @@ export default {
             {
               label: "添加时间",
               prop: "createTime",
-              width: "600",
+              width: "560",
               type: "date",
               editable: false,
               searchable: true,
@@ -384,27 +313,14 @@ export default {
         },
       ],
       	addFormRules:{
-    		 no: [
-            { required: true, message: '请输入发射源编号', trigger: 'blur' }
+    		 name: [
+            { required: true, message: '请输入角色名称', trigger: 'blur' }
           ],
-          address: [
-            { required: true, message: '请输入地址', trigger: 'blur' }
+          code: [
+            { required: true, message: '请选择角色', trigger: 'blur' }
           ],
-          radius: [
-            { validator: validatePass,required: true, trigger: 'blur' }
-          ],
-          sceneryId: [
-            { required: true, message: '请选择景区', trigger: 'change' }
-          ],
-          scenerySpotId: [
-            {  required: true, message: '请选择景点', trigger: 'change' }
-          ],
-          lon: [
-            {type:'number', required: true, message: '请输入合法经度，例如111.123456', trigger: 'blur' }
-          ],
-          lat: [
-            {type:'number', required: true, message: '请输入合法纬度，例如39.123456', trigger: 'blur' }
-          ]
+        
+         
     	},
       row:''
     };
@@ -413,20 +329,30 @@ export default {
   	//修改
   	update(){
   		
-  		
   		var _this = this;
   		var sform = this.editForm;
-  		sform.type=1;
+  		sform.type=this.type;
 			var token = localStorage.getItem("token");
   		console.log('update...............................')
   		console.log(sform)
   		var api = this.updateapi;
-  		common.commonUpdateByPost(path+api,sform,token,function(){
+  		common.commonUpdateByPost(path+api,sform,token,function(){					
   				_this.refreshTable();
   				_this.editVisible=false;
   		});
   		
-  	},
+		},
+
+		//  handleCheckAllChange(val) {
+		// 	 alert(1)
+    //     this.checkedCities = val ? cityOptions : [];
+    //     this.isIndeterminate = false;
+    //   },
+    //   handleCheckedCitiesChange(value) {
+		// 			console.log("menu...")
+		// 			console.log(this.addForm)
+    //   },
+	
   	//编辑
   	editData(row){
   		this.row = row;
@@ -458,7 +384,9 @@ export default {
   		common.commonUploadByPost(path+api,sform,token,function(){
   				_this.refreshTable();
   		});
-  	},
+		},
+		
+		
   	clearData(){
   		var _this = this;
   		//清空editForm
@@ -536,8 +464,8 @@ export default {
 	  	}
 			
 	  	//获取表格数据
-	  	sform.type = this.fridtype;
-	  	sform.sceneryIds=sceneryIds
+	  	// sform.type = this.fridtype;
+	  	// sform.sceneryIds=sceneryIds
 	  	
 	  	this.$refs['tumitable'].getTableData(sform);
 	    }
@@ -548,47 +476,72 @@ export default {
   mounted() {
   	
   	//查询景区服务商并并获取表格数据
-	  	this.getSceneryList();
+			this.getSceneryList();
+		
 
   },
-  watch:{
-  	"addForm.sceneryId": function sceneryId(){
-				//通过检测景区id的修改查询景点id
-				var api = "/scenery/webdata/getsceneryspotbysceneryid";
-				let token = localStorage.getItem("token");
-				let sform = {
-					sceneryId:this.addForm.sceneryId
-				}
-				var vm = this;
-				this.addForm.scenerySpotId='';
+  // watch:{
+  // 	"addForm.sceneryId": function sceneryId(){
+	// 			//通过检测景区id的修改查询景点id
+	// 			var api = "/scenery/webdata/getsceneryspotbysceneryid";
+	// 			let token = localStorage.getItem("token");
+	// 			let sform = {
+	// 				sceneryId:this.addForm.sceneryId
+	// 			}
+	// 			var vm = this;
+	// 			this.addForm.scenerySpotId='';
 			
 			    	
-			    	 common.commonPost(path+api,sform,token,function(data){
-			    	 	vm.sceneryspotlist=data.value
-			    	 });
-			 },
-			 "editForm.sceneryId": function sceneryId(value){
-			 	//alert(value != )
+	// 		    	 common.commonPost(path+api,sform,token,function(data){
+	// 		    	 	vm.sceneryspotlist=data.value
+	// 		    	 });
+	// 		 },
+	// 		 "editForm.sceneryId": function sceneryId(value){
+	// 		 	//alert(value != )
 			 	
-			 	if(this.row.sceneryId == value){
-			 		this.editForm.scenerySpotId = this.row.scenerySpotId;
-			 	}else{
-			 		this.editForm.scenerySpotId=''
-			 	}
-				//通过检测景区id的修改查询景点id
-				var api = "/scenery/webdata/getsceneryspotbysceneryid";
-				let token = localStorage.getItem("token");
-				let sform = {
-					sceneryId:this.editForm.sceneryId
-				}
-				var vm = this;
-				this.addForm.scenerySpotId='';
+	// 		 	if(this.row.sceneryId == value){
+	// 		 		this.editForm.scenerySpotId = this.row.scenerySpotId;
+	// 		 	}else{
+	// 		 		this.editForm.scenerySpotId=''
+	// 		 	}
+	// 			//通过检测景区id的修改查询景点id
+	// 			var api = "/scenery/webdata/getsceneryspotbysceneryid";
+	// 			let token = localStorage.getItem("token");
+	// 			let sform = {
+	// 				sceneryId:this.editForm.sceneryId
+	// 			}
+	// 			var vm = this;
+	// 			this.addForm.scenerySpotId='';
 
-	    	 common.commonPost(path+api,sform,token,function(data){
-	    	 		vm.sceneryspoteditlist=data.value
-	    	 });
-			 }
-  }
+	//     	 common.commonPost(path+api,sform,token,function(data){
+	//     	 		vm.sceneryspoteditlist=data.value
+	//     	 });
+	// 		 }
+	// },
+  watch:{
+		"addForm.type":function getmune(value){
+      var api="/user/selectMenuByType";
+			var _this = this;
+			var token = localStorage.getItem("token");
+			
+		  this.$axios.get(path + api+"?type="+value,{
+				headers:{
+					Authorization:"Bearer" +  token
+					}
+			}) .then(response=>{
+				let list={}
+				 list=JSON.parse(JSON.stringify(response.data.value))
+					_this.menuList = list
+					let menus = [];
+					for(var i = 0;i<list.length;i++){
+						menus.push(list[i].name);
+					}
+					//_this.addForm.menuIds=menus;
+				console.log(_this.menuList,"获取到的菜单········");
+				
+			})
+		},
+	}
 };
 </script>
 

@@ -112,7 +112,7 @@ export default {
                     type: "success"
                   });
                 
-                  this.$router.push({ path: "/spotindex" });
+                  this.$router.push({ path: "/index" });
                 }
                 else{
                   //  登录失败的错误提示

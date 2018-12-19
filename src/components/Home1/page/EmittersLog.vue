@@ -18,6 +18,7 @@
 		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			:showButtonEdit="showButtonEdit"
+                :showresetButton="showresetButton" 
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
 		       			v-on:editData="editData"
@@ -39,7 +40,8 @@ export default {
   data() {
   	
     return {
-    	showButtonEdit:true,
+      showButtonEdit:true,
+      showresetButton:true,
     	showTools: {
     		tools:true,
       	no:true,
