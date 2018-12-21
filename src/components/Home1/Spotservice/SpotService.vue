@@ -18,6 +18,7 @@
 		       			:showAdd2="showAdd2"
 		       			:showAdd="showAdd"
 		       			:delapi="delapi"
+								:showresetButton="showresetButton" 
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
 		       			v-on:editData="editData"
@@ -182,14 +183,14 @@ export default {
 				chargeName:'',
 				chargeTelephone:'',
 				lonLat:'',
-    		type:1
+    		// type:1
     	},
     	editForm:{
     		name:'',
 				address:'',
 				chargeName:'',
 				chargeTelephone:'',
-				type:1,
+				// type:1,
 				id:'',
     		lonLat:''
     	},
@@ -200,6 +201,7 @@ export default {
     	addVisible:false,
 			showQueryDate:true,
 			showImg:true,
+			showresetButton:true,
     	showImport:true,
     	showExport:true,
     	showDel:true,
@@ -550,7 +552,7 @@ export default {
   	},
   	onSearch(sform){
 
-			sform.type=this.fridtype;
+			// sform.type=this.fridtype;
 			
 			this.getTableData(sform);
     },
@@ -572,8 +574,8 @@ export default {
 	  	}
 			
 	  	//获取表格数据
-	  	sform.type = this.fridtype;
-	  	sform.sceneryIds=sceneryIds
+	  	// sform.type = this.fridtype;
+	  	// sform.sceneryIds=sceneryIds
 	  	
 	  	this.$refs['tumitable'].getTableData(sform);
 	    }

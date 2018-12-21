@@ -62,8 +62,8 @@
 				    </el-option>
 			    </el-select> -->
 					<select v-model="sform.isAllot" style="width:140px;height:30px;border:1px solid #e5e5e5;border-radius:6px;outline:none">
-						<option value="0">0</option>
-						<option value="1">1</option>
+						<option value="0">未分配</option>
+						<option value="1">已分配</option>
 					</select>
  			</div>
 

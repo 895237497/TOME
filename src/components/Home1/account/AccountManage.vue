@@ -15,6 +15,7 @@
       :showAdd="showAdd"
       :delapi="delapi"
        :showresetButton="showresetButton"
+       :powerOff="powerOff"
       v-on:search="onSearch"
       v-on:addData2="addData2"
       v-on:editData="editData"
@@ -174,7 +175,8 @@ export default {
       }
     };
     return {
-       showresetButton:true,
+       showresetButton:false,
+       powerOff:true,
 			pageSize:10,
 			pageNum:1,
       contenttitl: {

@@ -94,9 +94,11 @@
               size="mini"
               @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button>
-            <el-button size="mini" type="danger" @click="openDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button size="mini"  @click="openDelete(scope.$index, scope.row)">删除</el-button>
 
             <el-button size="mini" v-if="!showresetButton" type="warning" @click="resetpwd(scope.$index, scope.row)">重置密码</el-button>
+            <el-button size="mini" v-if="!powerOff" type="danger" @click="resetpwd(scope.$index, scope.row)">关机</el-button>
+
           </template>
         </el-table-column>
       </el-table>
@@ -211,6 +213,7 @@ export default {
     "showTools",
     "showButtonEdit",
     "showresetButton",
+    "powerOff",
     "showAddDevice",
     "showAllDevice",
     "showImpDevice",

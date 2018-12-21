@@ -13,6 +13,8 @@
 		       			:scenerylistquery='scenerylistquery'
 		       			:showExport='showExport'
 		       			:delapi="delapi"
+								:showresetButton="showresetButton"
+								:powerOff="powerOff" 
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
 		       			v-on:editData="editData"
@@ -154,6 +156,8 @@ export default {
         }
       };
     return {
+			showresetButton:true,
+			powerOff:true,
     	contenttitl:{
     		name:'数据统计',
     		description:'电子围栏统计',

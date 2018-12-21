@@ -15,6 +15,7 @@
       :showAdd="showAdd"
       :delapi="delapi"
       :showresetButton="showresetButton"
+      :powerOff="powerOff"
       v-on:search="onSearch"
       v-on:addData2="addData2"
       v-on:editData="editData"
@@ -121,7 +122,7 @@
           label="选择权限"
           prop="permissionIds"
         >
-          <el-checkbox-group v-model="editForm.menuIds" v-for="item in menuList">
+          <el-checkbox-group v-model="editForm.menuIds" v-for="item in menuList" prop="roleIds">
             <!-- 一级菜单 -->
             <p>
               <el-checkbox :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
@@ -132,7 +133,7 @@
             </span>
           </el-checkbox-group>
 
-          <el-checkbox-group v-model="editForm.permissionIds" v-for="item in menuList">
+          <el-checkbox-group v-model="editForm.permissionIds" v-for="item in menuList" prop="roleId">
             <!-- 循环子类 -->
             <span style="margin-left:16px">
               <el-checkbox
@@ -178,6 +179,7 @@ export default {
     };
     return {
       showresetButton: true,
+      powerOff:true,
       menuList: [],
       contenttitl: {
         name: "账号管理",
@@ -200,6 +202,7 @@ export default {
       },
       editForm: {
         id: "",
+        roleId:'',
         type: "",
         name: "",
         code: "",
@@ -207,9 +210,9 @@ export default {
         menuIds: []
       },
       showAdd: false,
-      numberValidateForm: {
-        age: ""
-      },
+      // numberValidateForm: {
+      //   age: ""
+      // },
       addVisible: false,
       showQueryDate: true,
       showImg: true,
@@ -343,31 +346,32 @@ export default {
     update() {
       var _this = this;
       var sform = this.editForm;
-      sform.type = this.type;
+      
       var token = localStorage.getItem("token");
       console.log("update...............................");
       console.log(sform);
       var api = this.updateapi;
+      
       common.commonUpdateByPost(path + api, sform, token, function() {
         _this.refreshTable();
         _this.editVisible = false;
       });
     },
 
-    // handleCheckedCitiesChange(value) {
-    //       console.log("当前选择的是"+name);
-
-    //   // let checkedCount = value.length;
-    //   // this.checkAll = checkedCount === this.cities.length;
-    //   // this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-    // },
+    
     //编辑
     editData(row) {
       this.row = row;
       var _this = this;
-
+      var roleId = _this.row.id;
+      console.log(roleId,"获取到当前的Id");
+      
+       
+      var type = _this.row.menuList[0].type;
+      console.log(type,"获取当前的type");
       //根据当前景区id获取景点信息
-
+     
+      
       //清空editForm
       common.clearattribute(_this.editForm);
 
@@ -376,6 +380,10 @@ export default {
 
       //显示编辑页面
       this.editVisible = true;
+        // _this.editForm.roleId = roleId
+                
+       return  _this.editForm.type = type
+               
     },
     //刷新表格
     refreshTable() {
@@ -537,19 +545,19 @@ export default {
           console.log(_this.menuList, "获取到的菜单········");
         });
 		},
-		"editForm.type":function gettype(value){
-			var api = "/user/selectMenuByType";
-			var _this = this;
-			var token = localStorage.getItem("token");
-			this.$axios.get(path + api +"?type=" + value,{
-				headers:{
-					Authorization:"Bearer" + token
-				}
-			}).then(response=>{
-				console.log(response,"修改角色·····");
+		// "editForm.type":function gettype(value){
+		// 	var api = "/user/selectMenuByType";
+		// 	var _this = this;
+		// 	var token = localStorage.getItem("token");
+		// 	this.$axios.get(path + api +"?type=" + value,{
+		// 		headers:{
+		// 			Authorization:"Bearer" + token
+		// 		}
+		// 	}).then(response=>{
+		// 		console.log(response,"修改角色·····");
 				
-			})
-		}
+		// 	})
+		// }
   }
 };
 </script>

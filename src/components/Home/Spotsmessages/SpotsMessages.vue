@@ -14,6 +14,8 @@
       :showAdd2="showAdd2"
       :showImport="showImport"
       :delapi="delapi"
+      :showresetButton="showresetButton"
+			:powerOff="powerOff"
       v-on:search="onSearch"
       v-on:addData2="addData2"
       v-on:editData="editData"
@@ -162,6 +164,8 @@ export default {
       }
     };
     return {
+      showresetButton:true,
+			powerOff:true,
       touristRouteIdslist:[],
       contenttitl: {
         name: "首页",

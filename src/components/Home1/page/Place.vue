@@ -17,6 +17,8 @@
 		       			:showAdd2="showAdd2"
 		       			:showAdd="showAdd"
 		       			:delapi="delapi"
+								:showresetButton="showresetButton"
+								:powerOff="powerOff"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
 		       			v-on:editData="editData"
@@ -158,6 +160,8 @@ export default {
         }
       };
     return {
+			showresetButton:true,
+			powerOff:true,
     	contenttitl:{
     		name:'RFID管理',
     		description:'位置版',
