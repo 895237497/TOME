@@ -160,7 +160,8 @@ export default {
           console.log(data);
           return (this.vcode = data);
         });
-    }
+    },
+    
   },
   mounted() {
     this.getCheckCode();

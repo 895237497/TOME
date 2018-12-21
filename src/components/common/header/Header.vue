@@ -1,23 +1,22 @@
 <template>
-    <div>
-        <el-row>
-            <el-col :span="24">
-                <div class="grid-content bg-purple-dark">
-                   <img src="../../../assets/images/logo.png" alt="" srcset=""> 
-                   <span>智 慧 全 域</span> 
-                   <div class="box">
-                       <span class="active">{{username}}</span>
-                       <span>退出</span>
-                   </div>
-                </div>
-            </el-col>
-        </el-row>
-       
-    </div>
+  <div>
+    <el-row>
+      <el-col :span="24">
+        <div class="grid-content bg-purple-dark">
+          <img src="../../../assets/images/logo.png" alt srcset>
+          <span>智 慧 全 域</span>
+          <div class="box">
+            <span class="active">{{username}}</span>
+            <span @click="backToLogin">退出</span>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+  </div>
 </template>
 <script>
 import axios from "axios";
-import { path } from '../../../api/api.js'
+import { path } from "../../../api/api.js";
 export default {
   name: "Header",
   data() {
@@ -25,11 +24,31 @@ export default {
       username: ""
     };
   },
+  methods: {
+  backToLogin() {
+      var api = "/sys/logout";
+      var _this = this;
+      var token = localStorage.getItem("token");
+      this.$axios
+        .get(path + api, {
+          headers: {
+            Authorization: "Bearer" + token
+          }
+        })
+        .then(response => {
+          console.log(response,"退出获取到的东西·····");
+          
+          if(response.data.resultStatus.resultCode === "0000"){
+              console.log("退出登录");
+          }
+        });
+    }
+  },
   mounted() {
     var token = localStorage.getItem("token");
     //alert(token)
     var _this = this;
-    var api="/user/current"
+    var api = "/user/current";
     //var access_token=this.access_token
     var access_token = _this.token;
     axios
@@ -85,6 +104,7 @@ export default {
     top: 12px;
     right: 60px;
     span {
+      cursor: pointer;
       display: inline-block;
       font-size: 12px;
       color: #888;
