@@ -117,12 +117,12 @@
           </select>
         </el-form-item>
         <el-form-item
-          v-model="addForm.permissionIds"
+          v-model="menuList"          
           style="margin: 47px auto;width: 330px;"
           label="选择权限"
-          prop="permissionIds"
+          prop="menuIds"
         >
-          <el-checkbox-group v-model="editForm.menuIds" v-for="item in menuList" prop="roleIds">
+          <el-checkbox-group v-model="editForm.permissionIds" v-for="item in menuList" prop="roleId" @change="handleCheckedCitiesChange">
             <!-- 一级菜单 -->
             <p>
               <el-checkbox :label="item.id" :key="item.id">{{item.name}}</el-checkbox>
@@ -139,6 +139,7 @@
               <el-checkbox
                 v-for="(subItem,index) in item.permissionList"
                 :label="subItem.id"
+               
               >{{subItem.name}}</el-checkbox>
             </span>
           </el-checkbox-group>
@@ -157,6 +158,7 @@
 import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
+
 export default {
   components: {
     ComTable
@@ -178,6 +180,7 @@ export default {
       }
     };
     return {
+      // isChecked:[],
       showresetButton: true,
       powerOff:true,
       menuList: [],
@@ -191,7 +194,7 @@ export default {
       delapi: "/user/deleteRoleByRoleIds",
       saveapi: "/user/addRole",
       updateapi: "/user/updatePermissionByRoleId",
-      scenerySpotId: "",
+      // scenerySpotId: "",
       editVisible: false,
       addForm: {
         type: "",
@@ -346,41 +349,42 @@ export default {
     update() {
       var _this = this;
       var sform = this.editForm;
-      
       var token = localStorage.getItem("token");
       console.log("update...............................");
       console.log(sform);
       var api = this.updateapi;
-      
       common.commonUpdateByPost(path + api, sform, token, function() {
         _this.refreshTable();
         _this.editVisible = false;
       });
     },
-
+    //  handleCheckedCitiesChange(value) {
+    //     let checkedCount = value.length;
+    //     this.checkAll = checkedCount === this.menuList.length;
+    //     this.isIndeterminate = checkedCount > 0 && checkedCount < this.menuList.length;
+    //   },
     
     //编辑
     editData(row) {
       this.row = row;
       var _this = this;
       var roleId = _this.row.id;
-      console.log(roleId,"获取到当前的Id");
-      
+      // console.log(roleId,"获取到当前的Id");
        
       var type = _this.row.menuList[0].type;
-      console.log(type,"获取当前的type");
+      var menuLists= _this.row.menuList;
+      
+      _this.menuList = menuLists
       //根据当前景区id获取景点信息
-     
       
       //清空editForm
       common.clearattribute(_this.editForm);
 
       //复制row到editForm
       common.copyattribute(_this.editForm, row);
-
+      // console.log(_this.editForm)
       //显示编辑页面
       this.editVisible = true;
-        // _this.editForm.roleId = roleId
                 
        return  _this.editForm.type = type
                
@@ -545,20 +549,13 @@ export default {
           console.log(_this.menuList, "获取到的菜单········");
         });
 		},
-		// "editForm.type":function gettype(value){
-		// 	var api = "/user/selectMenuByType";
-		// 	var _this = this;
-		// 	var token = localStorage.getItem("token");
-		// 	this.$axios.get(path + api +"?type=" + value,{
-		// 		headers:{
-		// 			Authorization:"Bearer" + token
-		// 		}
-		// 	}).then(response=>{
-		// 		console.log(response,"修改角色·····");
-				
-		// 	})
-		// }
-  }
+		
+  },
+  // computed:{
+  //   isChecked:function(val){
+  //      return this.val= true;
+  //   }
+  // }
 };
 </script>
 
