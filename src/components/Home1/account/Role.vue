@@ -180,7 +180,7 @@ export default {
       }
     };
     return {
-      // isChecked:[],
+      isChecked:true,
       showresetButton: true,
       powerOff:true,
       menuList: [],
@@ -358,11 +358,11 @@ export default {
         _this.editVisible = false;
       });
     },
-    //  handleCheckedCitiesChange(value) {
-    //     let checkedCount = value.length;
-    //     this.checkAll = checkedCount === this.menuList.length;
-    //     this.isIndeterminate = checkedCount > 0 && checkedCount < this.menuList.length;
-    //   },
+     handleCheckedCitiesChange(value) {
+        let checkedCount = value.length;
+        this.isChecked = checkedCount === this.menuList.length;
+        // this.isIndeterminate = checkedCount > 0 && checkedCount < this.menuList.length;
+      },
     
     //编辑
     editData(row) {
