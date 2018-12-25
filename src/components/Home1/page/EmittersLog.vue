@@ -11,18 +11,14 @@
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-		       			:showImport='showImport'
 		       			:showExport='showExport'
 		       			:showDel="showDel"
-		       			:showAdd2="showAdd2"
-		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			:showButtonEdit="showButtonEdit"
                 :showresetButton="showresetButton" 
                 :powerOff="powerOff"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
-		       			v-on:editData="editData"
 	       							ref="tumitable"/>
 	       	
     </div>
@@ -52,8 +48,8 @@ export default {
       	codeMachine:true
       },
     	contenttitl:{
-    		name:'RFID管理',
-    		description:'RFID',
+    		name:'发射源管理',
+    		description:'发射源访问日志',
     		tabledesctiption:'发射源访问记录',
     		unit:'条'
     	},
@@ -83,10 +79,8 @@ export default {
         },
     	addVisible:false,
     	showQueryDate:true,
-    	showImport:true,
     	showExport:true,
     	showDel:true,
-    	showAdd2:true,
     	fridtype:0,
 			showImg:true,
       showRFID:true,

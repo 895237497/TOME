@@ -32,42 +32,29 @@
 							       <el-form :model="addForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
 								
 							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="景区服务商" prop="name" >
-							    <el-input  v-model="addForm.name" autocomplete="off"></el-input>
+							    <el-input  v-model="addForm.name" autocomplete="off" placeholder="请输入景区"></el-input>
 							  </el-form-item>
 							  
 							  <el-form-item style="margin: 30px auto;width: 330px;" label="通讯地址" prop="address" >
-							    <el-input  v-model="addForm.address" autocomplete="off"></el-input>
+							    <el-input  v-model="addForm.address" autocomplete="off" placeholder="请输入地址"></el-input>
 							  </el-form-item>
 							  
 							  <el-form-item style="margin: 30px auto;width: 330px;" label="负责人姓名" prop="chargeName" >
-							    <el-input  v-model="addForm.chargeName" autocomplete="off"></el-input>
+							    <el-input  v-model="addForm.chargeName" autocomplete="off" placeholder="请填写负责人姓名"></el-input>
 							  </el-form-item>
 							  
 								<el-form-item style="margin: 30px auto;width: 330px;" label="负责人电话" prop="chargeTelephone" >
-							    <el-input  v-model="addForm.chargeTelephone" autocomplete="off"></el-input>
+							    <el-input  v-model="addForm.chargeTelephone" autocomplete="off" placeholder="请填写负责人电话"></el-input>
 							  </el-form-item>
 
-							  <!-- <el-form-item label="负责人电话"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="addForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item> -->
-
-							  <!-- <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item> -->
+							 
 							  
 							  
 							  <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat" >
-							    <el-input  v-model="addForm.lonLat" autocomplete="off"></el-input>
+							    <el-input  v-model="addForm.lonLat" autocomplete="off" placeholder="获取当前经纬度"></el-input>
 							  </el-form-item>
 							  
-							  <!-- <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="addForm.lat" autocomplete="off"></el-input>
-							  </el-form-item> -->
+							 
 							  
 														  
 							</el-form>
@@ -85,42 +72,29 @@
 							       <el-form :model="editForm" ref="addForm" label-width="100px" :rules="addFormRules" style="width:100%;border-top: 2px solid #FCD4B0;">
 								
 							  <el-form-item style="margin: 47px auto 30px;width: 330px;" label="景区服务商" prop="name" >
-							    <el-input  v-model="editForm.name" autocomplete="off"></el-input>
+							    <el-input  v-model="editForm.name" autocomplete="off" placeholder="请输入景区服务商"></el-input>
 							  </el-form-item>
 							  
 							  <el-form-item style="margin: 30px auto;width: 330px;" label="通讯地址" prop="address" >
-							    <el-input  v-model="editForm.address" autocomplete="off"></el-input>
+							    <el-input  v-model="editForm.address" autocomplete="off" placeholder="请填写地址"></el-input>
 							  </el-form-item>
 							  
 							  <el-form-item style="margin: 30px auto;width: 330px;" label="负责人姓名" prop="chargeName" >
-							    <el-input  v-model="editForm.chargeName" autocomplete="off"></el-input>
+							    <el-input  v-model="editForm.chargeName" autocomplete="off" placeholder="请填写负责人姓名"></el-input>
 							  </el-form-item>
 							  
 								<el-form-item style="margin: 30px auto;width: 330px;" label="负责人电话" prop="chargeTelephone" >
-							    <el-input  v-model="editForm.chargeTelephone" autocomplete="off"></el-input>
+							    <el-input  v-model="editForm.chargeTelephone" autocomplete="off" placeholder="请填写负责人电话"></el-input>
 							  </el-form-item>
 
-							  <!-- <el-form-item label="负责人电话"  style="margin: 30px auto;width: 330px;" prop="sceneryId">
-							    <el-select v-model="addForm.sceneryId" placeholder="请选择景区">
-							      <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item> -->
-
-							  <!-- <el-form-item ref="select1" label="景点名称" style="margin: 30px auto;width: 330px;" prop="scenerySpotId">
-							    <el-select  v-model="addForm.scenerySpotId" placeholder="请选择活景点">
-							    	
-							     <el-option v-for="item in sceneryspotlist" :label="item.name" :value="item.id"></el-option>
-							    </el-select>
-							  </el-form-item> -->
+							 
 							  
 							  
 							  <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat" >
-							    <el-input  v-model="editForm.lonLat" autocomplete="off"></el-input>
+							    <el-input  v-model="editForm.lonLat" autocomplete="off" placeholder="获取当前经纬度"></el-input>
 							  </el-form-item>
 							  
-							  <!-- <el-form-item style="margin: 30px auto;width: 330px;" label="纬度" prop="lat" >
-							    <el-input  v-model.number="editForm.lonLat" autocomplete="off"></el-input>
-							  </el-form-item> -->
+							  
 							  
 														  
 							</el-form>
@@ -183,7 +157,8 @@ export default {
 				chargeName:'',
 				chargeTelephone:'',
 				lonLat:'',
-    		// type:1
+				id:'',
+				name:''
     	},
     	editForm:{
     		name:'',
@@ -266,7 +241,7 @@ export default {
             {
               label: "景区服务商",
               prop: "name",
-              width: "168",
+              width: "160",
               type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -283,7 +258,7 @@ export default {
             {
               label: "设备总数",
               prop: "terminalTotalNum",
-              width: "168",
+              width: "160",
               type: "number",
               editable: true,
               searchable: true,
@@ -300,7 +275,7 @@ export default {
             {
               label: "在线总数",
               prop: "onLineTerminalTotalNum",
-              width: "168",
+              width: "160",
               type: "number",
               editable: true,
               searchable: true,
@@ -316,7 +291,7 @@ export default {
             {
               label: "离线总数",
               prop: "offLineTerminalTotalNum",
-              width: "168",
+              width: "160",
                type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -333,7 +308,7 @@ export default {
             {
               label: "负责人姓名",
               prop: "chargeName",
-              width: "168",
+              width: "160",
               type: "number",
               editable: true,
               searchable: true,
@@ -385,7 +360,7 @@ export default {
             {
               label: "负责人电话",
               prop: "chargeTelephone",
-              width: "168",
+              width: "160",
               type: "date",
               editable: false,
               searchable: true,
@@ -537,13 +512,13 @@ export default {
 				
 				
 		    	let data = response.data.value;
-		    	
+					
 		    	let scenerylist= data.slice();
 		    	
 		    	_this.scenerylist=scenerylist;
-		    	
+					
 		    	//data.push({id: 0, name: "查询全部"})
-		    	data.splice(0, 0, {id: 0, name: "查询全部"});
+		    	data.splice(0, 0, {id: 0, name: "查询所有"});
 		    	_this.scenerylistquery = data;
 
 		    	//获取表格数据

@@ -144,18 +144,20 @@ export default {
 <style lang="less">
 #content {
   display: flex;
+  width: 100%;
   height: 100%;
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-    border: none;
-  }
+  
   .left {
     width: 12%;
     height: 100%;
     border-bottom: none;
     border-right: 1px solid #ffe6c9;
     box-shadow: #ffe6c9 8px 2px 4px;
+      .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 90%;
+    min-height: 400px;
+    border: none;
+  }
     .el-tree-node__label {
       font-size: 20px;
       color: #ff6600;
@@ -191,12 +193,17 @@ export default {
     .el-submenu .el-menu-item {
       color: #ff6600;
       background: #fcf8f9;
+      &:focus{
+        width: 100%;
+        height: 50px;
+        background: bisque;
+      }
     }
   }
   .right {
-    width: 100%;
+    width: 88%;
     flex: 1;
-    display: flex;
+    // display: flex;
     background: #f9f8f4;
     .con {
       width: 96%;

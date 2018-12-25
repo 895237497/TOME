@@ -10,3 +10,6 @@ export function MP(ak) {
     document.head.appendChild(script);  
   })  
 } 
+
+
+

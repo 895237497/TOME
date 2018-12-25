@@ -22,7 +22,7 @@
       ref="tumitable"
     />
 
-    <!--发射源添加-->
+    <!--添加-->
     <el-dialog title :visible.sync="addVisible" style width="520px" :close-on-click-modal="false">
       <div
         style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;"
@@ -63,17 +63,20 @@
           style="margin: 30px auto;width: 330px;"
           prop="name"
         >
-          <span>1111</span>
-          <el-input v-model="addForm.name" autocomplete="off" placeholder="请输入相关景区"></el-input>
+          <span v-model="addForm.userSceneries" ></span>
         </el-form-item>
 
-        <el-form-item prop="sceneryName">
+        <el-form-item style="width:330px;margin: 30px auto;" prop="name">
+          <el-input v-model="addForm.name" autocomplete="off" placeholder="请输入相关景区"></el-input>                           
+        </el-form-item>
+
+        <el-form-item prop="name">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>用户名</span>
             </div>
-            <div v-for="item in nameList" :key="item.id" :value="item.id" class="text item">
-              <el-checkbox v-model="addForm.sceneryName">{{item.name}}</el-checkbox>
+            <div  v-for="item in nameList" :key="item.id"  class="text item">
+              <el-checkbox :label="item.id">{{item.name}}</el-checkbox>
             </div>
           </el-card>
         </el-form-item>
@@ -85,7 +88,7 @@
       </span>
     </el-dialog>
 
-    <!--发射源修改-->
+    <!--修改-->
     <el-dialog title :visible.sync="editVisible" style width="520px" :close-on-click-modal="false">
       <div
         style="margin:-30px 0 6px 29px;font: 18px '微软雅黑';border-left: 4px solid #F98319;padding-left: 9px;color:#FEA062 ;"
@@ -177,9 +180,9 @@ export default {
     return {
        showresetButton:false,
        powerOff:true,
-			pageSize:10,
-			pageNum:1,
-      contenttitl: {
+        pageSize:10,
+        pageNum:1,
+        contenttitl: {
         name: "账号分配",
         description: "账号管理",
         tabledesctiption: "共有位置版发射源",
@@ -195,9 +198,10 @@ export default {
         nickname: '',
         username: '',
         password: '',
-        sceneryName: '',
+        // sceneryName: '',
         name:'',
-        sceneryId:'',
+        userSceneries:[],
+        id:'',
         roleId:''
 				
 			
@@ -207,9 +211,9 @@ export default {
         nickname: '',
         username: '',
         password: '',
-        sceneryName: '',
+        // sceneryName: '',
         name:'',
-        sceneryId:'',
+        // sceneryId:'',
         roleId:''
       },
       showAdd: false,
@@ -429,9 +433,9 @@ export default {
         ],
         roleId: [{ message: "请选择角色", required: true, trigger: "blur" }],
         // sceneryId: [{ required: true, message: "请选择景区", trigger: "blur" }],
-        name: [
-          { required: true, message: "请选择景点", trigger: "blur" }
-        ]
+        // sceneryName: [
+        //   { required: true, message: "请选择景点", trigger: "blur" }
+        // ]
       },
       row: ""
     };
@@ -473,13 +477,15 @@ export default {
       this.addVisible = false;
     },
     save() {
-      var sform = this.addForm;
+      var sform = this.addForm;       
       var token = localStorage.getItem("token");
       var _this = this;
       var api = this.saveapi;
       common.commonUploadByPost(path + api, sform, token, function() {
         _this.refreshTable();
       });
+       console.log(this.addForm,"表单传入的值是？？");
+
     },
     clearData() {
       var _this = this;
@@ -536,7 +542,7 @@ export default {
           { headers: { Authorization: "Bearer " + token } }
         )
         .then(response => {
-          return   _this.nameList = response.data.value		
+          return   _this.nameList = response.data.value	
              console.log(_this.nameList,"我要的景区名字的数据是----");
              			 
         });

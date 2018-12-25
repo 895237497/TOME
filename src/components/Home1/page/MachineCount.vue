@@ -6,23 +6,19 @@
 		       			:showTools="showTools"
 		       			:showRFID="showRFID"
 		       			:tableitems='tableitems' 
-		       			:showImg="showImg" 
 		       			:queryapi="queryapi"
 		       			:showScenery='showScenery'
 		       			:showQueryDate='showQueryDate'
 		       			:scenerylistquery='scenerylistquery'
-		       			:showImport='showImport'
+		       			:showImg='showImg'
 		       			:showExport='showExport'
 		       			:showDel="showDel"
-		       			:showAdd2="showAdd2"
-		       			:showAdd="showAdd"
 		       			:delapi="delapi"
 		       			:showButtonEdit="showButtonEdit"
                 :showresetButton="showresetButton"
                 :powerOff="powerOff"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
-		       			v-on:editData="editData"
 	       							ref="tumitable"/>
 	       	
     </div>
@@ -52,12 +48,12 @@ export default {
       	codeMachine:true
       },
     	contenttitl:{
-    		name:'RFID管理',
-    		description:'RFID',
+    		name:'发射源管理',
+    		description:'机器码统计',
     		tabledesctiption:'发射源访问记录',
     		unit:'条'
     	},
-    	queryapi:'/device/fridlog/log/query',
+    	queryapi:'/device/fridlog/log/countbyterminal',
     	delapi:'/device/fridlog/log/del',
     	scenerySpotId:'',
     	editVisible:false,
@@ -83,12 +79,10 @@ export default {
         },
     	addVisible:false,
     	showQueryDate:true,
-    	showImport:true,
     	showExport:true,
-    	showDel:true,
-    	showAdd2:true,
+      showDel:true,
+      showImg:true,
     	fridtype:0,
-			showImg:true,
       showRFID:true,
 			showScenery:true,
 			scenerylist:[
@@ -171,7 +165,7 @@ export default {
             {
               label: "景区服务商",
               prop: "sceneryName",
-              width: "200",
+              width: "240",
               type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -188,7 +182,7 @@ export default {
             {
               label: "旅游景点",
               prop: "scenerySpotName",
-              width: "200",
+              width: "240",
                type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -236,18 +230,18 @@ export default {
           hasSubs: false,
           subs: [
             {
-              label: "访问时间",
-              prop: "accessTime",
-              width: "200",
+              label: "访问次数",
+              prop: "total",
+              width: "150",
               type: "date",
               editable: false,
               searchable: true,
               addable: false,
               unsortable: true,
               align: "center",
-              format:function(row){
-              	return common.dateformat(row.accessTime);
-              }
+              // format:function(row){
+              // 	return common.dateformat(row.accessTime);
+              // }
             }
           ]
         },

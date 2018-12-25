@@ -169,8 +169,8 @@ export default {
       	date:true
       },
     	contenttitl:{
-    		name:'RFID管理',
-    		description:'RFID',
+    		name:'发射源管理',
+    		description:'发射源',
     		tabledesctiption:'共有RFID发射源',
     		unit:'个'
     	},

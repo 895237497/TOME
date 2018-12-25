@@ -1,49 +1,43 @@
 <template>
-    <div id="login">
-      <!-- 登录背景图 -->
-        <div class="login_logo">
-           <img src="../../assets/images/login-logo.png" alt="" srcset="">  
-        </div>
-       <!--登录表单  -->
-        <div class="from">
-            <img src="../../assets/images/logo.png" alt="" srcset="">
-            <span>智 慧 全 域 管 理 系 统</span>
-          <!-- <el-radio-group v-model="labelPosition" size="small">
-          <el-radio-button label="left">左对齐</el-radio-button>
-          <el-radio-button label="right">右对齐</el-radio-button>
-          <el-radio-button label="top">顶部对齐</el-radio-button>
-        </el-radio-group> -->
-        <div style="margin: 10px;"></div>
-        <el-form :label-position="labelPosition" label-width="80px" :model="ruleForm"  :rules="rules" ref="ruleForm"  class="demo-ruleForm">
-          <el-form-item label="用户账号" prop="name">
-            <!-- <el-input v-model="ruleForm.name" ></el-input> -->
-             <el-input v-model="ruleForm.username" placeholder="请输入账号"></el-input>           
-          </el-form-item>
-          <el-form-item label="用户密码" prop="password">
-            <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码"></el-input>
-          </el-form-item>
-          <el-form-item label="验证码" prop="code">
-            <el-input class="input" type="code" v-model="ruleForm.code" placeholder="请输入验证码"></el-input>
-          </el-form-item>
-          <span class="picture">
-            <img @click="getVcode" :src="vcode">
-          </span>
-           <!-- <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-              <el-button @click="resetForm('ruleForm')">重置</el-button>
-            </el-form-item> -->
-        </el-form >
-           <button  @click="submitForm('ruleForm')">登录</button>
-        </div>
-
-       
-
+  <div id="login">
+    <!-- 登录背景图 -->
+    <div class="login_logo">
+      <img src="../../assets/images/login-logo.png" alt srcset>
     </div>
+    <!--登录表单  -->
+    <div class="from">
+      <img src="../../assets/images/logo.png" alt srcset>
+      <span>智 慧 全 域 管 理 系 统</span>
+       <div style="margin: 10px;"></div>
+      <el-form
+        :label-position="labelPosition"
+        label-width="80px"
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        class="demo-ruleForm"
+      >
+        <el-form-item label="用户账号" prop="name">
+          <el-input v-model="ruleForm.username" placeholder="请输入账号"></el-input>
+        </el-form-item>
+        <el-form-item label="用户密码" prop="password">
+          <el-input type="password" v-model="ruleForm.password" placeholder="请输入密码"></el-input>
+        </el-form-item>
+        <el-form-item label="验证码" prop="code">
+          <el-input class="input" type="code" v-model="ruleForm.code" placeholder="请输入验证码"></el-input>
+        </el-form-item>
+        <span class="picture">
+          <img @click="getVcode" :src="vcode">
+        </span>
+      </el-form>
+      <button class="btn" @click="submitForm('ruleForm')">登录</button>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import { path } from "../../api/api.js"
+import { path } from "../../api/api.js";
 export default {
   name: "Login",
   data() {
@@ -87,11 +81,11 @@ export default {
     // 登录函数
     submitForm(formName) {
       var _this = this;
-      var api="/sys/login"
+      var api = "/sys/login";
       this.$refs[formName].validate(valid => {
         if (valid) {
           axios
-            .post(path+api, {
+            .post(path + api, {
               username: _this.ruleForm.username,
               password: _this.ruleForm.password,
               imageCode: _this.ruleForm.code
@@ -99,10 +93,13 @@ export default {
             .then(response => {
               console.log(response, "打印的数据是.....");
               if (response.status === 200) {
-                if (response.data.resultStatus.resultCode === '0000') {                  
+                if (response.data.resultStatus.resultCode === "0000") {
                   this.$store.commit("SET_TOKEN", response.data.token);
                   this.$store.commit("GET_USER", response.data.username);
-                  localStorage.setItem("token",response.data.value.access_token)
+                  localStorage.setItem(
+                    "token",
+                    response.data.value.access_token
+                  );
                   // alert(response.data.value.access_token)
                   // alert(localStorage.getItem(token))
                   // var token = localStorage.getItem("token");
@@ -111,17 +108,15 @@ export default {
                     message: "登陆成功",
                     type: "success"
                   });
-                
-                  this.$router.push({ path: "/index" });
-                }
-                else{
-                  //  登录失败的错误提示
-                      this.$message({
-                        message:"账号或者密码错误",
-                        type:"error"
-                      })
 
-                } 
+                  this.$router.push({ path: "/index" });
+                } else {
+                  //  登录失败的错误提示
+                  this.$message({
+                    message: "账号或者密码错误",
+                    type: "error"
+                  });
+                }
               }
             })
             .catch(function(error) {
@@ -139,9 +134,9 @@ export default {
       let param = {
         imageCode: ""
       };
-      var api="/sys/captcha"
+      var api = "/sys/captcha";
       axios
-        .get(path+api, {
+        .get(path + api, {
           params: param,
           responseType: "arraybuffer"
         })
@@ -160,8 +155,7 @@ export default {
           console.log(data);
           return (this.vcode = data);
         });
-    },
-    
+    }
   },
   mounted() {
     this.getCheckCode();
@@ -174,9 +168,9 @@ export default {
   width: 100%;
   position: relative;
   .login_logo {
-    margin-left: 80px;
-    img{
-      background-repeat:no-repeat;
+    margin-left: 4%;
+    img {
+      background-repeat: no-repeat;
       overflow-y: hidden;
     }
   }
@@ -232,7 +226,7 @@ export default {
         color: #ff6600;
       }
     }
-    button {
+    .btn {
       width: 56%;
       margin-left: 20%;
       margin-top: 4%;
@@ -241,7 +235,34 @@ export default {
       border: none;
       outline: none;
       border-radius: 20px;
+      cursor: pointer;
       color: #fff;
+      position: relative;
+      //隐藏溢出的径向渐变背景
+      overflow: hidden;
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        //设置径向渐变
+        background-image: radial-gradient(circle, #666 10%, transparent 10.01%);
+        background-repeat: no-repeat;
+        background-position: 50%;
+        transform: scale(10, 10);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.5s;
+      }
+    }
+    .btn:active:after {
+      transform: scale(0, 0);
+      opacity: 0.3;
+      //设置初始状态
+      transition: 0s;
     }
   }
 }

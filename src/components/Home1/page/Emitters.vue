@@ -42,9 +42,9 @@ export default {
       	RFIDType:true
       },
     	contenttitl:{
-    		name:'RFID管理',
-    		description:'发射源访问统计',
-    		tabledesctiption:'发射源访问记录',
+    		name:'发射源管理',
+    		description:'发射源统计',
+    		tabledesctiption:'发射源统计记录',
     		unit:'条'
     	},
     	queryapi:'/device/fridlog/log/countbyfrid',

@@ -203,20 +203,20 @@
 				      :value="item.id">
 				    </el-option>
 			    </el-select> -->
-					<el-select  v-model="sform.scenery" size="small" filterable placeholder="请选择景区·····">
-									<el-option
-										v-for="item in scenerylistquery"
-										:key="item.id"
-										:label="item.name"
-										:value="item.id">
-									</el-option>
-								</el-select>
- 			</div>
+					<el-select v-model="sform.scenery" size="small" filterable placeholder="请选择景区·····">
+						<el-option
+					  	v-for="item in scenerylistquery"
+							:key="item.id"
+							:label="item.name"
+							:value="item.id">
+						</el-option>
+					</el-select>
+ 			 </div>
 
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.genre">
  				<span style="margin-right: 18px;">类型</span>
  				<el-select  size="small" v-model="sform.genre" placeholder="请选择类型···">
-				    <el-option st
+				    <el-option 
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
 				      :label="item.name"
@@ -228,7 +228,7 @@
 			  <div style="display: inline;margin-right: 84px;" v-if="showTools.service">
  				<span style="margin-right: 18px;">服务类型</span>
  				<el-select  size="small" v-model="sform.service" placeholder="请选择类型···">
-				    <el-option st
+				    <el-option 
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
 				      :label="item.name"

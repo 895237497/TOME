@@ -154,6 +154,7 @@ export default {
       });
       map.addControl(geolocationControl);
     },
+    // 查询设备总数及在线数量
     finddevicecount() {
       var api = "/device/terminal/selectTerminalCount";
       var _this = this;

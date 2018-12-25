@@ -163,7 +163,7 @@ export default {
 			showresetButton:true,
 			powerOff:true,
     	contenttitl:{
-    		name:'RFID管理',
+    		name:'发射源管理',
     		description:'位置版',
     		tabledesctiption:'共有位置版发射源',
     		unit:'个'
@@ -274,7 +274,7 @@ export default {
             {
               label: "景区服务商",
               prop: "sceneryName",
-              width: "200",
+              width: "160",
               type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -291,7 +291,7 @@ export default {
             {
               label: "播报半径",
               prop: "radius",
-              width: "200",
+              width: "120",
               type: "number",
               editable: true,
               searchable: true,
@@ -307,7 +307,7 @@ export default {
             {
               label: "旅游景点",
               prop: "scenerySpotName",
-              width: "200",
+              width: "180",
                type: "selection",
               selectlist: [{},{}],
               editable: true,
@@ -324,7 +324,7 @@ export default {
             {
               label: "坐标",
               prop: "coodrinte",
-              width: "200",
+              width: "180",
               type: "number",
               editable: true,
               searchable: true,
@@ -376,7 +376,7 @@ export default {
             {
               label: "添加时间",
               prop: "createTime",
-              width: "200",
+              width: "180",
               type: "date",
               editable: false,
               searchable: true,
