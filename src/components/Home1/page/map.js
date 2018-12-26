@@ -5,7 +5,7 @@ export function MP(ak) {
     }  
     var script = document.createElement("script");  
     script.type = "text/javascript";  
-    script.src = "http://api.map.baidu.com/api?v=2.0&ak=yE8uOs6F5xXa4ZzTGCUc5hN05moh5Zck&callback=init";  
+    script.src = "http://api.map.baidu.com/api?v=2.0&ak=8rfzjZUiuce8cTopKFRyQVMYn7qFqG0N&callback=init";  
     script.onerror = reject;  
     document.head.appendChild(script);  
   })  

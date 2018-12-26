@@ -55,7 +55,7 @@ export default {
             var mk = new BMap.Marker(r.point);
             //map.addOverlay(mk);
             map.panTo(r.point);
-            alert("您的位置：" + r.point.lng + "," + r.point.lat);
+            // alert("您的位置：" + r.point.lng + "," + r.point.lat);
           } else {
             alert("failed" + this.getStatus());
           }
@@ -176,14 +176,8 @@ export default {
 
   mounted() {
     //调用上面的函数
-    //this.map();
-    this.$nextTick(function(init) {
-      var _this = this;
-      MP(_this.ak).then(BMap => {
-        //在此调用api
-        this.map();
-      });
-    });
+    this.map();
+    
     this.finddevicecount();
   }
 };
