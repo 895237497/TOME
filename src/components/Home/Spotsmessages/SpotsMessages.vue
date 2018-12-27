@@ -50,7 +50,7 @@
             <el-option v-for="item in touristRouteIdslist" :label="item.name" :value="item.id"></el-option>
           </el-select> -->
           <el-checkbox-group v-model="addForm.touristRouteIds" size="small">
-           <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.id" :key="item.id"></el-checkbox-button>
+           <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.id" :key="item.id">{{item.name}}</el-checkbox-button>
           </el-checkbox-group>
         </el-form-item>
 
@@ -75,6 +75,10 @@
         <el-form-item style="margin: 30px auto;width: 330px;" label="景点介绍" prop="introduction" >
 							    <el-input  v-model="addForm.introduction" autocomplete="off"></el-input>
         </el-form-item>
+
+         <div class="map">
+          <bmapcomponent @lngLat="getlngLat"/>
+         </div>
         
       </el-form>
 
@@ -104,7 +108,7 @@
 
         <el-form-item label="所属线路" style="margin: 30px auto;width: 330px;" prop="touristRouteIds">
           <el-checkbox-group v-model="editForm.touristRouteIds" size="small">
-           <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.name" ></el-checkbox-button>
+           <el-checkbox-button v-for="item in touristRouteIdslist" :label="item.id" :value="item.name" >{{item.name}}</el-checkbox-button>
           </el-checkbox-group>
         </el-form-item>
 
@@ -119,6 +123,8 @@
           <el-input v-model="editForm.lonLat" autocomplete="off"></el-input>
         </el-form-item>
 
+        
+
         <el-form-item style="margin: 30px auto;width: 330px;" label="景点地址" prop="address">
           <el-input v-model="editForm.address" autocomplete="off"></el-input>
         </el-form-item>
@@ -126,6 +132,11 @@
         <el-form-item style="margin: 30px auto;width: 330px;" label="景点介绍" prop="introduction" >
 							    <el-input  v-model="editForm.introduction" autocomplete="off"></el-input>
         </el-form-item>
+
+         <div class="map">
+          <bmapcomponent @lngLat="getlngLat"/>
+        </div>
+
       </el-form>
 
       <span slot="footer" class="dialog-footer">
@@ -142,10 +153,14 @@
 import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
+import Bmapcomponent from './Bmapcomponent.vue'
+import { MP } from "./map.js";
+
 const touristRouteIds=[this.touristRouteIds]
 export default {
   components: {
-    ComTable
+    ComTable,
+    Bmapcomponent
   },
   data() {
     //自定义校验，播报半径校验，正整数
@@ -338,6 +353,12 @@ export default {
     };
   },
   methods: {
+
+     getlngLat(lngLat) {
+      var _this = this;
+      _this.addForm.lonLat = lngLat.lng + "," + lngLat.lat;
+      _this.editForm.lonLat = lngLat.lng + "," + lngLat.lat;
+    },
     //修改
     update() {
       var _this = this;
@@ -542,5 +563,11 @@ export default {
 <style lang="less">
 el-dialog .el-input__inner {
   width: 330px;
+}
+.map {
+  width: 480px;
+  height: 200px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
 }
 </style>

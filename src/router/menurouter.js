@@ -52,6 +52,7 @@ let routes = [
         path: '/index',
         component: Index,
         // name: '首页',
+        // redirect:TestMap,
         iconCls: 'el-icon-document',
         children: [
             {path: '/TestMap', component: TestMap, name: '地图'},

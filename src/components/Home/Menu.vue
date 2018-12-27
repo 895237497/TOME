@@ -203,6 +203,11 @@ export default {
     .el-submenu .el-menu-item {
       color: #ff6600;
       background: #fcf8f9;
+      &:focus{
+        width: 100%;
+        height: 50px;
+        background: bisque;
+      }
     }
   }
   .right {

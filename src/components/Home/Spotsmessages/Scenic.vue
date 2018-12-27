@@ -45,7 +45,9 @@
         <el-form-item style="margin: 30px auto;width: 330px;" label="坐标" prop="lonLat">
           <el-input v-model="addForm.lonLat" autocomplete="off"></el-input>
         </el-form-item>
-
+        <div class="map">
+          <bmapcomponent @lngLat="getlngLat"/>
+        </div>
       </el-form>
 
       <span slot="footer" class="dialog-footer">
@@ -78,7 +80,9 @@
           <el-input v-model="editForm.lonLat" autocomplete="off"></el-input>
         </el-form-item>
 
-
+         <div class="map">
+          <bmapcomponent @lngLat="getlngLat"/>
+         </div>
         
       </el-form>
 
@@ -96,9 +100,13 @@
 import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
+import Bmapcomponent from './Bmapcomponent.vue'
+import { MP } from "./map.js";
+
 export default {
   components: {
-    ComTable
+    ComTable,
+    Bmapcomponent
   },
   data() {
     //自定义校验，播报半径校验，正整数
@@ -305,6 +313,11 @@ export default {
     };
   },
   methods: {
+    getlngLat(lngLat) {
+      var _this = this;
+      _this.addForm.lonLat = lngLat.lng + "," + lngLat.lat;
+      _this.editForm.lonLat = lngLat.lng + "," + lngLat.lat;
+    },
     //修改
     update() {
       var _this = this;
@@ -502,5 +515,11 @@ export default {
 <style lang="less">
 el-dialog .el-input__inner {
   width: 330px;
+}
+map {
+  width: 480px;
+  height: 200px;
+  border: 1px solid #ccc;
+  margin: 0 auto;
 }
 </style>

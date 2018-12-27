@@ -54,10 +54,10 @@
 
         <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat">
           <el-input v-model="addForm.lonLat" autocomplete="off" placeholder="获取当前经纬度"></el-input>
-          <span class="gain" @click="showBmap()">获取</span>
+          <span class="gain">获取</span>
         </el-form-item>
-        <div id="map">
-          <bmapcomponent/>
+        <div class="map">
+          <bmapcomponent @lngLat="getlngLat"/>
         </div>
       </el-form>
 
@@ -80,11 +80,11 @@
         style="width:100%;border-top: 2px solid #FCD4B0;"
       >
         <el-form-item style="margin: 47px auto 30px;width: 330px;" label="景区服务商" prop="name">
-          <el-input v-model="editForm.name" autocomplete="off" placeholder="请输入景区服务商"></el-input>
+          <el-input v-model="editForm.name" autocomplete="off" placeholder="请输入景区"></el-input>
         </el-form-item>
 
         <el-form-item style="margin: 30px auto;width: 330px;" label="通讯地址" prop="address">
-          <el-input v-model="editForm.address" autocomplete="off" placeholder="请填写地址"></el-input>
+          <el-input v-model="editForm.address" autocomplete="off" placeholder="请输入地址"></el-input>
         </el-form-item>
 
         <el-form-item style="margin: 30px auto;width: 330px;" label="负责人姓名" prop="chargeName">
@@ -97,7 +97,11 @@
 
         <el-form-item style="margin: 30px auto;width: 330px;" label="经纬度" prop="lonLat">
           <el-input v-model="editForm.lonLat" autocomplete="off" placeholder="获取当前经纬度"></el-input>
+          <span class="gain">获取</span>
         </el-form-item>
+        <div class="map">
+          <bmapcomponent @lngLat="getlngLat"/>
+        </div>
       </el-form>
 
       <span slot="footer" class="dialog-footer">
@@ -113,6 +117,7 @@ import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
 import Bmapcomponent from "./Bmapcomponent.vue";
+import { MP } from "./map.js";
 
 export default {
   components: {
@@ -419,20 +424,10 @@ export default {
     };
   },
   methods: {
-
-    showBmap() {
-      // 获取触发源
-			var gain = document.getElementsByClassName("gain");
-			var _this = this
-			var lonLat=[]
-			//  注册点击事件
-		   gain[0].onclick = function(){
-					 _this.lonLat =e.point.lng + e.point.lat;
-					 console.log(_this.lonLat,"经纬度");
-					 
-		   
-			 }
-				
+    getlngLat(lngLat) {
+      var _this = this;
+      _this.addForm.lonLat = lngLat.lng + "," + lngLat.lat;
+      _this.editForm.lonLat = lngLat.lng + "," + lngLat.lat;
     },
     //修改
     update() {
@@ -619,7 +614,7 @@ el-dialog .el-input__inner {
   color: #ff6600;
   cursor: pointer;
 }
-#map {
+.map {
   width: 480px;
   height: 200px;
   border: 1px solid #ccc;

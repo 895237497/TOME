@@ -14,7 +14,7 @@
       :showAdd2="showAdd2"
       :delapi="delapi"
       :showresetButton="showresetButton"
-			:powerOff="powerOff"
+      :powerOff="powerOff"
       v-on:search="onSearch"
       v-on:addData2="addData2"
       v-on:editData="editData"
@@ -37,50 +37,53 @@
           <el-input v-model="addForm.name" autocomplete="off"></el-input>
         </el-form-item>
 
-        
         <div style="margin-left:74px">
-          <el-form-item label="目的地" style="margin: 30px auto;width: 330px;display:inline;" prop="sceneryId">
+          <el-form-item
+            label="目的地"
+            style="margin: 30px auto;width: 330px;display:inline;"
+            prop="sceneryId"
+          >
             <!-- <el-select v-model="addForm.province" style="width:116px;" placeholder="请选择省">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select> -->
+            </el-select>-->
+            <el-select
+              v-model="addForm.province"
+              @change="choseProvince"
+              style="width:116px;"
+              placeholder="请选择省"
+            >
+              <el-option
+                v-for="item in province"
+                :key="item.id"
+                :label="item.value"
+                :value="item.id"
+              ></el-option>
+            </el-select>
 
-          <el-select
-            v-model="addForm.province"
-             @change="choseProvince"
-            style="width:116px;"
-            placeholder="请选择省">
-            <el-option
-              v-for="item in province"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-
-          <el-select
-            v-model="addForm.city"
-            @change="choseCity"
-            style="width:116px;"
-            placeholder="请选择市">
-            <el-option
-              v-for="item in shi1"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-           <!-- <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
+            <el-select
+              v-model="addForm.city"
+              @change="choseCity"
+              style="width:116px;"
+              placeholder="请选择市"
+            >
+              <el-option v-for="item in shi1" :key="item.id" :label="item.value" :value="item.id"></el-option>
+            </el-select>
+            <!-- <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select> -->
-        </el-form-item>
+            </el-select>-->
+          </el-form-item>
         </div>
 
         <el-form-item style="margin: 47px auto 30px;width: 330px;" label="线路详情" prop="detail">
           <el-input v-model="addForm.detail" autocomplete="off"></el-input>
         </el-form-item>
 
-         <el-form-item label="线路类型" style="margin: 30px auto;width: 330px;" prop="type">
-           <select v-model="addForm.type" aria-placeholder="请选择线路类型···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+        <el-form-item label="线路类型" style="margin: 30px auto;width: 330px;" prop="type">
+          <select
+            v-model="addForm.type"
+            aria-placeholder="请选择线路类型···"
+            style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px"
+          >
             <option value="1">出境游</option>
             <option value="2">短途游</option>
             <option value="3">长途游</option>
@@ -110,50 +113,53 @@
           <el-input v-model="editForm.name" autocomplete="off"></el-input>
         </el-form-item>
 
-        
         <div style="margin-left:74px">
-          <el-form-item label="目的地" style="margin: 30px auto;width: 330px;display:inline;" prop="sceneryId">
+          <el-form-item
+            label="目的地"
+            style="margin: 30px auto;width: 330px;display:inline;"
+            prop="sceneryId"
+          >
             <!-- <el-select v-model="addForm.province" style="width:116px;" placeholder="请选择省">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select> -->
+            </el-select>-->
+            <el-select
+              v-model="editForm.province"
+              @change="choseProvince"
+              style="width:116px;"
+              placeholder="请选择省"
+            >
+              <el-option
+                v-for="item in province"
+                :key="item.id"
+                :label="item.value"
+                :value="item.id"
+              ></el-option>
+            </el-select>
 
-          <el-select
-            v-model="editForm.province"
-             @change="choseProvince"
-            style="width:116px;"
-            placeholder="请选择省">
-            <el-option
-              v-for="item in province"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-
-          <el-select
-            v-model="editForm.city"
-            @change="choseCity"
-            style="width:116px;"
-            placeholder="请选择市">
-            <el-option
-              v-for="item in shi1"
-              :key="item.id"
-              :label="item.value"
-              :value="item.id">
-            </el-option>
-          </el-select>
-           <!-- <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
+            <el-select
+              v-model="editForm.city"
+              @change="choseCity"
+              style="width:116px;"
+              placeholder="请选择市"
+            >
+              <el-option v-for="item in shi1" :key="item.id" :label="item.value" :value="item.id"></el-option>
+            </el-select>
+            <!-- <el-select v-model="addForm.city" style="width:116px;" placeholder="请选择市">
             <el-option v-for="item in scenerylist" :label="item.name" :value="item.id"></el-option>
-          </el-select> -->
-        </el-form-item>
+            </el-select>-->
+          </el-form-item>
         </div>
 
         <el-form-item style="margin: 47px auto 30px;width: 330px;" label="线路详情" prop="detail">
           <el-input v-model="editForm.detail" autocomplete="off"></el-input>
         </el-form-item>
 
-         <el-form-item label="线路类型" style="margin: 30px auto;width: 330px;" prop="type">
-           <select v-model="editForm.type" aria-placeholder="请选择线路类型···" style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+        <el-form-item label="线路类型" style="margin: 30px auto;width: 330px;" prop="type">
+          <select
+            v-model="editForm.type"
+            aria-placeholder="请选择线路类型···"
+            style="width:230px;height:36px;border:1px solid #e5e5e5;border-radius:6px"
+          >
             <option value="1">出境游</option>
             <option value="2">短途游</option>
             <option value="3">长途游</option>
@@ -166,8 +172,6 @@
         <el-button type="primary" style="background: #FA841A;" size="small" @click="update">保存</el-button>
       </span>
     </el-dialog>
-
-   
   </div>
 </template>
 
@@ -175,7 +179,7 @@
 import ComTable from "../../ComTable";
 import common from "../../common/common.js";
 import { path } from "../../../api/api";
-import axios from 'axios'
+import axios from "axios";
 export default {
   components: {
     ComTable
@@ -197,14 +201,14 @@ export default {
       }
     };
     return {
-         showresetButton:true,
-				powerOff:true,
-      mapJson:'../../../../static/map.json',
-      province:[],
-      sheng: '',
-      shi: '',
+      showresetButton: true,
+      powerOff: true,
+      mapJson: "../../../../static/map.json",
+      province: [],
+      sheng: "",
+      shi: "",
       shi1: [],
-      city:'',
+      city: "",
 
       contenttitl: {
         name: "景区服务商",
@@ -219,21 +223,21 @@ export default {
       scenerySpotId: "",
       editVisible: false,
       addForm: {
-        name:'',
-        province:'',
-        city:'',
-        detail:'',
-        type:'',
+        name: "",
+        province: "",
+        city: "",
+        detail: "",
+        type: ""
       },
       editForm: {
-        name:'',
-        province:'',
-        city:'',
-        detail:'',
-        type:'',
-        id:''
+        name: "",
+        province: "",
+        city: "",
+        detail: "",
+        type: "",
+        id: ""
       },
-     
+
       showAdd: false,
       numberValidateForm: {
         age: ""
@@ -244,12 +248,12 @@ export default {
       showQueryDate: true,
       showImg: true,
       showDel: true,
-      showAdd2:true,
+      showAdd2: true,
       // fridtype: 1,
       showTools: {
         tools: true,
-        line:true,
-        mold:true,
+        line: true,
+        mold: true
       },
       showRFID: true,
       showScenery: true,
@@ -265,12 +269,12 @@ export default {
               label: "线路类型",
               prop: "type",
               width: "420",
-              type: "number",
+              // type: "number",
               editable: true,
               searchable: true,
               addable: false,
               unsortable: true,
-              align: "center"
+              align: "center",
             }
           ]
         },
@@ -306,96 +310,95 @@ export default {
               align: "center"
             }
           ]
-        },
-       
+        }
       ],
       addFormRules: {
         name: [{ required: true, message: "请输入线路名称", trigger: "blur" }],
-        province: [
-          { required: true, message: "请选择省份", trigger: "blur" }
-        ],
+        province: [{ required: true, message: "请选择省份", trigger: "blur" }],
         // radius: [
         //   { validator: validatePass,required: true, trigger: 'blur' }
         // ],
-        city: [
-          { required: true, message: "请选择市区", trigger: "blur" }
-        ],
-        detail: [
-          { required: true, message: "请填写详情", trigger: "change" }
-        ],
+        city: [{ required: true, message: "请选择市区", trigger: "blur" }],
+        detail: [{ required: true, message: "请填写详情", trigger: "change" }],
         type: [
           {
             required: true,
             message: "请选择类型",
             trigger: "blur"
           }
-        ],
-        
+        ]
       },
       row: ""
     };
   },
   methods: {
-
-    
     // 加载china地点数据，三级
-      getCityData(){
-        var that = this
-        
-        axios.get(that.mapJson).then(function(response){
-          if (response.status==200) {
-            var data = response.data
-            console.log(data,"这是打印的数据--------");
-            
-            that.province = []
-            that.city = []
+    getCityData() {
+      var that = this;
+
+      axios
+        .get(that.mapJson)
+        .then(function(response) {
+          if (response.status == 200) {
+            var data = response.data;
+            console.log(data, "这是打印的数据--------");
+
+            that.province = [];
+            that.city = [];
             //that.block = []
             // 省市区数据分类
             for (var item in data) {
-              if (item.match(/0000$/)) {//省
-                that.province.push({id: item, value: data[item], children: []})
-              } else if (item.match(/00$/)) {//市
-                that.city.push({id: item, value: data[item], children: []})
-              } 
+              if (item.match(/0000$/)) {
+                //省
+                that.province.push({
+                  id: item,
+                  value: data[item],
+                  children: []
+                });
+              } else if (item.match(/00$/)) {
+                //市
+                that.city.push({ id: item, value: data[item], children: [] });
+              }
             }
             // 分类市级
             for (var index in that.province) {
               for (var index1 in that.city) {
-                if (that.province[index].id.slice(0, 2) === that.city[index1].id.slice(0, 2)) {
-                  that.province[index].children.push(that.city[index1])
+                if (
+                  that.province[index].id.slice(0, 2) ===
+                  that.city[index1].id.slice(0, 2)
+                ) {
+                  that.province[index].children.push(that.city[index1]);
                 }
               }
             }
             // 分类区级
-           
+          } else {
+            console.log(response.status);
           }
-          else{
-            console.log(response.status)
-          }
-        }).catch(function(error){console.log(typeof+ error)})
-      },
-      // 选省
-      choseProvince:function(e) {
-        for (var index2 in this.province) {
-          if (e === this.province[index2].id) {
-            this.shi1 = this.province[index2].children
-            this.shi = this.province[index2].children[0].value
-          }
+        })
+        .catch(function(error) {
+          console.log(typeof +error);
+        });
+    },
+    // 选省
+    choseProvince: function(e) {
+      for (var index2 in this.province) {
+        if (e === this.province[index2].id) {
+          this.shi1 = this.province[index2].children;
+          this.shi = this.province[index2].children[0].value;
         }
-      },
-      // 选市
-      choseCity:function(e) {
-        for (var index3 in this.city) {
-          if (e === this.city[index3].id) {
-            this.qu1 = this.city[index3].children
-            // console.log(this.E)
-          }
+      }
+    },
+    // 选市
+    choseCity: function(e) {
+      for (var index3 in this.city) {
+        if (e === this.city[index3].id) {
+          this.qu1 = this.city[index3].children;
+          // console.log(this.E)
         }
-      },
-     
+      }
+    },
 
-       
-    
     //修改
     update() {
       var _this = this;
@@ -441,7 +444,7 @@ export default {
         _this.refreshTable();
       });
     },
-   
+
     clearData() {
       var _this = this;
       //清空editForm
@@ -463,11 +466,9 @@ export default {
     addData2() {
       this.addVisible = true;
     },
-    
+
     //  导出设备
-    exportReceipt(){
-    
-    },
+    exportReceipt() {},
     showSetting: function(name) {
       alert("hello:" + name);
     },
@@ -503,7 +504,7 @@ export default {
         });
     },
     onSearch(sform) {
-      // sform.type = this.fridtype;
+      sform.type = this.fridtype;
 
       this.getTableData(sform);
     },
@@ -521,14 +522,23 @@ export default {
 
       //获取表格数据
       sform.type = this.fridtype;
-      sform.sceneryIds = sceneryIds;
+      // sform.sceneryIds = sceneryIds;
 
       this.$refs["tumitable"].getTableData(sform);
-    },
+    }
   },
-  activated() {
+  activated() {},
+  
+  computed: {
+
+    getType() {
+      return function(type) {
+        return type == 1 ? "出境游" : "短途游" ;
+      }
+    }
     
   },
+
   mounted() {
     //查询景区服务商并并获取表格数据
     this.getSceneryList();

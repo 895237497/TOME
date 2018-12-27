@@ -1,6 +1,25 @@
 <template>
   <div id="map">
     <div id="allmap" ref="allmap"></div>
+
+    <div id="l-map"></div>
+    <div id="result">
+      <button id="open">打开</button>
+      <button id="close">关闭</button>
+    </div>
+    <!--城市列表-->
+    <div class="sel_container">
+      <strong id="curCity">北京市</strong> [
+      <a id="curCityText" href="javascript:void(0)">更换城市</a>]
+    </div>
+    <div class="map_popup" id="cityList" style="display:none;">
+      <div class="popup_main">
+        <div class="title">城市列表</div>
+        <div class="cityList" id="citylist_container"></div>
+        <button id="popup_close"></button>
+      </div>
+    </div>
+
     <div class="count">
       <!-- 设备总数 -->
       <div class="sum">
@@ -32,127 +51,110 @@ export default {
   },
   methods: {
     map() {
-      let map = new BMap.Map(this.$refs.allmap); // 创建Map实例
-      var point = new BMap.Point(104.07, 30.67);
-      map.centerAndZoom(point, 15);
-      var marker = new BMap.Marker(point);  // 创建标注
-      map.addOverlay(marker);               // 将标注添加到地图中
-      marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-      // map.centerAndZoom(new BMap.Point(104.07, 30.67), 11); // 初始化地图,设置中心点坐标（经纬度/城市的名称）和地图级别
-      // map.addControl(
-      //   new BMap.MapTypeControl({
-      //     //添加地图类型控件
-      //     mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
-      //   })
-      // );
-      // map.setCurrentCity("成都"); // 设置地图显示的城市 此项是必须设置的
-      map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放 //map.setMapStyle({style:'midnight'});//地图风格
-
-      var geolocation = new BMap.Geolocation();
-      geolocation.getCurrentPosition(
-        function(r) {
-          if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-            var mk = new BMap.Marker(r.point);
-            //map.addOverlay(mk);
-            map.panTo(r.point);
-            // alert("您的位置：" + r.point.lng + "," + r.point.lat);
-          } else {
-            alert("failed" + this.getStatus());
-          }
-        },
-        { enableHighAccuracy: true }
-      );
-
-      var data_info = [
-        [
-          113.30764968,
-          23.1200491,
-          "地址：北京市东城区王府井大街88号乐天银泰百货八层<br><a href='https://www.baidu.com'>详情<a>"
-        ],
-        [
-          116.406605,
-          39.921585,
-          "地址：北京市东城区东华门大街<br><a href='https://www.baidu.com'>详情<a>"
-        ],
-        [
-          116.412222,
-          39.912345,
-          "地址：北京市东城区正义路甲5号<br><a href='https://www.baidu.com'>详情<a>"
-        ]
-      ];
-      var opts = {
-        width: 250, // 信息窗口宽度
-        height: 80, // 信息窗口高度
-        //              title : "信息窗口" , // 信息窗口标题
-        enableMessage: true //设置允许信息窗发送短息
+      var map = new BMap.Map("allmap"); // 创建地图实例
+      var point = new BMap.Point(116.403694, 39.927552); // 创建点坐标
+      map.centerAndZoom(point, 15); // 初始化地图，设置中心点坐标和地图级别
+      map.enableScrollWheelZoom();
+      map.addControl(new BMap.NavigationControl()); //添加默认缩放平移控件
+      var customLayer;
+      // function addCustomLayer(keyword) {
+      //   if (customLayer) {
+      //     map.removeTileLayer(customLayer);
+      //   }
+      //   customLayer = new BMap.CustomLayer({
+      //     geotableId: 30960,
+      //     q: "", //检索关键字
+      //     tags: "", //空格分隔的多字符串
+      //     filter: "" //过滤条件,参考http://lbsyun.baidu.com/lbs-geosearch.htm#.search.nearby
+      //   });
+      //   map.addTileLayer(customLayer);
+      //   customLayer.addEventListener("hotspotclick", callback);
+      // }
+      function callback(e) {
+        //单击热点图层
+        var customPoi = e.customPoi; //poi的默认字段
+        var contentPoi = e.content; //poi的自定义字段
+        var content =
+          '<p style="width:280px;margin:0;line-height:20px;">地址：' +
+          customPoi.address +
+          "<br/>价格:" +
+          contentPoi.dayprice +
+          "元" +
+          "</p>";
+        var searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+          title: customPoi.title, //标题
+          width: 290, //宽度
+          height: 40, //高度
+          panel: "panel", //检索结果面板
+          enableAutoPan: true, //自动平移
+          enableSendToPhone: true, //是否显示发送到手机按钮
+          searchTypes: [
+            BMAPLIB_TAB_SEARCH, //周边检索
+            BMAPLIB_TAB_TO_HERE, //到这里去
+            BMAPLIB_TAB_FROM_HERE //从这里出发
+          ]
+        });
+        var point = new BMap.Point(customPoi.point.lng, customPoi.point.lat);
+        searchInfoWindow.open(point);
+      }
+      // document.getElementById("open").onclick = function() {
+      //   addCustomLayer();
+      // };
+      document.getElementById("open").click();
+      document.getElementById("close").onclick = function() {
+        if (customLayer) {
+          map.removeTileLayer(customLayer);
+        }
       };
+      // 创建CityList对象，并放在citylist_container节点内
+      var myCl = new BMapLib.CityList({
+        container: "citylist_container",
+        map: map
+      });
 
-      for (var i = 0; i < data_info.length; i++) {
+      //click--点击事件获取经纬度
+      map.addEventListener("click", function(e) {
+        var lng = e.point.lng;
+        var lat = e.point.lat;
+        var p1 = new BMap.Point(lng, lat);
+        // var marker = new BMap.Marker(p1);  // 创建标注
         var myIcon = new BMap.Icon(
           "http://developer.baidu.com/map/jsdemo/img/fox.gif",
-          // URL = "../../../assets/images/lixian.png",
-          new BMap.Size(100, 57)
+          // imgurl =  '../../../../assets/images/zaixian.png',
+
+          new BMap.Size(300, 157)
         );
-
-        var marker = new BMap.Marker(
-          new BMap.Point(data_info[i][0], data_info[i][1]),
-          { icon: myIcon }
-        ); // 创建标注
-        var content = data_info[i][2];
-        map.addOverlay(marker); // 将标注添加到地图中
-        //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        addClickHandler(content, marker);
-      }
-
-      //地图描点单击事件
-      function addClickHandler(content, marker) {
-        marker.addEventListener("click", function(e) {
-          openInfo(content, e);
-        });
-      }
-
-      function openInfo(content, e) {
-        var p = e.target;
-        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-        var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
-        map.openInfoWindow(infoWindow, point); //开启信息窗口
-      }
-
-      //地图移动获取经纬度
-      map.addEventListener("moveend", function() {
-        console.log("lng: " + map.getCenter().lng);
-        console.log("lat: " + map.getCenter().lat);
+        var marker2 = new BMap.Marker(p1, { icon: myIcon }); // 创建标注
+        map.addOverlay(marker2); // 将标注添加到地图中
+        // map.addOverlay(marker2); // 将标注添加到地图中
       });
 
-      // 添加带有定位的导航控件
-      var navigationControl = new BMap.NavigationControl({
-        // 靠左上角位置
-        anchor: BMAP_ANCHOR_TOP_LEFT,
-        // LARGE类型
-        type: BMAP_NAVIGATION_CONTROL_LARGE,
-        // 启用显示定位
-        enableGeolocation: true
+      // 给城市点击时，添加相关操作
+      myCl.addEventListener("cityclick", function(e) {
+        // 修改当前城市显示
+        document.getElementById("curCity").innerHTML = e.name;
+
+        // 点击后隐藏城市列表
+        document.getElementById("cityList").style.display = "none";
       });
-      map.addControl(navigationControl);
-      // 添加定位控件
-      var geolocationControl = new BMap.GeolocationControl();
-      geolocationControl.addEventListener("locationSuccess", function(e) {
-        // 定位成功事件
-        console.log("经度  lng:" + e.point.lng);
-        console.log("维度  lat:" + e.point.lat);
-        //      var address = '';
-        //      address += e.addressComponent.province;
-        //      address += e.addressComponent.city;
-        //      address += e.addressComponent.district;
-        //      address += e.addressComponent.street;
-        //      address += e.addressComponent.streetNumber;
-        //      alert("当前定位地址为：" + address);
-      });
-      geolocationControl.addEventListener("locationError", function(e) {
-        // 定位失败事件
-        alert(e.message);
-      });
-      map.addControl(geolocationControl);
+      // 给“更换城市”链接添加点击操作
+      document.getElementById("curCityText").onclick = function() {
+        var cl = document.getElementById("cityList");
+        if (cl.style.display == "none") {
+          cl.style.display = "";
+        } else {
+          cl.style.display = "none";
+        }
+      };
+      // 给城市列表上的关闭按钮添加点击操作
+      document.getElementById("popup_close").onclick = function() {
+        var cl = document.getElementById("cityList");
+        if (cl.style.display == "none") {
+          cl.style.display = "";
+        } else {
+          cl.style.display = "none";
+        }
+      };
     },
     // 查询设备总数及在线数量
     finddevicecount() {
@@ -177,7 +179,7 @@ export default {
   mounted() {
     //调用上面的函数
     this.map();
-    
+
     this.finddevicecount();
   }
 };
@@ -194,6 +196,7 @@ export default {
     height: 100%;
     border: 1px solid #ccc;
     z-index: 1;
+    // background-image: url(../../../../assets/images/zaixian.png);
   }
   .count {
     width: 500px;

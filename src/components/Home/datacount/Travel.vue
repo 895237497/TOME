@@ -106,7 +106,7 @@ export default {
     	scenerySpotId:'',
     	editVisible:false,
     	addForm:{
-    		sceneryId:'',
+    		// sceneryId:'',
     		scenerySpotId:'',
 				informRange:'',
 				name:'',

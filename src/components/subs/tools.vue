@@ -30,25 +30,29 @@
 					</div>
 
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.username" >
- 				<span style="margin-right: 18px;">用户名</span>
+ 				<span style="margin-right: 18px;">景点名称</span>
  				<el-input style="display: inline-block;" size="small"
-				  placeholder="请输入用户名"
-				  v-model="sform.username"
+				  placeholder="请输入景点名称"
+				  v-model="sform.name"
 				  clearable>
 				</el-input>
  			</div>
 
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.mold" >
  				<span style="margin-right: 18px;">线路类型</span>
- 				<el-select  size="small" v-model="sform.type" placeholder="请输入线路类型">
+ 				<!-- <el-select  size="small" v-model="sform.type" placeholder="请输入线路类型">
 				    <el-option st
 				      v-for="item in scenerylistquery"
 				      :key="item.id"
 				      :label="item.name"
 				      :value="item.sceneryId">
 				    </el-option>
-			    </el-select>
-					
+			    </el-select> -->
+					<select v-model="sform.type" aria-placeholder="请选择线路类型···" style="width:160px;height:36px;border:1px solid #e5e5e5;border-radius:6px">
+            <option value="1">出境游</option>
+            <option value="2">短途游</option>
+            <option value="3">长途游</option>
+          </select>
  			</div>
 
 			 <div style="display: inline;margin-right: 84px;" v-if="showTools.isAllot" >
@@ -299,7 +303,7 @@ export default {
 			no:'',
 			codeMachine:'',
 			line:'',
-			username:'',
+			// username:'',
 			type:'',
 			isAllot:'',
 			imei:'',

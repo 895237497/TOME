@@ -15,7 +15,6 @@
 		       			:showButtonEdit="showButtonEdit"
 		       			v-on:search="onSearch"
 		       			v-on:addData2="addData2"
-		       			v-on:editData="editData"
 	       							ref="tumitable"/>
 	       	
     </div>
@@ -40,7 +39,7 @@ export default {
       	group:true
       },
     	contenttitl:{
-    		name:'RFID管理',
+    		name:'设备/成员',
     		description:'设备信息',
     		tabledesctiption:'共有设备',
     		unit:'条'
